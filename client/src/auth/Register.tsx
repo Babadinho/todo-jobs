@@ -65,14 +65,6 @@ const Register = () => {
       if (res.data) {
         authenticate(res.data);
         setTimeout(() => {
-          // setValues({
-          //   ...values,
-          //   _id: res.data._id,
-          //   firstName: firstName,
-          //   lastName: lastName,
-          //   email: email,
-          //   password: '',
-          // });
           toast({
             title: 'Registration was successful',
             status: 'success',
@@ -101,14 +93,6 @@ const Register = () => {
       if (res.data) {
         authenticate(res.data);
         setTimeout(() => {
-          // setValues({
-          //   ...values,
-          //   _id: res.data._id,
-          //   firstName: firstName,
-          //   lastName: lastName,
-          //   email: email,
-          //   password: '',
-          // });
           setUserDetails(res.data);
           navigate('/');
         }, 3000);
@@ -133,7 +117,7 @@ const Register = () => {
 
     google.accounts.id.renderButton(document.getElementById('signupGoogle'), {
       type: 'standard',
-      // theme: 'filled_black',
+      theme: 'outline',
       size: 'large',
       text: 'signup_with',
       shape: 'pill',
@@ -158,7 +142,7 @@ const Register = () => {
             </Heading>
             <Text
               _dark={{
-                color: 'gray',
+                color: 'white',
               }}
               fontSize={'1xl'}
               color={'gray.600'}
@@ -170,7 +154,7 @@ const Register = () => {
           <Box
             rounded={'lg'}
             bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
+            boxShadow={'md'}
             p={8}
           >
             <Stack spacing={4} color='gray.600'>
@@ -180,7 +164,7 @@ const Register = () => {
                   <FormControl id='firstName' isRequired>
                     <FormLabel
                       _dark={{
-                        color: 'gray',
+                        color: 'white',
                       }}
                     >
                       First Name
@@ -196,7 +180,7 @@ const Register = () => {
                   <FormControl id='lastName' isRequired>
                     <FormLabel
                       _dark={{
-                        color: 'gray',
+                        color: 'white',
                       }}
                     >
                       Last Name
@@ -212,7 +196,7 @@ const Register = () => {
               <FormControl id='email' isRequired>
                 <FormLabel
                   _dark={{
-                    color: 'gray',
+                    color: 'white',
                   }}
                 >
                   Email address
@@ -226,7 +210,7 @@ const Register = () => {
               <FormControl id='password' isRequired>
                 <FormLabel
                   _dark={{
-                    color: 'gray',
+                    color: 'white',
                   }}
                 >
                   Password
@@ -265,7 +249,7 @@ const Register = () => {
               </Stack>
               <Box
                 _dark={{
-                  color: 'gray',
+                  color: 'white',
                 }}
                 textAlign='center'
                 fontSize='0.95rem'

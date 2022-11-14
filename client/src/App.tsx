@@ -5,6 +5,7 @@ import Jobs from './components/Jobs';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import { UserContext } from './context/Context';
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
             element={userDetails ? <Navigate to='/' /> : <Register />}
           />
         </Routes>
+        <Footer />
       </UserContext.Provider>
     </>
   );

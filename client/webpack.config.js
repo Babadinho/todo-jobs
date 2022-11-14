@@ -66,4 +66,7 @@ module.exports = {
       'process.env': JSON.stringify(process.env),
     }),
   ],
+  performance: {
+    hints: false,
+  },
 };

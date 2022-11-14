@@ -47,7 +47,13 @@ const NavBar = () => {
             fontSize={'1.7rem'}
             color='linkedin.500'
           >
-            <Link href='/' className='logo'>
+            <Link
+              href='/'
+              className='logo'
+              _hover={{
+                textDecoration: 'none',
+              }}
+            >
               <Flex alignItems={'center'}>
                 <Box as='span' pb='0.2rem'>
                   <RepeatClockIcon />

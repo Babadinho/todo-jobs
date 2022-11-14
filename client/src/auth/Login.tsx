@@ -126,19 +126,19 @@ const Login = () => {
             </Heading>
             <Text
               _dark={{
-                color: 'gray',
+                color: 'white',
               }}
               fontSize={'1xl'}
               color={'gray.600'}
               align={'center'}
             >
-              Login to view and manage your job applications
+              Login to manage your job applications
             </Text>
           </Stack>
           <Box
             rounded={'lg'}
             bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
+            boxShadow={'md'}
             p={8}
           >
             <Stack spacing={4} color='gray.600'>
@@ -146,7 +146,7 @@ const Login = () => {
               <FormControl id='email' isRequired>
                 <FormLabel
                   _dark={{
-                    color: 'gray',
+                    color: 'white',
                   }}
                 >
                   Email address
@@ -160,7 +160,7 @@ const Login = () => {
               <FormControl id='password' isRequired>
                 <FormLabel
                   _dark={{
-                    color: 'gray',
+                    color: 'white',
                   }}
                 >
                   Password
@@ -199,7 +199,7 @@ const Login = () => {
               </Stack>
               <Box
                 _dark={{
-                  color: 'gray',
+                  color: 'white',
                 }}
                 textAlign='center'
                 fontSize='0.95rem'
