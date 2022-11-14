@@ -34,18 +34,20 @@ const NavBar = () => {
 
   return (
     <>
-      <Box bg={useColorModeValue('white', 'dark')} px={4}>
+      <Box bg={useColorModeValue('white', 'dark')}>
         <Flex
           h={16}
-          px={{ base: 2, md: 20, xl: 40 }}
+          px={{ base: '1rem', md: '6rem', lg: '11rem' }}
           alignItems={'center'}
           justifyContent={'space-between'}
         >
           <Box
-            fontFamily={'heading'}
             fontWeight={'bold'}
             fontSize={'1.7rem'}
-            color='linkedin.500'
+            color='gray.700'
+            _dark={{
+              color: 'white',
+            }}
           >
             <Link
               href='/'

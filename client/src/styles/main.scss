@@ -2,6 +2,13 @@ html, body, #root, #app {
     height: 100vh !important;
 }
 
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
 .footer {
 margin-top: auto !important;
 }
