@@ -105,9 +105,9 @@ const Login = () => {
     });
 
     google.accounts.id.renderButton(document.getElementById('loginGoogle'), {
-      //   type: 'standard',
+      type: 'standard',
       // theme: 'filled_black',
-      // size: "small",
+      size: 'large',
       text: 'signin_with',
       shape: 'pill',
     });
@@ -125,10 +125,17 @@ const Login = () => {
           w={{ base: 'full', md: '63vh' }}
         >
           <Stack align={'center'}>
-            <Heading fontSize={'3xl'} color={'green.500'}>
+            <Heading fontSize={'3xl'} color={'linkedin.500'}>
               Account Login
             </Heading>
-            <Text fontSize={'1xl'} color={'gray.600'} align={'center'}>
+            <Text
+              _dark={{
+                color: 'gray',
+              }}
+              fontSize={'1xl'}
+              color={'gray.600'}
+              align={'center'}
+            >
               Login to view and manage your job applications
             </Text>
           </Stack>
@@ -141,7 +148,13 @@ const Login = () => {
             <Stack spacing={4} color='gray.600'>
               <Box id='loginGoogle' mx='auto' mb='1rem'></Box>
               <FormControl id='email' isRequired>
-                <FormLabel>Email address</FormLabel>
+                <FormLabel
+                  _dark={{
+                    color: 'gray',
+                  }}
+                >
+                  Email address
+                </FormLabel>
                 <Input
                   type='email'
                   value={email}
@@ -149,7 +162,13 @@ const Login = () => {
                 />
               </FormControl>
               <FormControl id='password' isRequired>
-                <FormLabel>Password</FormLabel>
+                <FormLabel
+                  _dark={{
+                    color: 'gray',
+                  }}
+                >
+                  Password
+                </FormLabel>
                 <InputGroup>
                   <Input
                     type={showPassword ? 'text' : 'password'}
@@ -173,23 +192,30 @@ const Login = () => {
                   loadingText='Submitting'
                   size='lg'
                   fontWeight='500'
-                  bg={'green.500'}
+                  bg={'linkedin.500'}
                   color={'white'}
                   _hover={{
-                    bg: 'green.600',
+                    bg: 'linkedin.600',
                   }}
                 >
                   {loading ? <Spinner thickness='4px' size='lg' /> : 'Login'}
                 </Button>
               </Stack>
-              <Box textAlign='center' fontSize='0.95rem' pt='0.5rem'>
+              <Box
+                _dark={{
+                  color: 'gray',
+                }}
+                textAlign='center'
+                fontSize='0.95rem'
+                pt='0.5rem'
+              >
                 Don't have an account?{' '}
                 <Link to='/register'>
                   {' '}
                   <Box
                     as='span'
-                    color='green.500'
-                    _hover={{ color: 'green.600' }}
+                    color='linkedin.500'
+                    _hover={{ color: 'linkedin.600' }}
                   >
                     Register
                   </Box>

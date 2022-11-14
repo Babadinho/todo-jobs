@@ -131,9 +131,9 @@ const Register = () => {
     });
 
     google.accounts.id.renderButton(document.getElementById('signupGoogle'), {
-      // type: "standard",
+      type: 'standard',
       // theme: 'filled_black',
-      // size: "small",
+      size: 'large',
       text: 'signup_with',
       shape: 'pill',
     });
@@ -142,7 +142,7 @@ const Register = () => {
 
   return (
     <>
-      <Flex align={'center'} justify={'center'} mt='2rem'>
+      <Flex align={'center'} justify={'center'} mt='1.5rem'>
         <Stack
           spacing={8}
           mx={'auto'}
@@ -152,10 +152,17 @@ const Register = () => {
           w={{ base: 'full', md: '63vh' }}
         >
           <Stack align={'center'}>
-            <Heading fontSize={'3xl'} color={'green.500'} textAlign='center'>
+            <Heading fontSize={'3xl'} color={'linkedin.500'} textAlign='center'>
               Register Account
             </Heading>
-            <Text fontSize={'1xl'} color={'gray.600'} align={'center'}>
+            <Text
+              _dark={{
+                color: 'gray',
+              }}
+              fontSize={'1xl'}
+              color={'gray.600'}
+              align={'center'}
+            >
               To track and manage job applications
             </Text>
           </Stack>
@@ -166,11 +173,17 @@ const Register = () => {
             p={8}
           >
             <Stack spacing={4} color='gray.600'>
-              <Box id='signupGoogle' mx='auto' mb='1rem'></Box>
+              <Box id='signupGoogle' mx='auto' mb='1rem' />
               <HStack>
                 <Box>
                   <FormControl id='firstName' isRequired>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel
+                      _dark={{
+                        color: 'gray',
+                      }}
+                    >
+                      First Name
+                    </FormLabel>
                     <Input
                       type='text'
                       value={firstName}
@@ -180,7 +193,13 @@ const Register = () => {
                 </Box>
                 <Box>
                   <FormControl id='lastName' isRequired>
-                    <FormLabel>Last Name</FormLabel>
+                    <FormLabel
+                      _dark={{
+                        color: 'gray',
+                      }}
+                    >
+                      Last Name
+                    </FormLabel>
                     <Input
                       type='text'
                       value={lastName}
@@ -190,7 +209,13 @@ const Register = () => {
                 </Box>
               </HStack>
               <FormControl id='email' isRequired>
-                <FormLabel>Email address</FormLabel>
+                <FormLabel
+                  _dark={{
+                    color: 'gray',
+                  }}
+                >
+                  Email address
+                </FormLabel>
                 <Input
                   type='email'
                   value={email}
@@ -198,7 +223,13 @@ const Register = () => {
                 />
               </FormControl>
               <FormControl id='password' isRequired>
-                <FormLabel>Password</FormLabel>
+                <FormLabel
+                  _dark={{
+                    color: 'gray',
+                  }}
+                >
+                  Password
+                </FormLabel>
                 <InputGroup>
                   <Input
                     type={showPassword ? 'text' : 'password'}
@@ -222,23 +253,30 @@ const Register = () => {
                   loadingText='Submitting'
                   size='lg'
                   fontWeight='500'
-                  bg={'green.500'}
+                  bg={'linkedin.500'}
                   color={'white'}
                   _hover={{
-                    bg: 'green.600',
+                    bg: 'linkedin.600',
                   }}
                 >
                   {loading ? <Spinner thickness='4px' size='lg' /> : 'Register'}
                 </Button>
               </Stack>
-              <Box textAlign='center' fontSize='0.95rem' pt='0.5rem'>
+              <Box
+                _dark={{
+                  color: 'gray',
+                }}
+                textAlign='center'
+                fontSize='0.95rem'
+                pt='0.5rem'
+              >
                 Already have an account?{' '}
                 <Link to='/login'>
                   {' '}
                   <Box
                     as='span'
-                    color='green.500'
-                    _hover={{ color: 'green.600' }}
+                    color='linkedin.500'
+                    _hover={{ color: 'linkedin.600' }}
                   >
                     Login
                   </Box>
