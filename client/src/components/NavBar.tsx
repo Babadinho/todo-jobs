@@ -11,18 +11,15 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  useDisclosure,
   useColorModeValue,
   Stack,
   useColorMode,
   Center,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon, RepeatClockIcon } from '@chakra-ui/icons';
-import { isAuthenticated } from '../actions/auth';
 import { UserContext } from '../context/Context';
 
 const NavBar = () => {
-  const { user, token } = isAuthenticated();
   const { colorMode, toggleColorMode } = useColorMode();
   const { userDetails } = useContext(UserContext);
 
@@ -30,12 +27,17 @@ const NavBar = () => {
     localStorage.getItem('track-jobs');
   }, [userDetails]);
 
+  const handleLogout = () => {
+    window.localStorage.removeItem('track-jobs');
+    window.location.reload();
+  };
+
   return (
     <>
       <Box bg={useColorModeValue('white', 'dark')} px={4}>
         <Flex
           h={16}
-          px={{ base: 4, md: 20, xl: 40 }}
+          px={{ base: 2, md: 20, xl: 40 }}
           alignItems={'center'}
           justifyContent={'space-between'}
         >
@@ -66,7 +68,7 @@ const NavBar = () => {
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
 
-              {user && token && (
+              {userDetails && (
                 <Menu>
                   <MenuButton
                     as={Button}
@@ -74,28 +76,54 @@ const NavBar = () => {
                     variant={'link'}
                     cursor={'pointer'}
                     minW={0}
+                    _hover={{
+                      textDecoration: 'none',
+                    }}
                   >
                     <Avatar
                       size={'md'}
-                      name={user && user.firstName + ' ' + user.lastName}
-                      src={user && user.picture}
+                      name={
+                        userDetails &&
+                        userDetails.user.firstName +
+                          ' ' +
+                          userDetails.user.lastName
+                      }
+                      //   src={
+                      //     userDetails &&
+                      //     userDetails.user.picture &&
+                      //     userDetails.user.picture
+                      //   }
                     />
                   </MenuButton>
                   <MenuList alignItems={'center'}>
                     <Center>
                       <Avatar
                         size={'xl'}
-                        name={user && user.firstName + ' ' + user.lastName}
-                        src={user && user.picture}
+                        name={
+                          userDetails &&
+                          userDetails.user.firstName +
+                            ' ' +
+                            userDetails.user.lastName
+                        }
+                        // src={
+                        //   userDetails &&
+                        //   userDetails.user.picture &&
+                        //   userDetails.user.picture
+                        // }
                         mb='0.5rem'
                       />
                     </Center>
                     <Center>
-                      <p>{user && user.firstName + ' ' + user.lastName}</p>
+                      <p>
+                        {userDetails &&
+                          userDetails.user.firstName +
+                            ' ' +
+                            userDetails.user.lastName}
+                      </p>
                     </Center>
                     <MenuDivider />
                     <MenuItem>Account Settings</MenuItem>
-                    <MenuItem>Logout</MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
                   </MenuList>
                 </Menu>
               )}

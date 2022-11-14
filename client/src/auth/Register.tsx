@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { authenticate, register, signinGoogle } from '../actions/auth';
+import { UserContext } from '../context/Context';
 
 interface UserInfo {
   _id: string;
@@ -31,8 +32,8 @@ interface UserInfo {
 declare const google: any;
 
 const Register = () => {
+  const { setUserDetails } = useContext(UserContext);
   const toast = useToast();
-  const [user, setUser] = useState<unknown>(null);
   const navigate = useNavigate();
   const [values, setValues] = useState<UserInfo>({
     _id: '',
@@ -64,22 +65,22 @@ const Register = () => {
       if (res.data) {
         authenticate(res.data);
         setTimeout(() => {
-          setValues({
-            ...values,
-            _id: res.data._id,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: '',
-          });
+          // setValues({
+          //   ...values,
+          //   _id: res.data._id,
+          //   firstName: firstName,
+          //   lastName: lastName,
+          //   email: email,
+          //   password: '',
+          // });
           toast({
             title: 'Registration was successful',
             status: 'success',
             duration: 4000,
             isClosable: true,
           });
-          setUser(res.data);
-          navigate('/', res.data);
+          setUserDetails(res.data);
+          navigate('/');
         }, 2000);
       }
     } catch (error: any) {
@@ -100,15 +101,15 @@ const Register = () => {
       if (res.data) {
         authenticate(res.data);
         setTimeout(() => {
-          setValues({
-            ...values,
-            _id: res.data._id,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: '',
-          });
-          setUser(res.data);
+          // setValues({
+          //   ...values,
+          //   _id: res.data._id,
+          //   firstName: firstName,
+          //   lastName: lastName,
+          //   email: email,
+          //   password: '',
+          // });
+          setUserDetails(res.data);
           navigate('/');
         }, 3000);
       }
