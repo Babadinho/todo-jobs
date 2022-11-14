@@ -38,11 +38,11 @@ const Footer = () => {
             Built by{' '}
             <Link
               href='https://github.com/Babadinho'
-              color='orange.500'
+              color='linkedin.500'
               fontWeight='600'
               target='_blank'
               _hover={{
-                color: 'orange.600',
+                color: 'linkedin.600',
               }}
             >
               Babadinho
