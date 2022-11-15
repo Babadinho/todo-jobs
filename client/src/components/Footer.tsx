@@ -16,7 +16,6 @@ const Footer = () => {
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         h={'60px'}
         px={{ base: 4, md: 20, xl: 40 }}
-        mt='5rem'
       >
         <Flex
           w='full'

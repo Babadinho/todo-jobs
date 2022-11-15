@@ -16,7 +16,7 @@ import {
   useColorMode,
   Center,
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon, RepeatClockIcon } from '@chakra-ui/icons';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { UserContext } from '../context/Context';
 
 const NavBar = () => {
@@ -34,10 +34,10 @@ const NavBar = () => {
 
   return (
     <>
-      <Box bg={useColorModeValue('white', 'dark')}>
+      <Box bg={useColorModeValue('white', 'gray.700')}>
         <Flex
           h={16}
-          px={{ base: '1rem', md: '6rem', lg: '11rem' }}
+          px={{ base: '1rem', md: '5rem', xl: '12rem' }}
           alignItems={'center'}
           justifyContent={'space-between'}
         >
@@ -58,7 +58,7 @@ const NavBar = () => {
             >
               <Flex alignItems={'center'}>
                 <Box as='span' pb='0.2rem'>
-                  <RepeatClockIcon color='linkedin.600' />
+                  <i className='fa-solid fa-stopwatch'></i>
                 </Box>
                 <Text ml='1'>Jobtrack</Text>
               </Flex>

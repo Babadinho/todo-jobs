@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Category = require('../models/Category');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
@@ -54,6 +55,14 @@ exports.register = async (req, res) => {
       bcrypt.hash(user.password, salt, (err, hash) => {
         user.password = hash;
         user.save();
+
+        // create a default category for user
+        const category = new Category({
+          name: 'default',
+          user: user._id,
+        });
+
+        category.save();
 
         //Generate jwt signed token
         let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
@@ -132,6 +141,14 @@ exports.signinGoogle = async (req, res) => {
         });
 
         await user.save();
+
+        // create a default category for user
+        const category = new Category({
+          name: 'default',
+          user: user._id,
+        });
+
+        await category.save();
       }
 
       //Generate jwt signed token

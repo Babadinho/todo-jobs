@@ -8,8 +8,8 @@ const JobCard = () => {
         mx='auto'
         px={8}
         py={4}
-        rounded='lg'
-        shadow='lg'
+        rounded='md'
+        shadow='md'
         bg='white'
         _dark={{
           bg: 'gray.700',

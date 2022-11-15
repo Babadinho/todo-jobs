@@ -1,4 +1,4 @@
-html, body, #root, #app {
+.main {
     height: 100vh !important;
 }
 
@@ -15,4 +15,26 @@ body {
 
 .footer {
 margin-top: auto !important;
+}
+
+.chakra-button {
+  transform: transition 0.5s;
+}
+
+.chakra-button:hover {
+  transform: translateY(-.05rem);
+}
+
+.bullet {
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+}
+
+.category {
+  transform: transition 0.5s;
+}
+
+.category:hover {
+  transform: translateY(-.05rem);
 }
