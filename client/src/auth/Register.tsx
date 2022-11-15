@@ -137,7 +137,15 @@ const Register = () => {
           w={{ base: 'full', md: '63vh' }}
         >
           <Stack align={'center'}>
-            <Heading fontSize={'3xl'} color={'linkedin.500'} textAlign='center'>
+            <Heading
+              fontSize={'1.6rem'}
+              color={'gray.700'}
+              _dark={{
+                color: 'white',
+              }}
+              textAlign='center'
+              className='heading'
+            >
               Register Account
             </Heading>
             <Text

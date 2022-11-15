@@ -58,7 +58,7 @@ const NavBar = () => {
             >
               <Flex alignItems={'center'}>
                 <Box as='span' pb='0.2rem'>
-                  <RepeatClockIcon />
+                  <RepeatClockIcon color='linkedin.600' />
                 </Box>
                 <Text ml='1'>Jobtrack</Text>
               </Flex>

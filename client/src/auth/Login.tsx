@@ -121,7 +121,14 @@ const Login = () => {
           w={{ base: 'full', md: '63vh' }}
         >
           <Stack align={'center'}>
-            <Heading fontSize={'3xl'} color={'linkedin.500'}>
+            <Heading
+              fontSize={'1.6rem'}
+              color={'gray.700'}
+              _dark={{
+                color: 'white',
+              }}
+              className='heading'
+            >
               Account Login
             </Heading>
             <Text
