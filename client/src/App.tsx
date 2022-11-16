@@ -20,7 +20,7 @@ const App = () => {
     if (localStorage.getItem('track-jobs')) {
       setUserDetails(JSON.parse(localStorage.getItem('track-jobs')));
     }
-  }, [userDetails]);
+  }, [setUserDetails]);
   return (
     <>
       <UserContext.Provider value={value}>

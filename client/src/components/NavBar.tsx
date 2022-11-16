@@ -21,11 +21,11 @@ import { UserContext } from '../context/Context';
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { userDetails } = useContext(UserContext);
+  const { userDetails, setUserDetails } = useContext(UserContext);
 
   useEffect(() => {
     localStorage.getItem('track-jobs');
-  }, [userDetails]);
+  }, [setUserDetails]);
 
   const handleLogout = () => {
     window.localStorage.removeItem('track-jobs');
@@ -60,7 +60,7 @@ const NavBar = () => {
                 <Box as='span' pb='0.2rem'>
                   <i className='fa-solid fa-stopwatch'></i>
                 </Box>
-                <Text ml='1'>Jobtrack</Text>
+                <Text ml='0.12rem'>Jobtrack</Text>
               </Flex>
             </Link>
           </Box>
@@ -96,11 +96,6 @@ const NavBar = () => {
                           ' ' +
                           userDetails.user.lastName
                       }
-                      //   src={
-                      //     userDetails &&
-                      //     userDetails.user.picture &&
-                      //     userDetails.user.picture
-                      //   }
                     />
                   </MenuButton>
                   <MenuList alignItems={'center'}>
@@ -113,21 +108,16 @@ const NavBar = () => {
                             ' ' +
                             userDetails.user.lastName
                         }
-                        // src={
-                        //   userDetails &&
-                        //   userDetails.user.picture &&
-                        //   userDetails.user.picture
-                        // }
                         mb='0.5rem'
                       />
                     </Center>
                     <Center>
-                      <p>
+                      <Box>
                         {userDetails &&
                           userDetails.user.firstName +
                             ' ' +
                             userDetails.user.lastName}
-                      </p>
+                      </Box>
                     </Center>
                     <MenuDivider />
                     <MenuItem>Account Settings</MenuItem>

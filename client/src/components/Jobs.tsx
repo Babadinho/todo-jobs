@@ -149,7 +149,7 @@ const Jobs = () => {
         </GridItem>
       </Grid>
 
-      <AddJobModal isOpen={isOpen} onClose={onClose} />
+      <AddJobModal isOpen={isOpen} onClose={onClose} categories={category} />
     </Box>
   );
 };
