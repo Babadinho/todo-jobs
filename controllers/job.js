@@ -16,6 +16,32 @@ exports.getJobs = async (req, res) => {
   //   }
 };
 
+exports.fetchJob = async (req, res) => {
+  try {
+    const { link } = req.body;
+
+    if (!link) return res.status(400).send('Please enter url');
+
+    // fetch job info
+    const response = await fetch(link);
+    const body = await response.text();
+
+    // parse the html text and extract titles
+    const $ = cheerio.load(body);
+    const title = $('title').text();
+    const desc = $('meta[name=description]').attr('content');
+    const image = $('meta[property=og:image]').attr('content');
+
+    res.json({
+      title,
+      desc,
+      image,
+    });
+  } catch (err) {
+    return res.status(400).send('Error. Try again');
+  }
+};
+
 exports.addJob = async (req, res) => {
   try {
     const { link, description, category, date } = req.body.jobDetails;
@@ -37,7 +63,9 @@ exports.addJob = async (req, res) => {
 
     // parse the html text and extract titles
     const $ = cheerio.load(body);
-    const title = $('title');
+    const title = $('title').text();
+    const desc = $('meta[name=description]').attr('content');
+    const image = $('meta[property=og:image]').attr('content');
 
     // using CSS selector
     // $('._eYtD2XCVieq6emjKBH3m').each((i, title) => {
@@ -46,7 +74,11 @@ exports.addJob = async (req, res) => {
 
     //   titleList.push(titleText);
     // });
-    res.json(title);
+    res.json({
+      title,
+      desc,
+      image,
+    });
   } catch (err) {
     return res.status(400).send('Error. Try again');
   }

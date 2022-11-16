@@ -24,15 +24,18 @@ import {
   useToast,
   Spinner,
   Text,
+  InputRightAddon,
 } from '@chakra-ui/react';
-import { addJob } from '../actions/job';
+import { addJob, fetchJob } from '../actions/job';
 import { UserContext } from '../context/Context';
 
 interface JobInfo {
   link: string;
-  description: string;
+  title: string;
+  description?: string;
   category: string;
   date: string;
+  image: string;
 }
 
 const AddJobModal = ({ onClose, isOpen, categories }: any) => {
@@ -40,17 +43,42 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
   const { userDetails } = useContext(UserContext);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<Boolean>(false);
+  const [loading2, setLoading2] = useState<Boolean>(false);
   const [jobDetails, setJobDetails] = useState<JobInfo>({
     link: '',
+    title: '',
     description: '',
     category: '',
     date: '',
+    image: '',
   });
 
-  const { link, description, category, date } = jobDetails;
+  const { link, title, description, category, date } = jobDetails;
 
   const handleChange = (name: string) => (e: { target: { value: any } }) => {
     setJobDetails({ ...jobDetails, [name]: e.target.value });
+    setError('');
+  };
+
+  const handlefetchJob = async () => {
+    try {
+      setLoading2(true);
+      const res = await fetchJob({ link }, userDetails.token);
+      if (res.data) {
+        setTimeout(() => {
+          setLoading2(false);
+          setJobDetails({
+            ...jobDetails,
+            title: res.data.title,
+            description: res.data.desc,
+            image: res.data.image,
+          });
+        }, 2000);
+      }
+    } catch (error: any) {
+      if (error.response.status === 400) setError(error.response.data);
+      setLoading2(false);
+    }
   };
 
   const handleAddJob = async () => {
@@ -126,16 +154,6 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                         Job Link
                       </FormLabel>
                       <InputGroup size='sm'>
-                        <InputLeftAddon
-                          bg='gray.50'
-                          _dark={{
-                            bg: 'gray.800',
-                          }}
-                          color='gray.500'
-                          rounded='md'
-                        >
-                          http://
-                        </InputLeftAddon>
                         <Input
                           type='tel'
                           placeholder='www.example.com'
@@ -144,9 +162,57 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                           value={link}
                           onChange={handleChange('link')}
                         />
+                        <InputRightAddon
+                          bg='gray.50'
+                          _dark={{
+                            bg: 'gray.800',
+                          }}
+                          color='gray.500'
+                          rounded='md'
+                          cursor='pointer'
+                          onClick={handlefetchJob}
+                        >
+                          {loading2 ? (
+                            <Spinner size='xs' />
+                          ) : (
+                            <Box as='span'>
+                              <i className='fa-solid fa-link'></i> &nbsp; Fetch
+                              job
+                            </Box>
+                          )}
+                        </InputRightAddon>
                       </InputGroup>
                     </FormControl>
                   </SimpleGrid>
+
+                  <Box>
+                    <FormControl id='description' mt={1}>
+                      <FormLabel
+                        fontSize='sm'
+                        fontWeight='md'
+                        color='gray.700'
+                        _dark={{
+                          color: 'gray.50',
+                        }}
+                      >
+                        Title
+                      </FormLabel>
+                      <Input
+                        placeholder='Enter job title'
+                        mt={1}
+                        shadow='sm'
+                        focusBorderColor='brand.400'
+                        fontSize={{
+                          sm: 'sm',
+                        }}
+                        value={title}
+                        onChange={handleChange('title')}
+                      />
+                      {/* <FormHelperText>
+                        If empty, we will try to fetch a description.
+                      </FormHelperText> */}
+                    </FormControl>
+                  </Box>
 
                   <Box>
                     <FormControl id='description' mt={1}>
@@ -172,9 +238,9 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                         value={description}
                         onChange={handleChange('description')}
                       />
-                      <FormHelperText>
+                      {/* <FormHelperText>
                         If empty, we will try to fetch a description.
-                      </FormHelperText>
+                      </FormHelperText> */}
                     </FormControl>
                   </Box>
                   <Box>

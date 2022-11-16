@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+export const fetchJob = async (link: any, token: any) =>
+  await axios.post(`${process.env.REACT_APP_URL}/fetch-job`, link, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
 export const getJobs = async (userId: any, token: any) =>
   await axios.get(`${process.env.REACT_APP_URL}/jobs/${userId}`, {
     headers: {

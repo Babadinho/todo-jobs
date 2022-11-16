@@ -3,10 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 //controllers
-const { addJob, getJobs } = require('../controllers/job');
+const { fetchJob, addJob, getJobs } = require('../controllers/job');
 const { requireSignin } = require('../controllers/auth');
 
 //routes
+router.post('/fetch-job', requireSignin, fetchJob);
 router.get('/jobs/:userId', requireSignin, getJobs);
 router.post('/add-job/:userId', requireSignin, addJob);
 // router.post('/edit-category/:userId', requireSignin, editCategory);
