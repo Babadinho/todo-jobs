@@ -57,7 +57,7 @@ const Jobs = () => {
       <Grid
         h='200px'
         templateRows='repeat(2, 1fr)'
-        templateColumns='repeat(5, 1fr)'
+        templateColumns='repeat(4, 1fr)'
         gap={4}
       >
         <Drawer
@@ -102,7 +102,7 @@ const Jobs = () => {
             setActiveCat={setActiveCatId}
           />
         </GridItem>
-        <GridItem colSpan={{ base: 6, lg: 4 }}>
+        <GridItem colSpan={{ base: 6, lg: 3 }}>
           <Box>
             <Box
               px={4}
