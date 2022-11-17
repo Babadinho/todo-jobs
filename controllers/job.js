@@ -1,8 +1,7 @@
-const Category = require('../models/Category');
 const Job = require('../models/Job');
 const fetch = require('node-fetch');
-const { AbortError } = require('node-fetch');
 const cheerio = require('cheerio');
+const psl = require('psl');
 
 exports.getJobs = async (req, res) => {
   //   try {
@@ -54,7 +53,7 @@ exports.fetchJob = async (req, res) => {
 
 exports.addJob = async (req, res) => {
   try {
-    const { link, title, description, category, image, date } =
+    const { link, title, description, category, image, endDate } =
       req.body.jobDetails;
 
     // validate fields
@@ -68,6 +67,9 @@ exports.addJob = async (req, res) => {
     }).exec();
     if (jobExist) return res.status(400).send('You already added this job');
 
+    const domain = new URL(link).hostname;
+    const parsed = psl.parse(domain);
+
     const job = new Job({
       link,
       title,
@@ -76,14 +78,15 @@ exports.addJob = async (req, res) => {
       image,
       user: req.params.userId,
       status: 'ongoing',
-      date,
+      website: parsed.sld,
+      endDate,
     });
 
     await job.save();
 
-    const jobs = Job.find({ user: req.params.userId });
+    const jobs = await Job.find({ user: req.params.userId });
     if (jobs) {
-      res.json(jobs);
+      return res.json(jobs);
     }
   } catch (err) {
     return res.status(400).send('Error. Try again');

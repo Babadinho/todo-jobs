@@ -32,7 +32,7 @@ interface JobInfo {
   title: string;
   description?: string;
   category: string;
-  date: string;
+  endDate: string;
   image: string;
 }
 
@@ -47,11 +47,11 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
     title: '',
     description: '',
     category: '',
-    date: '',
+    endDate: '',
     image: '',
   });
 
-  const { link, title, description, category, date } = jobDetails;
+  const { link, title, description, category, endDate } = jobDetails;
 
   const handleChange = (name: string) => (e: { target: { value: any } }) => {
     setJobDetails({ ...jobDetails, [name]: e.target.value });
@@ -61,6 +61,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
   const handlefetchJob = async () => {
     try {
       setLoading2(true);
+      setError('');
       const res = await fetchJob({ link }, userDetails.token);
       if (res.data) {
         setTimeout(() => {
@@ -80,6 +81,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
   };
 
   const handleAddJob = async () => {
+    setError('');
     try {
       const res = await addJob(
         userDetails.user._id,
@@ -97,14 +99,14 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
             duration: 4000,
             isClosable: true,
           });
-          // setJobDetails({
-          //   link: '',
-          //   title: '',
-          //   description: '',
-          //   category: '',
-          //   date: '',
-          //   image: '',
-          // });
+          setJobDetails({
+            link: '',
+            title: '',
+            description: '',
+            category: '',
+            endDate: '',
+            image: '',
+          });
         }, 2000);
       }
     } catch (error: any) {
@@ -126,7 +128,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
             title: '',
             description: '',
             category: '',
-            date: '',
+            endDate: '',
             image: '',
           });
         }}
@@ -297,7 +299,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                     </FormControl>
                   </Box>
                   <Box>
-                    <FormControl id='date' mt={1}>
+                    <FormControl id='endDate' mt={1}>
                       <FormLabel
                         fontSize='sm'
                         fontWeight='md'
@@ -316,8 +318,8 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                         fontSize={{
                           sm: 'sm',
                         }}
-                        value={date}
-                        onChange={handleChange('date')}
+                        value={endDate}
+                        onChange={handleChange('endDate')}
                       />
                     </FormControl>
                   </Box>

@@ -18,9 +18,13 @@ const JobSchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: false,
+    },
     endDate: {
       type: Date,
-      required: false,
+      required: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
