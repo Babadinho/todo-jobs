@@ -23,6 +23,7 @@ import {
   Spinner,
   Text,
   InputRightAddon,
+  FormHelperText,
 } from '@chakra-ui/react';
 import { addJob, fetchJob } from '../actions/job';
 import { UserContext } from '../context/Context';
@@ -153,7 +154,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                 <Stack
                   bg='white'
                   _dark={{
-                    bg: '#141517',
+                    bg: 'gray.700',
                   }}
                   spacing={6}
                   p={{
@@ -180,7 +181,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                       <InputGroup size='sm'>
                         <Input
                           type='tel'
-                          placeholder='www.example.com'
+                          placeholder='https://www.example.com'
                           focusBorderColor='brand.400'
                           rounded='md'
                           value={link}
@@ -189,7 +190,8 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                         <InputRightAddon
                           bg='gray.50'
                           _dark={{
-                            bg: 'gray.800',
+                            bg: 'gray.500',
+                            color: 'white',
                           }}
                           color='gray.500'
                           rounded='md'
@@ -206,6 +208,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                           )}
                         </InputRightAddon>
                       </InputGroup>
+                      <FormHelperText></FormHelperText>
                     </FormControl>
                   </SimpleGrid>
 

@@ -4,16 +4,18 @@ const cheerio = require('cheerio');
 const psl = require('psl');
 
 exports.getJobs = async (req, res) => {
-  //   try {
-  //     const categories = await Category.find({ user: req.params.userId }).sort({
-  //       createdAt: 'ascending',
-  //     });
-  //     if (categories) {
-  //       res.json(categories);
-  //     }
-  //   } catch (error) {
-  //     res.status(400).send('Error Loading categories');
-  //   }
+  try {
+    const jobs = await Job.find({ user: req.params.userId })
+      .populate('category')
+      .sort({
+        createdAt: 'ascending',
+      });
+    if (jobs) {
+      res.json(jobs);
+    }
+  } catch (error) {
+    res.status(400).send('Error Loading jobs');
+  }
 };
 
 exports.fetchJob = async (req, res) => {
@@ -37,10 +39,17 @@ exports.fetchJob = async (req, res) => {
     const desc = $('meta[name=description]').attr('content');
     const image = $('meta[property=og:image]').attr('content');
 
+    const domain = new URL(image).hostname;
+    const pathname = new URL(image).pathname;
+    const protocol = new URL(image).protocol;
+    const parsed = psl.parse(domain);
+
+    const newImage = protocol + '//www.' + parsed.domain + pathname;
+
     return res.json({
       title,
       desc,
-      image,
+      image: newImage,
     });
   } catch (err) {
     if (err.type === 'aborted') {
@@ -70,15 +79,19 @@ exports.addJob = async (req, res) => {
     const domain = new URL(link).hostname;
     const parsed = psl.parse(domain);
 
+    if (parsed.domain === 'totaljobs.com')
+      image = 'https://www.totaljobs.com/jsd/img/global/totaljobs.png';
+
     const job = new Job({
       link,
       title,
       description,
       category,
-      image,
+      image: image,
       user: req.params.userId,
-      status: 'ongoing',
-      website: parsed.sld,
+      status: 'applied',
+      sld: parsed.sld,
+      domain: parsed.domain,
       endDate,
     });
 

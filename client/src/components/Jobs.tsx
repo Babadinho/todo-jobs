@@ -20,9 +20,11 @@ import { FiMenu } from 'react-icons/fi';
 import { AddIcon } from '@chakra-ui/icons';
 import { isAuthenticated } from '../actions/auth';
 import { getCategories } from '../actions/category';
+import { JobContext } from '../context/Context';
 
 const Jobs = () => {
   const sidebar = useDisclosure();
+  const { userJobs, setUserJobs } = useContext(JobContext);
   const [category, setCategory] = useState<Array<{}> | null>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [activeCatId, setActiveCatId] = useState<string | null>();
@@ -105,7 +107,7 @@ const Jobs = () => {
             <Box
               px={4}
               py={3}
-              mb='2rem'
+              mb='1rem'
               bg='gray.700'
               _dark={{
                 bg: 'gray.700',
@@ -144,7 +146,11 @@ const Jobs = () => {
                 </chakra.span>
               </Flex>
             </Box>
-            <JobCard />
+            {userJobs &&
+              userJobs.length > 0 &&
+              userJobs.map((job: any, i: any) => {
+                return <JobCard {...job} key={i} />;
+              })}
           </Box>
         </GridItem>
       </Grid>

@@ -20,6 +20,7 @@
     "mongoose": "^6.6.5",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.7",
+    "node-libcurl": "^3.0.0-0",
     "nodemon": "^2.0.20",
     "psl": "^1.9.0"
   }

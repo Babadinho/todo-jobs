@@ -5,3 +5,9 @@ interface userInterface {
   setUserDetails: any;
 }
 export const UserContext = createContext<Partial<userInterface>>({});
+
+interface jobInterface {
+  userJobs: any;
+  setUserJobs: any;
+}
+export const JobContext = createContext<Partial<jobInterface>>({});

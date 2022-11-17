@@ -14,7 +14,11 @@ const JobSchema = new Schema(
       type: String,
       required: true,
     },
-    website: {
+    sld: {
+      type: String,
+      required: true,
+    },
+    domain: {
       type: String,
       required: true,
     },
@@ -30,13 +34,17 @@ const JobSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
     },
+    notes: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'note',
+    },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'category',
     },
     status: {
       type: String,
-      enum: ['ongoing', 'closed', 'rejected', 'assessment', 'interview'],
+      enum: ['applied', 'closed', 'rejected', 'assessment', 'interview'],
     },
   },
   { timestamps: true }

@@ -1,13 +1,26 @@
 import React from 'react';
-import { Box, Flex, Image, Link, chakra } from '@chakra-ui/react';
+import { Box, Flex, Image, Link, chakra, Tooltip } from '@chakra-ui/react';
+import moment from 'moment';
 
-const JobCard = () => {
+const JobCard = ({ ...job }) => {
+  const {
+    link,
+    title,
+    description,
+    category,
+    endDate,
+    domain,
+    image,
+    status,
+    createdAt,
+  } = job;
   return (
     <>
       <Box
         mx='auto'
         px={8}
         py={4}
+        mb='1rem'
         rounded='md'
         shadow='md'
         bg='white'
@@ -18,33 +31,36 @@ const JobCard = () => {
       >
         <Flex justifyContent='space-between' alignItems='center'>
           <chakra.span
-            fontSize='sm'
+            fontSize='0.92rem'
             color='gray.600'
             _dark={{
               color: 'gray.400',
             }}
           >
-            Mar 10, 2019
+            {moment(createdAt).format('MMM Do, YYYY')}
           </chakra.span>
-          <Link
-            px={3}
+          <Box
+            as='span'
+            px={2}
             py={1}
+            cursor='pointer'
             bg='gray.600'
             color='gray.100'
-            fontSize='sm'
+            fontSize='0.68rem'
             fontWeight='700'
             rounded='md'
             _hover={{
               bg: 'gray.500',
             }}
+            textTransform='capitalize'
           >
-            Design
-          </Link>
+            {status}
+          </Box>
         </Flex>
 
         <Box mt={2}>
           <Link
-            fontSize='2xl'
+            fontSize='1.08rem'
             color='gray.700'
             _dark={{
               color: 'white',
@@ -58,7 +74,7 @@ const JobCard = () => {
               textDecor: 'underline',
             }}
           >
-            Accessibility tools for designers and developers
+            {title}
           </Link>
           <chakra.p
             mt={2}
@@ -66,51 +82,68 @@ const JobCard = () => {
             _dark={{
               color: 'gray.300',
             }}
+            fontSize='0.95rem'
           >
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
-            expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos
-            enim reprehenderit nisi, accusamus delectus nihil quis facere in
-            modi ratione libero!
+            {description}
           </chakra.p>
         </Box>
 
         <Flex justifyContent='space-between' alignItems='center' mt={4}>
-          <Link
-            color='brand.600'
-            _dark={{
-              color: 'brand.400',
-            }}
-            _hover={{
-              textDecor: 'underline',
-            }}
-          >
-            Read more
-          </Link>
-
           <Flex alignItems='center'>
             <Image
-              mx={4}
-              w={10}
-              h={10}
+              mr={2}
+              w={6}
+              h={6}
               rounded='full'
               fit='cover'
-              display={{
-                base: 'none',
-                sm: 'block',
-              }}
-              src='https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=40&q=80'
+              src={image}
               alt='avatar'
             />
-            <Link
+            <Box
+              as='span'
               color='gray.700'
               _dark={{
                 color: 'gray.200',
               }}
+              fontSize='0.9rem'
               fontWeight='700'
               cursor='pointer'
             >
-              Khatab wedaa
-            </Link>
+              {domain}
+            </Box>
+          </Flex>
+
+          <Flex
+            alignItems='center'
+            color='gray.700'
+            _dark={{
+              color: 'gray.200',
+            }}
+          >
+            <Box mr='0.5rem' cursor='pointer'>
+              <Tooltip
+                hasArrow
+                label='Add note'
+                bg='gray.300'
+                color='black'
+                placement='top'
+                fontSize='0.75rem'
+              >
+                <i className='fa-solid fa-file-pen'></i>
+              </Tooltip>
+            </Box>
+            <Box cursor='pointer'>
+              <Tooltip
+                hasArrow
+                label='Add to calender'
+                bg='gray.300'
+                color='black'
+                placement='top'
+                fontSize='0.75rem'
+              >
+                <i className='fa-solid fa-calendar-days'></i>
+              </Tooltip>
+            </Box>
           </Flex>
         </Flex>
       </Box>
