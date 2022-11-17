@@ -90,7 +90,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
-          // onClose();
+          onClose();
           toast({
             title: 'Job added successfully',
             status: 'success',
@@ -119,6 +119,8 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
         onClose={() => {
           onClose();
           setError('');
+          setLoading2(false);
+          setLoading(false);
           setJobDetails({
             link: '',
             title: '',
