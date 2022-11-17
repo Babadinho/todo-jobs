@@ -30,12 +30,15 @@ const AddCategoryModal = ({
       <Modal onClose={onClose} size={'md'} isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontWeight='500'>Add Category</ModalHeader>
+          <ModalHeader fontSize='1.1rem' fontWeight='500'>
+            Add Category
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Stack spacing={4} color='gray.600'>
               <FormControl>
                 <Input
+                  size='sm'
                   autoFocus
                   borderColor={error ? 'red' : '#e2e8f0'}
                   _focus={{
@@ -47,6 +50,8 @@ const AddCategoryModal = ({
                     setValue(e.target.value);
                     setError('');
                   }}
+                  focusBorderColor='brand.400'
+                  rounded='md'
                 />
                 <Text color='red.500' pt='0.3rem'>
                   {error && error}
@@ -57,6 +62,7 @@ const AddCategoryModal = ({
           <ModalFooter>
             <Button
               mr='0.7rem'
+              size='sm'
               fontWeight='500'
               variant='ghost'
               onClick={() => {
@@ -67,6 +73,7 @@ const AddCategoryModal = ({
               Cancel
             </Button>
             <Button
+              size='sm'
               loadingText='Submitting'
               fontWeight='500'
               colorScheme='linkedin'

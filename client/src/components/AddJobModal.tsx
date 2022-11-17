@@ -11,12 +11,10 @@ import {
   Box,
   chakra,
   FormControl,
-  FormHelperText,
   FormLabel,
   GridItem,
   Input,
   InputGroup,
-  InputLeftAddon,
   Select,
   SimpleGrid,
   Stack,
@@ -99,7 +97,14 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
             duration: 4000,
             isClosable: true,
           });
-          // setJobDetails({ link: '', description: '', category: '', date: '' });
+          // setJobDetails({
+          //   link: '',
+          //   title: '',
+          //   description: '',
+          //   category: '',
+          //   date: '',
+          //   image: '',
+          // });
         }, 2000);
       }
     } catch (error: any) {
@@ -110,7 +115,22 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
 
   return (
     <>
-      <Modal onClose={onClose} size={'xl'} isOpen={isOpen}>
+      <Modal
+        onClose={() => {
+          onClose();
+          setError('');
+          setJobDetails({
+            link: '',
+            title: '',
+            description: '',
+            category: '',
+            date: '',
+            image: '',
+          });
+        }}
+        size={'xl'}
+        isOpen={isOpen}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add new job</ModalHeader>
@@ -133,7 +153,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                   }}
                   spacing={6}
                   p={{
-                    sm: 6,
+                    sm: 2,
                   }}
                 >
                   <SimpleGrid columns={3} spacing={6}>
