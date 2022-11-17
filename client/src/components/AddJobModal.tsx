@@ -228,9 +228,6 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                         value={title}
                         onChange={handleChange('title')}
                       />
-                      {/* <FormHelperText>
-                        If empty, we will try to fetch a description.
-                      </FormHelperText> */}
                     </FormControl>
                   </Box>
 
@@ -258,9 +255,6 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                         value={description}
                         onChange={handleChange('description')}
                       />
-                      {/* <FormHelperText>
-                        If empty, we will try to fetch a description.
-                      </FormHelperText> */}
                     </FormControl>
                   </Box>
                   <Box>
