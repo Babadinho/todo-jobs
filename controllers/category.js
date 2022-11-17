@@ -10,7 +10,7 @@ exports.getCategories = async (req, res) => {
       res.json(categories);
     }
   } catch (error) {
-    res.status(400).send('Error Loading categories');
+    res.status(400).send('Error loading categories');
   }
 };
 

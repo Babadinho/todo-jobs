@@ -7,6 +7,7 @@ exports.getJobs = async (req, res) => {
   try {
     const jobs = await Job.find({ user: req.params.userId })
       .populate('category')
+      .populate('notes')
       .sort({
         createdAt: 'ascending',
       });
@@ -14,7 +15,7 @@ exports.getJobs = async (req, res) => {
       res.json(jobs);
     }
   } catch (error) {
-    res.status(400).send('Error Loading jobs');
+    res.status(400).send('Error loading jobs');
   }
 };
 

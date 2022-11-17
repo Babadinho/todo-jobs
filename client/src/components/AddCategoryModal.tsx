@@ -79,7 +79,7 @@ const AddCategoryModal = ({
               colorScheme='linkedin'
               onClick={handleSubmit}
             >
-              {loading ? <Spinner thickness='4px' size='lg' /> : 'Submit'}
+              {loading ? <Spinner thickness='4px' size='md' /> : 'Submit'}
             </Button>
           </ModalFooter>
         </ModalContent>

@@ -44,7 +44,14 @@ const JobSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ['applied', 'closed', 'rejected', 'assessment', 'interview'],
+      enum: [
+        'applied',
+        'not applied',
+        'closed',
+        'rejected',
+        'assessment',
+        'interview',
+      ],
     },
   },
   { timestamps: true }

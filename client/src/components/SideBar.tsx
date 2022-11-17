@@ -37,7 +37,7 @@ export const SideBar = ({
   //get default list and store in variable
   const defaultActive = category && category.length > 0 && category[0]._id;
 
-  const handleSubmit = async () => {
+  const handleAddCategory = async () => {
     try {
       const res = await addCategory(
         userDetails.user._id,
@@ -51,7 +51,7 @@ export const SideBar = ({
           onClose();
           setCategory(res.data);
           toast({
-            title: value + ' added to your list',
+            title: value + ' added to your Categories',
             status: 'success',
             duration: 4000,
             isClosable: true,
@@ -79,12 +79,6 @@ export const SideBar = ({
       if (res.data) {
         setTimeout(() => {
           setCategory(res.data);
-          toast({
-            title: 'Category edited successfully',
-            status: 'success',
-            duration: 4000,
-            isClosable: true,
-          });
           setEdit('');
           setLoading(false);
         }, 2000);
@@ -105,12 +99,6 @@ export const SideBar = ({
       if (res.data) {
         setTimeout(() => {
           setCategory(res.data);
-          toast({
-            title: 'Category deleted successfully',
-            status: 'success',
-            duration: 4000,
-            isClosable: true,
-          });
           setLoading2(false);
         }, 2000);
       }
@@ -128,7 +116,7 @@ export const SideBar = ({
         _dark={{
           bg: 'gray.700',
         }}
-        mb='2.5rem'
+        mb='1.5rem'
         px={{ base: 4, md: 3, xl: 4 }}
         shadow='md'
         rounded='md'
@@ -147,7 +135,7 @@ export const SideBar = ({
         </Box>
         <Flex justifyContent='space-between' alignItems='center' mb='0.3rem'>
           <chakra.span
-            fontSize={{ sm: 'md', md: '0.9rem', xl: 'md' }}
+            fontSize='0.94rem'
             color='gray.600'
             _dark={{
               color: 'white',
@@ -155,7 +143,7 @@ export const SideBar = ({
           >
             <Flex align='center'>
               <Box
-                fontSize='0.65rem'
+                fontSize='0.7rem'
                 mr='0.4rem'
                 color='gray.600'
                 _dark={{ color: 'white' }}
@@ -180,7 +168,7 @@ export const SideBar = ({
         </Flex>
         <Flex justifyContent='space-between' alignItems='center' mb='0.3rem'>
           <chakra.span
-            fontSize={{ sm: 'md', md: '0.9rem', xl: 'md' }}
+            fontSize='0.94rem'
             color='gray.600'
             _dark={{
               color: 'white',
@@ -188,7 +176,7 @@ export const SideBar = ({
           >
             <Flex align='center'>
               <Box
-                fontSize='0.65rem'
+                fontSize='0.7rem'
                 mr='0.4rem'
                 color='gray.600'
                 _dark={{ color: 'white' }}
@@ -206,7 +194,7 @@ export const SideBar = ({
               color: 'brand.900',
             }}
           >
-            <Badge rounded='lg' colorScheme='linkedin'>
+            <Badge rounded='lg' fontSize='xs' colorScheme='linkedin'>
               150
             </Badge>
           </chakra.span>
@@ -265,7 +253,7 @@ export const SideBar = ({
                 key={i}
                 fontSize={{ sm: 'md', md: '0.9rem', xl: 'md' }}
                 textTransform='capitalize'
-                mb='0.2rem'
+                mb='0.25rem'
               >
                 <Box
                   display='flex'
@@ -314,6 +302,7 @@ export const SideBar = ({
                           _hover={{
                             color: 'gray.500',
                           }}
+                          fontSize='0.94rem'
                         >
                           {c.name}
                         </Box>
@@ -327,12 +316,14 @@ export const SideBar = ({
                     cursor={'pointer'}
                     display={activeCat === c._id ? 'flex' : 'none'}
                   >
-                    <Text fontSize='0.8rem'>
+                    <Text fontSize='0.7rem'>
                       {edit ? (
                         <Box
                           as='span'
                           onClick={handleCategoryEdit}
-                          fontSize='1rem'
+                          fontSize='0.85rem'
+                          color='gray.500'
+                          _hover={{ color: 'gray.600' }}
                         >
                           {loading ? (
                             <Spinner size='xs' />
@@ -359,7 +350,7 @@ export const SideBar = ({
                       )}{' '}
                     </Text>
                     <Text
-                      fontSize='0.8rem'
+                      fontSize='0.7rem'
                       display={c._id === defaultActive ? 'none' : 'block'}
                       color='red.300'
                       _hover={{ color: 'red.400' }}
@@ -381,7 +372,7 @@ export const SideBar = ({
         value={value}
         setValue={setValue}
         loading={loading}
-        handleSubmit={handleSubmit}
+        handleSubmit={handleAddCategory}
         isOpen={isOpen}
         onClose={onClose}
         error={error}

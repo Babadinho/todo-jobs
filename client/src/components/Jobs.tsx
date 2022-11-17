@@ -129,7 +129,7 @@ const Jobs = () => {
                     onClick={sidebar.onOpen}
                     icon={<FiMenu />}
                     size='md'
-                    color='linkedin.500'
+                    colorScheme='linkedin'
                   />
                 </chakra.span>
                 <chakra.span>

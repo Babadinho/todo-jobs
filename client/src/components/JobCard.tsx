@@ -1,8 +1,20 @@
 import React from 'react';
-import { Box, Flex, Image, Link, chakra, Tooltip } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Image,
+  Link,
+  chakra,
+  Tooltip,
+  useDisclosure,
+  Badge,
+} from '@chakra-ui/react';
 import moment from 'moment';
+import NotesModal from './NotesModal';
 
 const JobCard = ({ ...job }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const {
     link,
     title,
@@ -12,8 +24,10 @@ const JobCard = ({ ...job }) => {
     domain,
     image,
     status,
+    notes,
     createdAt,
   } = job;
+
   return (
     <>
       <Box
@@ -82,7 +96,7 @@ const JobCard = ({ ...job }) => {
             _dark={{
               color: 'gray.300',
             }}
-            fontSize='0.95rem'
+            fontSize='0.94rem'
           >
             {description}
           </chakra.p>
@@ -120,7 +134,7 @@ const JobCard = ({ ...job }) => {
               color: 'gray.200',
             }}
           >
-            <Box mr='0.5rem' cursor='pointer'>
+            <Box mr='0.5rem' cursor='pointer' onClick={onOpen} display='flex'>
               <Tooltip
                 hasArrow
                 label='Add note'
@@ -131,6 +145,17 @@ const JobCard = ({ ...job }) => {
               >
                 <i className='fa-solid fa-file-pen'></i>
               </Tooltip>
+              {job && notes.length > 0 && (
+                <Badge
+                  bg='gray.300'
+                  alignSelf='flex-start'
+                  color='gray.800'
+                  fontSize='0.6rem'
+                  rounded='50%'
+                >
+                  {notes.length}
+                </Badge>
+              )}
             </Box>
             <Box cursor='pointer'>
               <Tooltip
@@ -147,6 +172,7 @@ const JobCard = ({ ...job }) => {
           </Flex>
         </Flex>
       </Box>
+      <NotesModal isOpen={isOpen} onClose={onClose} job={job} />
     </>
   );
 };
