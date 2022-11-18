@@ -180,6 +180,9 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                       </FormLabel>
                       <InputGroup size='sm'>
                         <Input
+                          _dark={{
+                            _placeholder: { color: 'gray.200' },
+                          }}
                           type='tel'
                           placeholder='https://www.example.com'
                           focusBorderColor='brand.400'
@@ -225,6 +228,9 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                         Title
                       </FormLabel>
                       <Input
+                        _dark={{
+                          _placeholder: { color: 'gray.200' },
+                        }}
                         placeholder='Enter job title'
                         mt={1}
                         shadow='sm'
@@ -251,6 +257,9 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                         Description
                       </FormLabel>
                       <Textarea
+                        _dark={{
+                          _placeholder: { color: 'gray.200' },
+                        }}
                         placeholder='Enter job description'
                         mt={1}
                         rows={3}

@@ -48,6 +48,8 @@ exports.editCategory = async (req, res) => {
   try {
     const { categoryId, name } = req.body;
 
+    if (!name) return res.status(400).send('Field cannot be empty');
+
     let editCategory = await Category.findOne({
       _id: categoryId,
       user: req.params.userId,

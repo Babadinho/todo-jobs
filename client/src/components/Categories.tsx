@@ -14,6 +14,8 @@ import React from 'react';
 const Categories = ({
   loading,
   loading2,
+  error,
+  setError,
   defaultActive,
   edit,
   onOpen,
@@ -110,14 +112,21 @@ const Categories = ({
                       {edit && activeCat === c._id ? (
                         <Box as='form' onSubmit={handleCategoryEdit}>
                           <Input
+                            borderColor={error && 'red.400'}
                             value={editValue}
                             size='xs'
                             textTransform='capitalize'
                             color='gray.700'
+                            _dark={{
+                              color: 'gray.200',
+                            }}
                             width='90%'
                             autoFocus
                             isRequired
-                            onChange={(e) => setEditValue(e.target.value)}
+                            onChange={(e) => {
+                              setEditValue(e.target.value);
+                              setError('');
+                            }}
                           />
                         </Box>
                       ) : (
@@ -144,7 +153,7 @@ const Categories = ({
                     cursor={'pointer'}
                     display={activeCat === c._id ? 'flex' : 'none'}
                   >
-                    <Text fontSize='0.7rem'>
+                    <Text fontSize='0.7rem' display='flex' alignItems='center'>
                       {edit ? (
                         <Box
                           as='span'
@@ -191,10 +200,11 @@ const Categories = ({
                     </Text>
                     <Text
                       fontSize='0.7rem'
-                      display={c._id === defaultActive ? 'none' : 'block'}
+                      display={c._id === defaultActive ? 'none' : 'flex'}
                       color='red.300'
                       _hover={{ color: 'red.400' }}
                       onClick={() => handleCategoryDelete(c._id)}
+                      alignItems='center'
                     >
                       {loading2 ? (
                         <Spinner size='xs' />
