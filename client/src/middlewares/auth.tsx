@@ -12,7 +12,7 @@ export const login = async (user: any) =>
 // Save user to localStorage
 export const authenticate = (data: any) => {
   if (typeof window !== 'undefined') {
-    localStorage.setItem('track-jobs', JSON.stringify(data));
+    localStorage.setItem('todo-jobs', JSON.stringify(data));
   }
 };
 
@@ -20,8 +20,8 @@ export const isAuthenticated = () => {
   if (typeof window == 'undefined') {
     return false;
   }
-  if (localStorage.getItem('track-jobs')) {
-    return JSON.parse(localStorage.getItem('track-jobs')!);
+  if (localStorage.getItem('todo-jobs')) {
+    return JSON.parse(localStorage.getItem('todo-jobs')!);
   } else {
     return false;
   }

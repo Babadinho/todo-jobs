@@ -34,8 +34,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('track-jobs')) {
-      setUserDetails(JSON.parse(localStorage.getItem('track-jobs')));
+    if (localStorage.getItem('todo-jobs')) {
+      setUserDetails(JSON.parse(localStorage.getItem('todo-jobs')));
     }
   }, []);
 

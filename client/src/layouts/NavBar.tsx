@@ -24,11 +24,11 @@ const NavBar = () => {
   const { userDetails, setUserDetails } = useContext(UserContext);
 
   useEffect(() => {
-    localStorage.getItem('track-jobs');
+    localStorage.getItem('todo-jobs');
   }, [setUserDetails]);
 
   const handleLogout = () => {
-    window.localStorage.removeItem('track-jobs');
+    window.localStorage.removeItem('todo-jobs');
     window.location.reload();
   };
 

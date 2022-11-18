@@ -19,6 +19,7 @@ import {
   FormHelperText,
   Slide,
   Flex,
+  useOutsideClick,
 } from '@chakra-ui/react';
 import { addJob, fetchJob } from '../middlewares/job';
 import { UserContext } from '../context/Context';
@@ -34,6 +35,7 @@ interface JobInfo {
 }
 
 const AddJobModal = ({ onClose, isOpen, categories }: any) => {
+  const ref = React.useRef();
   const toast = useToast();
   const { userDetails } = useContext(UserContext);
   const [error, setError] = useState<string>('');
@@ -49,6 +51,11 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
   });
 
   const { link, title, description, category, endDate } = jobDetails;
+
+  useOutsideClick({
+    ref: ref,
+    handler: () => onClose(),
+  });
 
   const handleChange = (name: string) => (e: { target: { value: any } }) => {
     setJobDetails({ ...jobDetails, [name]: e.target.value });
@@ -130,6 +137,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
   return (
     <Box>
       <Slide
+        ref={ref}
         direction='right'
         in={isOpen}
         style={{ zIndex: 10, width: 'full' }}
