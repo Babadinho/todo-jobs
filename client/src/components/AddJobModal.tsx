@@ -340,7 +340,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
               fontWeight='md'
               onClick={handleAddJob}
             >
-              {loading ? <Spinner thickness='4px' size='lg' /> : 'Add Job'}
+              {loading ? <Spinner thickness='4px' size='md' /> : 'Add Job'}
             </Button>
           </ModalFooter>
         </ModalContent>

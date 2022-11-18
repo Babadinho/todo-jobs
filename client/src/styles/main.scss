@@ -1,20 +1,22 @@
-.main {
-    height: 100vh !important;
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif !important;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  margin: 0;
+  font-family: 'Poppins', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .heading {
   font-family: 'Poppins', sans-serif !important;
 }
 
 .footer {
-margin-top: auto !important;
+  margin-top: auto !important;
 }
 
 .chakra-button {

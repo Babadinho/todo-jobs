@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <Box mt='auto' className='footer'>
+    <Box className='footer'>
       <Flex
         w='full'
         flexDir='row'
@@ -16,6 +16,7 @@ const Footer = () => {
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         h={'60px'}
         px={{ base: 4, md: 20, xl: 40 }}
+        fontSize='0.9rem'
       >
         <Flex
           w='full'
@@ -30,7 +31,7 @@ const Footer = () => {
             color='gray.800'
             _dark={{ color: 'white' }}
           >
-            Jontrack © 2022. All Rights Reserved
+            Justbooks © 2022. All Rights Reserved
           </chakra.p>
 
           <chakra.p color='gray.800' _dark={{ color: 'white' }}>

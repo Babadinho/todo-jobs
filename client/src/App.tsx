@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import { UserContext, JobContext } from './context/Context';
 import { getJobs } from './actions/job';
 import { isAuthenticated } from './actions/auth';
+import { Box } from '@chakra-ui/react';
 
 const App = () => {
   const [userDetails, setUserDetails] = useState<{} | null>(null);
@@ -39,7 +40,7 @@ const App = () => {
     loadJobs();
   }, [setUserDetails]);
   return (
-    <>
+    <Box _light={{ bg: '#f7f8fd' }}>
       <UserContext.Provider value={value}>
         <JobContext.Provider value={jobs}>
           <NavBar />
@@ -64,7 +65,7 @@ const App = () => {
           <Footer />
         </JobContext.Provider>
       </UserContext.Provider>
-    </>
+    </Box>
   );
 };
 

@@ -53,10 +53,11 @@ const Jobs = () => {
       pt='5rem'
       px={{ base: '1rem', md: '5rem', xl: '12rem' }}
       className='main'
+      pb={{ base: '5rem', md: '3rem' }}
     >
       <Grid
-        h='200px'
-        templateRows='repeat(2, 1fr)'
+        // h='100%'
+        // templateRows='repeat(1, 1fr)'
         templateColumns='repeat(4, 1fr)'
         gap={4}
       >
