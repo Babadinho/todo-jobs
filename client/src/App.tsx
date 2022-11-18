@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import PrivateRoute from './auth/PrivateRoute';
-import Jobs from './components/Jobs';
+import Jobs from './pages/Jobs';
 import Login from './auth/Login';
 import Register from './auth/Register';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
+import NavBar from './layouts/NavBar';
+import Footer from './layouts/Footer';
 import { UserContext, JobContext } from './context/Context';
-import { getJobs } from './actions/job';
-import { isAuthenticated } from './actions/auth';
+import { getJobs } from './middlewares/job';
+import { isAuthenticated } from './middlewares/auth';
 import { Box } from '@chakra-ui/react';
 
 const App = () => {

@@ -13,13 +13,13 @@ import {
   Grid,
   GridItem,
 } from '@chakra-ui/react';
-import JobCard from './JobCard';
-import SideBar from './SideBar';
-import AddJobModal from './AddJobModal';
+import JobCard from '../components/JobCard';
+import SideBar from '../components/SideBar';
+import AddJobModal from '../components/AddJobModal';
 import { FiMenu } from 'react-icons/fi';
 import { AddIcon } from '@chakra-ui/icons';
-import { isAuthenticated } from '../actions/auth';
-import { getCategories } from '../actions/category';
+import { isAuthenticated } from '../middlewares/auth';
+import { getCategories } from '../middlewares/category';
 import { JobContext } from '../context/Context';
 
 const Jobs = () => {

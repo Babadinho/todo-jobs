@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
-import { authenticate, login, signinGoogle } from '../actions/auth';
+import { authenticate, login, signinGoogle } from '../middlewares/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/Context';
 

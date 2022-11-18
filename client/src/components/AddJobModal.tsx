@@ -25,7 +25,7 @@ import {
   InputRightAddon,
   FormHelperText,
 } from '@chakra-ui/react';
-import { addJob, fetchJob } from '../actions/job';
+import { addJob, fetchJob } from '../middlewares/job';
 import { UserContext } from '../context/Context';
 
 interface JobInfo {

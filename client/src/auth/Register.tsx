@@ -18,7 +18,7 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { authenticate, register, signinGoogle } from '../actions/auth';
+import { authenticate, register, signinGoogle } from '../middlewares/auth';
 import { UserContext } from '../context/Context';
 
 interface UserInfo {

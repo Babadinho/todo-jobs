@@ -46,7 +46,7 @@ const NavBar = () => {
             fontSize={'1.7rem'}
             color='gray.700'
             _dark={{
-              color: 'white',
+              color: 'gray.50',
             }}
           >
             <Link

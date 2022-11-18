@@ -93,7 +93,7 @@ const JobCard = ({ ...job }) => {
             fontSize='1.05rem'
             color='gray.700'
             _dark={{
-              color: 'white',
+              color: 'gray.50',
             }}
             fontWeight='700'
             _hover={{
@@ -101,7 +101,7 @@ const JobCard = ({ ...job }) => {
               _dark: {
                 color: 'gray.200',
               },
-              textDecor: 'underline',
+              textDecor: 'none',
             }}
           >
             {title}

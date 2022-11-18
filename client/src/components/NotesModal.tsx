@@ -17,7 +17,7 @@ import {
   List,
   ListItem,
 } from '@chakra-ui/react';
-import { addNote, deleteNote } from '../actions/note';
+import { addNote, deleteNote } from '../middlewares/note';
 import { JobContext, UserContext } from '../context/Context';
 import moment from 'moment';
 
