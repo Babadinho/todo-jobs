@@ -196,6 +196,12 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                             bg: 'gray.500',
                             color: 'white',
                           }}
+                          _hover={{
+                            bg: 'gray.100',
+                            _dark: {
+                              bg: 'gray.400',
+                            },
+                          }}
                           color='gray.500'
                           rounded='md'
                           cursor='pointer'
