@@ -54,6 +54,7 @@ export const SideBar = ({
             status: 'success',
             duration: 4000,
             isClosable: true,
+            position: 'top',
           });
           setValue('');
         }, 2000);

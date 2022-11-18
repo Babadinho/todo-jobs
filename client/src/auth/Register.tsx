@@ -70,6 +70,7 @@ const Register = () => {
             status: 'success',
             duration: 4000,
             isClosable: true,
+            position: 'top',
           });
           setUserDetails(res.data);
           navigate('/');
@@ -81,6 +82,7 @@ const Register = () => {
         status: 'error',
         duration: 4000,
         isClosable: true,
+        position: 'top',
       });
       setLoading(false);
     }

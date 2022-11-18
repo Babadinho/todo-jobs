@@ -37,8 +37,11 @@ const App = () => {
     if (localStorage.getItem('track-jobs')) {
       setUserDetails(JSON.parse(localStorage.getItem('track-jobs')));
     }
+  }, []);
+
+  useEffect(() => {
     loadJobs();
-  }, [setUserDetails]);
+  }, [userDetails]);
   return (
     <Box _light={{ bg: '#f7f8fd' }}>
       <UserContext.Provider value={value}>

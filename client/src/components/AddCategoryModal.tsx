@@ -29,7 +29,7 @@ const AddCategoryModal = ({
 }: any) => {
   return (
     <>
-      <Modal onClose={onClose} size={'md'} isOpen={isOpen}>
+      <Modal onClose={onClose} size={'sm'} isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader fontSize='1.1rem' fontWeight='500' mb='0.1rem'>
@@ -79,44 +79,17 @@ const AddCategoryModal = ({
                   Cancel
                 </Button>
                 <Button
+                  minW='4.334rem'
                   size='sm'
-                  loadingText='Submitting'
                   fontWeight='500'
                   colorScheme='linkedin'
                   onClick={handleSubmit}
                 >
-                  {loading ? (
-                    <Spinner thickness='4px' size='md' />
-                  ) : (
-                    'Add Category'
-                  )}
+                  {loading ? <Spinner thickness='4px' size='md' /> : 'Submit'}
                 </Button>
               </Box>
             </Flex>
           </ModalBody>
-          {/* <ModalFooter>
-            <Button
-              mr='0.7rem'
-              size='sm'
-              fontWeight='500'
-              variant='ghost'
-              onClick={() => {
-                onClose();
-                setValue('');
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              size='sm'
-              loadingText='Submitting'
-              fontWeight='500'
-              colorScheme='linkedin'
-              onClick={handleSubmit}
-            >
-              {loading ? <Spinner thickness='4px' size='md' /> : 'Submit'}
-            </Button>
-          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </>

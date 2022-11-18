@@ -1,12 +1,5 @@
 import React, { useContext, useState } from 'react';
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   Button,
   Box,
   chakra,
@@ -21,12 +14,15 @@ import {
   Textarea,
   useToast,
   Spinner,
-  Text,
+  useColorModeValue,
   InputRightAddon,
   FormHelperText,
+  Slide,
+  Flex,
 } from '@chakra-ui/react';
 import { addJob, fetchJob } from '../middlewares/job';
 import { UserContext } from '../context/Context';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
 
 interface JobInfo {
   link: string;
@@ -78,6 +74,13 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
     } catch (error: any) {
       if (error.response.status === 400) setError(error.response.data);
       setLoading2(false);
+      toast({
+        title: error.response.data,
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
     }
   };
 
@@ -99,6 +102,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
             status: 'success',
             duration: 4000,
             isClosable: true,
+            position: 'top',
           });
           setJobDetails({
             link: '',
@@ -113,254 +117,300 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
     } catch (error: any) {
       if (error.response.status === 400) setError(error.response.data);
       setLoading(false);
+      toast({
+        title: error.response.data,
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
     }
   };
 
   return (
-    <>
-      <Modal
-        onClose={() => {
-          onClose();
-          setError('');
-          setLoading2(false);
-          setLoading(false);
-          setJobDetails({
-            link: '',
-            title: '',
-            description: '',
-            category: '',
-            endDate: '',
-            image: '',
-          });
-        }}
-        size={'xl'}
-        isOpen={isOpen}
+    <Box>
+      <Slide
+        direction='right'
+        in={isOpen}
+        style={{ zIndex: 10, width: 'full' }}
       >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Add new job</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text color='red.500' pb='0.1rem' textAlign='center'>
-              {error && error}
-            </Text>
-            <Box>
-              <chakra.form
-                method='POST'
-                overflow={{
-                  sm: 'hidden',
-                }}
-              >
-                <Stack
-                  bg='white'
-                  _dark={{
-                    bg: 'gray.700',
-                  }}
-                  spacing={6}
-                  p={{
-                    sm: 2,
+        <Box
+          p='1rem'
+          rounded='md'
+          shadow='md'
+          h='100vh'
+          w={{ base: '100vw', md: 'lg' }}
+          zIndex={29999}
+          bg={useColorModeValue('white', 'gray.700')}
+        >
+          <Button
+            size='0.5rem'
+            ml={4}
+            p={1}
+            bg='gray.50'
+            _dark={{
+              bg: 'gray.500',
+              color: 'white',
+            }}
+            _hover={{
+              bg: 'gray.100',
+              _dark: {
+                bg: 'gray.400',
+              },
+            }}
+            color='gray.500'
+            onClick={() => {
+              onClose();
+              setLoading2(false);
+              setLoading(false);
+              setJobDetails({
+                link: '',
+                title: '',
+                description: '',
+                category: '',
+                endDate: '',
+                image: '',
+              });
+            }}
+            cursor='pointer'
+            fontSize='0.85rem'
+          >
+            <Flex align='center'>
+              <Box as='span'>Close</Box>
+              <ArrowForwardIcon pt='0.15rem' />
+            </Flex>
+          </Button>
+          <Stack
+            spacing={8}
+            mx={'auto'}
+            maxW={'lg'}
+            py={10}
+            w={{ base: 'full', md: '63vh' }}
+          >
+            <Box
+              rounded={'lg'}
+              bg={useColorModeValue('white', 'gray.700')}
+              p={4}
+            >
+              <Box>
+                <chakra.form
+                  method='POST'
+                  overflow={{
+                    sm: 'hidden',
                   }}
                 >
-                  <SimpleGrid columns={3} spacing={6}>
-                    <FormControl
-                      as={GridItem}
-                      colSpan={[3, 4]}
-                      id='link'
-                      isRequired
-                    >
-                      <FormLabel
-                        fontSize='sm'
-                        fontWeight='md'
-                        color='gray.700'
-                        _dark={{
-                          color: 'gray.50',
-                        }}
+                  <Stack
+                    bg='white'
+                    _dark={{
+                      bg: 'gray.700',
+                    }}
+                    spacing={6}
+                    p={{
+                      sm: 2,
+                    }}
+                  >
+                    <SimpleGrid columns={3} spacing={6}>
+                      <FormControl
+                        as={GridItem}
+                        colSpan={[3, 4]}
+                        id='link'
+                        isRequired
                       >
-                        Job Link
-                      </FormLabel>
-                      <InputGroup size='sm'>
+                        <FormLabel
+                          fontSize='sm'
+                          fontWeight='md'
+                          color='gray.700'
+                          _dark={{
+                            color: 'gray.50',
+                          }}
+                        >
+                          Job Link
+                        </FormLabel>
+                        <InputGroup size='sm'>
+                          <Input
+                            _dark={{
+                              _placeholder: { color: 'gray.200' },
+                            }}
+                            type='tel'
+                            placeholder='https://www.example.com'
+                            focusBorderColor='brand.400'
+                            rounded='md'
+                            value={link}
+                            onChange={handleChange('link')}
+                          />
+                          <InputRightAddon
+                            bg='gray.50'
+                            _dark={{
+                              bg: 'gray.500',
+                              color: 'white',
+                            }}
+                            _hover={{
+                              bg: 'gray.100',
+                              _dark: {
+                                bg: 'gray.400',
+                              },
+                            }}
+                            color='gray.500'
+                            rounded='md'
+                            cursor='pointer'
+                            onClick={handlefetchJob}
+                          >
+                            {loading2 ? (
+                              <Spinner size='xs' />
+                            ) : (
+                              <Box as='span'>
+                                <i className='fa-solid fa-link'></i> &nbsp;
+                                Fetch job
+                              </Box>
+                            )}
+                          </InputRightAddon>
+                        </InputGroup>
+                        <FormHelperText></FormHelperText>
+                      </FormControl>
+                    </SimpleGrid>
+
+                    <Box>
+                      <FormControl id='description' mt={1} isRequired>
+                        <FormLabel
+                          fontSize='sm'
+                          fontWeight='md'
+                          color='gray.700'
+                          _dark={{
+                            color: 'gray.50',
+                          }}
+                        >
+                          Title
+                        </FormLabel>
                         <Input
                           _dark={{
                             _placeholder: { color: 'gray.200' },
                           }}
-                          type='tel'
-                          placeholder='https://www.example.com'
+                          placeholder='Enter job title'
+                          mt={1}
+                          shadow='sm'
                           focusBorderColor='brand.400'
-                          rounded='md'
-                          value={link}
-                          onChange={handleChange('link')}
+                          fontSize={{
+                            sm: 'sm',
+                          }}
+                          value={title}
+                          onChange={handleChange('title')}
                         />
-                        <InputRightAddon
-                          bg='gray.50'
+                      </FormControl>
+                    </Box>
+
+                    <Box>
+                      <FormControl id='description' mt={1}>
+                        <FormLabel
+                          fontSize='sm'
+                          fontWeight='md'
+                          color='gray.700'
                           _dark={{
-                            bg: 'gray.500',
-                            color: 'white',
+                            color: 'gray.50',
                           }}
-                          _hover={{
-                            bg: 'gray.100',
-                            _dark: {
-                              bg: 'gray.400',
-                            },
-                          }}
-                          color='gray.500'
-                          rounded='md'
-                          cursor='pointer'
-                          onClick={handlefetchJob}
                         >
-                          {loading2 ? (
-                            <Spinner size='xs' />
-                          ) : (
-                            <Box as='span'>
-                              <i className='fa-solid fa-link'></i> &nbsp; Fetch
-                              job
-                            </Box>
-                          )}
-                        </InputRightAddon>
-                      </InputGroup>
-                      <FormHelperText></FormHelperText>
-                    </FormControl>
-                  </SimpleGrid>
-
-                  <Box>
-                    <FormControl id='description' mt={1} isRequired>
-                      <FormLabel
-                        fontSize='sm'
-                        fontWeight='md'
-                        color='gray.700'
-                        _dark={{
-                          color: 'gray.50',
-                        }}
-                      >
-                        Title
-                      </FormLabel>
-                      <Input
-                        _dark={{
-                          _placeholder: { color: 'gray.200' },
-                        }}
-                        placeholder='Enter job title'
-                        mt={1}
-                        shadow='sm'
-                        focusBorderColor='brand.400'
-                        fontSize={{
-                          sm: 'sm',
-                        }}
-                        value={title}
-                        onChange={handleChange('title')}
-                      />
-                    </FormControl>
-                  </Box>
-
-                  <Box>
-                    <FormControl id='description' mt={1}>
-                      <FormLabel
-                        fontSize='sm'
-                        fontWeight='md'
-                        color='gray.700'
-                        _dark={{
-                          color: 'gray.50',
-                        }}
-                      >
-                        Description
-                      </FormLabel>
-                      <Textarea
-                        _dark={{
-                          _placeholder: { color: 'gray.200' },
-                        }}
-                        placeholder='Enter job description'
-                        mt={1}
-                        rows={3}
-                        shadow='sm'
-                        focusBorderColor='brand.400'
-                        fontSize={{
-                          sm: 'sm',
-                        }}
-                        value={description}
-                        onChange={handleChange('description')}
-                      />
-                    </FormControl>
-                  </Box>
-                  <Box>
-                    <FormControl id='category' isRequired>
-                      <FormLabel
-                        htmlFor='country'
-                        fontSize='sm'
-                        fontWeight='md'
-                        color='gray.700'
-                        _dark={{
-                          color: 'gray.50',
-                        }}
-                      >
-                        Category
-                      </FormLabel>
-                      <Select
-                        placeholder='Select category'
-                        mt={1}
-                        focusBorderColor='brand.400'
-                        shadow='sm'
-                        size='sm'
-                        w='full'
-                        rounded='md'
-                        value={category}
-                        onChange={handleChange('category')}
-                      >
-                        {categories &&
-                          categories.map((category: any, i: any) => (
-                            <option
-                              key={i}
-                              value={category._id}
-                              style={{ textTransform: 'capitalize' }}
-                            >
-                              {category.name}
-                            </option>
-                          ))}
-                      </Select>
-                    </FormControl>
-                  </Box>
-                  <Box>
-                    <FormControl id='endDate' mt={1}>
-                      <FormLabel
-                        fontSize='sm'
-                        fontWeight='md'
-                        color='gray.700'
-                        _dark={{
-                          color: 'gray.50',
-                        }}
-                      >
-                        Close Date
-                      </FormLabel>
-                      <Input
-                        type='date'
-                        mt={1}
-                        shadow='sm'
-                        focusBorderColor='brand.400'
-                        fontSize={{
-                          sm: 'sm',
-                        }}
-                        value={endDate}
-                        onChange={handleChange('endDate')}
-                      />
-                    </FormControl>
-                  </Box>
-                </Stack>
-              </chakra.form>
+                          Description
+                        </FormLabel>
+                        <Textarea
+                          _dark={{
+                            _placeholder: { color: 'gray.200' },
+                          }}
+                          placeholder='Enter job description'
+                          mt={1}
+                          rows={3}
+                          shadow='sm'
+                          focusBorderColor='brand.400'
+                          fontSize={{
+                            sm: 'sm',
+                          }}
+                          value={description}
+                          onChange={handleChange('description')}
+                        />
+                      </FormControl>
+                    </Box>
+                    <Box>
+                      <FormControl id='category' isRequired>
+                        <FormLabel
+                          htmlFor='country'
+                          fontSize='sm'
+                          fontWeight='md'
+                          color='gray.700'
+                          _dark={{
+                            color: 'gray.50',
+                          }}
+                        >
+                          Category
+                        </FormLabel>
+                        <Select
+                          placeholder='Select category'
+                          mt={1}
+                          focusBorderColor='brand.400'
+                          shadow='sm'
+                          size='sm'
+                          w='full'
+                          rounded='md'
+                          value={category}
+                          onChange={handleChange('category')}
+                        >
+                          {categories &&
+                            categories.map((category: any, i: any) => (
+                              <option
+                                key={i}
+                                value={category._id}
+                                style={{ textTransform: 'capitalize' }}
+                              >
+                                {category.name}
+                              </option>
+                            ))}
+                        </Select>
+                      </FormControl>
+                    </Box>
+                    <Box>
+                      <FormControl id='endDate' mt={1}>
+                        <FormLabel
+                          fontSize='sm'
+                          fontWeight='md'
+                          color='gray.700'
+                          _dark={{
+                            color: 'gray.50',
+                          }}
+                        >
+                          Close Date
+                        </FormLabel>
+                        <Input
+                          type='date'
+                          mt={1}
+                          shadow='sm'
+                          focusBorderColor='brand.400'
+                          fontSize={{
+                            sm: 'sm',
+                          }}
+                          value={endDate}
+                          onChange={handleChange('endDate')}
+                        />
+                      </FormControl>
+                    </Box>
+                  </Stack>
+                </chakra.form>
+                <Flex justify='flex-end' mt='1rem' pr={2}>
+                  <Button
+                    minW='6.5rem'
+                    type='submit'
+                    colorScheme='linkedin'
+                    _focus={{
+                      shadow: '',
+                    }}
+                    fontWeight='md'
+                    onClick={handleAddJob}
+                  >
+                    {loading ? <Spinner thickness='4px' size='md' /> : 'Submit'}
+                  </Button>
+                </Flex>
+              </Box>
             </Box>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              type='submit'
-              colorScheme='linkedin'
-              _focus={{
-                shadow: '',
-              }}
-              fontWeight='md'
-              onClick={handleAddJob}
-            >
-              {loading ? <Spinner thickness='4px' size='md' /> : 'Add Job'}
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
+          </Stack>
+        </Box>
+      </Slide>
+    </Box>
   );
 };
 

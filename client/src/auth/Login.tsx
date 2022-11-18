@@ -88,6 +88,7 @@ const Login = () => {
         status: 'error',
         duration: 4000,
         isClosable: true,
+        position: 'top',
       });
       setLoading(false);
     }

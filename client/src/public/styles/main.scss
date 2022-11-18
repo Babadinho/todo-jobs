@@ -1,14 +1,37 @@
+@import "./animations.scss";
+
 #app {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
+html {
+  height: 100%
+}
+
 body {
+  height: 100%;
   margin: 0;
   font-family: 'Jost', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.job-card {
+  animation-name: moveInBottom;
+  animation-duration: 0.8s;
+  animation-timing-function: ease;
+
+  transition: all .5s;
+
+  &:hover {
+    transform: translateY(-.1rem);
+  }
+
+  &::after {
+    transform: translateY(-.1rem);
+  }
 }
 
 .heading {
@@ -29,18 +52,6 @@ body {
 
 .chakra-button:hover {
   transform: translateY(-.05rem);
-}
-
-.job-card {
-  transition: all .5s;
-
-  &:active {
-    transform: translateY(-.1rem);
-}
-}
-
-.job-card:hover {
-  transform: translateY(-.1rem);
 }
 
 .bullet {
