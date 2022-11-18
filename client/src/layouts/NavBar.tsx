@@ -57,10 +57,10 @@ const NavBar = () => {
               }}
             >
               <Flex alignItems={'center'}>
-                <Box as='span' pb='0.2rem'>
+                {/* <Box as='span' pb='0.2rem'>
                   <i className='fa-solid fa-stopwatch'></i>
-                </Box>
-                <Text ml='0.12rem'>Jobtrack</Text>
+                </Box> */}
+                <Text ml='0.12rem'>Todojobs</Text>
               </Flex>
             </Link>
           </Box>
