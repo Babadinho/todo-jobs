@@ -50,7 +50,7 @@ const Jobs = () => {
   return (
     <Box
       _light={{ bg: '#f7f8fd' }}
-      pt='5rem'
+      pt={{ base: '3rem', md: '5rem' }}
       px={{ base: '1rem', md: '5rem', xl: '12rem' }}
       className='main'
       pb={{ base: '5rem', md: '3rem' }}
@@ -113,7 +113,7 @@ const Jobs = () => {
               _dark={{
                 bg: 'gray.700',
               }}
-              shadow='md'
+              shadow='sm'
               rounded='md'
             >
               <Flex justifyContent='space-between' alignItems='center'>

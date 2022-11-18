@@ -118,7 +118,7 @@ export const SideBar = ({
         }}
         mb='1.5rem'
         px={{ base: 4, md: 3, xl: 4 }}
-        shadow='md'
+        shadow='sm'
         rounded='md'
         className='sidebarCard'
       >
@@ -209,7 +209,7 @@ export const SideBar = ({
         }}
         mb='3rem'
         px={{ base: 4, md: 3, xl: 4 }}
-        shadow='md'
+        shadow='sm'
         rounded='md'
         className='sidebarCard'
       >

@@ -6,13 +6,13 @@
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Jost', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .heading {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Jost', sans-serif;
 }
 
 .footer {
@@ -20,11 +20,27 @@ body {
 }
 
 .chakra-button {
-  transform: transition 0.5s;
+  transition: all .5s;
+
+  &:active {
+    transform: translateY(-.1rem);
+}
 }
 
 .chakra-button:hover {
   transform: translateY(-.05rem);
+}
+
+.job-card {
+  transition: all .5s;
+
+  &:active {
+    transform: translateY(-.1rem);
+}
+}
+
+.job-card:hover {
+  transform: translateY(-.1rem);
 }
 
 .bullet {
