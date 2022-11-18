@@ -22,7 +22,7 @@ import { isAuthenticated } from '../middlewares/auth';
 import { getCategories } from '../middlewares/category';
 import { JobContext } from '../context/Context';
 
-const Jobs = () => {
+const Jobs = ({ loadJobs }: any) => {
   const sidebar = useDisclosure();
   const { userJobs } = useContext(JobContext);
   const [category, setCategory] = useState<Array<{}> | null>();

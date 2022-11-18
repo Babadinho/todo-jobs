@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Category = require('../models/Category');
+const Job = require('../models/Job');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
@@ -103,6 +104,15 @@ exports.login = async (req, res) => {
         expiresIn: '7d',
       });
 
+      const today = new Date();
+
+      Job.updateMany(
+        { endDate: { $lte: today } },
+        {
+          $set: { status: 'closed' },
+        }
+      );
+
       return res.json({
         token,
         user,
@@ -156,12 +166,22 @@ exports.signinGoogle = async (req, res) => {
         expiresIn: '7d',
       });
 
-      res.status(201).json({
+      const today = new Date();
+
+      await Job.updateMany(
+        { endDate: { $lte: today } },
+        {
+          $set: { status: 'closed' },
+        }
+      );
+
+      return res.status(201).json({
         token,
         user,
       });
     }
   } catch (error) {
-    res.status(400).send('An error occurred. Registration failed.');
+    console.log(error);
+    res.status(400).send('An error occurred. Sign in failed.');
   }
 };

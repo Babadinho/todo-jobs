@@ -16,7 +16,6 @@ import {
   Spinner,
   useColorModeValue,
   InputRightAddon,
-  FormHelperText,
   Slide,
   Flex,
   useOutsideClick,
@@ -273,7 +272,6 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                             )}
                           </InputRightAddon>
                         </InputGroup>
-                        <FormHelperText></FormHelperText>
                       </FormControl>
                     </SimpleGrid>
 
@@ -399,7 +397,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                     </Box>
                   </Stack>
                 </chakra.form>
-                <Flex justify='flex-end' mt='1rem' pr={2}>
+                <Flex justify='flex-end' mt='1.5rem' pr={2}>
                   <Button
                     minW='6.5rem'
                     type='submit'

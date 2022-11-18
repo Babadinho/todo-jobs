@@ -52,7 +52,7 @@ const App = () => {
               path='/'
               element={
                 <PrivateRoute>
-                  <Jobs />
+                  <Jobs loadJobs={loadJobs} />
                 </PrivateRoute>
               }
             />

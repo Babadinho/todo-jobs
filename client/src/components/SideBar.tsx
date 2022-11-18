@@ -3,6 +3,9 @@ import { useDisclosure, useToast } from '@chakra-ui/react';
 import AddCategoryModal from './AddCategoryModal';
 import Categories from './Categories';
 import Stats from './Stats';
+import Search from './Search';
+import Status from './Status';
+import Jobsites from './Jobsites';
 import { UserContext } from '../context/Context';
 import {
   addCategory,
@@ -104,6 +107,9 @@ export const SideBar = ({
   return (
     <>
       <Stats />
+      <Search />
+      <Status />
+      <Jobsites />
       <Categories
         loading={loading}
         loading2={loading2}
