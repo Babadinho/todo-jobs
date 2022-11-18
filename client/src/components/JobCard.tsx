@@ -46,12 +46,28 @@ const JobCard = ({ ...job }) => {
         <Flex justifyContent='space-between' alignItems='center'>
           <chakra.span
             fontSize='0.92rem'
-            color='gray.600'
+            color={
+              moment(endDate).diff(Date.now()) <= 0 ? 'red.400' : 'gray.600'
+            }
             _dark={{
               color: 'gray.400',
             }}
+            cursor='pointer'
           >
-            {moment(createdAt).format('MMM Do, YYYY')}
+            <Tooltip
+              hasArrow
+              label={
+                moment(endDate).diff(Date.now()) <= 0
+                  ? `Closed ${moment(endDate).fromNow()}`
+                  : `Closing ${moment(endDate).fromNow()}`
+              }
+              bg='gray.700'
+              color='white'
+              placement='top'
+              fontSize='0.75rem'
+            >
+              {moment(createdAt).format('MMM Do, YYYY')}
+            </Tooltip>
           </chakra.span>
           <Box
             as='span'
@@ -61,7 +77,6 @@ const JobCard = ({ ...job }) => {
             bg='gray.600'
             color='gray.100'
             fontSize='0.68rem'
-            fontWeight='700'
             rounded='md'
             _hover={{
               bg: 'gray.500',
@@ -102,6 +117,20 @@ const JobCard = ({ ...job }) => {
             {description.length > 143 && '..'}
           </chakra.p>
         </Box>
+
+        {/* <Flex justifyContent='flex-end' mt='0.6rem'>
+          <chakra.span
+            fontSize='0.75rem'
+            fontStyle='oblique'
+            // fontWeight='600'
+            color='gray.600'
+            _dark={{
+              color: 'gray.400',
+            }}
+          >
+            Closing {moment(endDate).fromNow()}
+          </chakra.span>
+        </Flex> */}
 
         <Flex justifyContent='space-between' alignItems='center' mt={4}>
           <Flex alignItems='center'>
