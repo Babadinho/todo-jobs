@@ -129,7 +129,7 @@ const Register = () => {
 
   return (
     <>
-      <Flex align={'center'} justify={'center'} mt='1.5rem'>
+      <Flex align={'center'} justify={'center'} mt='1.5rem' mb='3rem'>
         <Stack
           spacing={8}
           mx={'auto'}
@@ -143,7 +143,7 @@ const Register = () => {
               fontSize={'1.6rem'}
               color={'gray.700'}
               _dark={{
-                color: 'white',
+                color: 'gray.50',
               }}
               textAlign='center'
               className='heading'
@@ -152,7 +152,7 @@ const Register = () => {
             </Heading>
             <Text
               _dark={{
-                color: 'white',
+                color: 'gray.50',
               }}
               fontSize={'1xl'}
               color={'gray.600'}
@@ -171,14 +171,14 @@ const Register = () => {
               <Box id='signupGoogle' mx='auto' mb='1rem' />
               <HStack>
                 <Box>
-                  <FormControl id='firstName' isRequired>
-                    <FormLabel
-                      _dark={{
-                        color: 'white',
-                      }}
-                    >
-                      First Name
-                    </FormLabel>
+                  <FormControl
+                    id='firstName'
+                    isRequired
+                    _dark={{
+                      color: 'gray.50',
+                    }}
+                  >
+                    <FormLabel>First Name</FormLabel>
                     <Input
                       type='text'
                       value={firstName}
@@ -187,14 +187,14 @@ const Register = () => {
                   </FormControl>
                 </Box>
                 <Box>
-                  <FormControl id='lastName' isRequired>
-                    <FormLabel
-                      _dark={{
-                        color: 'white',
-                      }}
-                    >
-                      Last Name
-                    </FormLabel>
+                  <FormControl
+                    id='lastName'
+                    isRequired
+                    _dark={{
+                      color: 'gray.50',
+                    }}
+                  >
+                    <FormLabel>Last Name</FormLabel>
                     <Input
                       type='text'
                       value={lastName}
@@ -203,28 +203,28 @@ const Register = () => {
                   </FormControl>
                 </Box>
               </HStack>
-              <FormControl id='email' isRequired>
-                <FormLabel
-                  _dark={{
-                    color: 'white',
-                  }}
-                >
-                  Email address
-                </FormLabel>
+              <FormControl
+                id='email'
+                isRequired
+                _dark={{
+                  color: 'gray.50',
+                }}
+              >
+                <FormLabel>Email address</FormLabel>
                 <Input
                   type='email'
                   value={email}
                   onChange={handleChange('email')}
                 />
               </FormControl>
-              <FormControl id='password' isRequired>
-                <FormLabel
-                  _dark={{
-                    color: 'white',
-                  }}
-                >
-                  Password
-                </FormLabel>
+              <FormControl
+                id='password'
+                isRequired
+                _dark={{
+                  color: 'gray.50',
+                }}
+              >
+                <FormLabel>Password</FormLabel>
                 <InputGroup>
                   <Input
                     type={showPassword ? 'text' : 'password'}
@@ -259,7 +259,7 @@ const Register = () => {
               </Stack>
               <Box
                 _dark={{
-                  color: 'white',
+                  color: 'gray.50',
                 }}
                 textAlign='center'
                 fontSize='0.95rem'

@@ -65,8 +65,9 @@ const Categories = ({
           >
             <Button
               size='xs'
-              colorScheme='linkedin'
-              variant='solid'
+              bg='linkedin.500'
+              color='gray.100'
+              _hover={{ bg: 'linkedin.600' }}
               fontWeight='400'
               onClick={() => onOpen()}
             >

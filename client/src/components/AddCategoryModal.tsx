@@ -82,7 +82,9 @@ const AddCategoryModal = ({
                   minW='4.334rem'
                   size='sm'
                   fontWeight='500'
-                  colorScheme='linkedin'
+                  bg='linkedin.500'
+                  color='gray.100'
+                  _hover={{ bg: 'linkedin.600' }}
                   onClick={handleSubmit}
                 >
                   {loading ? <Spinner thickness='4px' size='md' /> : 'Submit'}

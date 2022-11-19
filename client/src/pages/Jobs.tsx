@@ -129,21 +129,16 @@ const Jobs = ({ loadJobs }: any) => {
                     display={{ base: 'inline-flex', lg: 'none' }}
                     onClick={sidebar.onOpen}
                     icon={<FiMenu />}
-                    size='md'
+                    size='sm'
                     colorScheme='linkedin'
                   />
                 </chakra.span>
                 <chakra.span>
                   <Button
-                    leftIcon={
-                      <AddIcon
-                        fontSize='0.8rem'
-                        color='gray.100'
-                        _dark={{ color: 'gray.700' }}
-                      />
-                    }
-                    colorScheme='linkedin'
-                    variant='solid'
+                    // leftIcon={<AddIcon fontSize='0.8rem' color='gray.100' />}
+                    bg='linkedin.500'
+                    color='gray.100'
+                    _hover={{ bg: 'linkedin.600' }}
                     fontWeight='400'
                     onClick={() => onOpen()}
                     rounded='2rem'

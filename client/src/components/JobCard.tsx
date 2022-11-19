@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import moment from 'moment';
 import NotesModal from './NotesModal';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 const JobCard = ({ ...job }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,6 +28,24 @@ const JobCard = ({ ...job }) => {
     notes,
     createdAt,
   } = job;
+
+  const color: any = {
+    applied: 'linkedin.500',
+    'not applied': 'gray.500',
+    closed: 'red.500',
+    rejected: 'orange.500',
+    assessment: 'purple.500',
+    interview: 'grren.500',
+  };
+
+  const color_hover: any = {
+    applied: 'linkedin.600',
+    'not applied': 'gray.600',
+    closed: 'red.600',
+    rejected: 'orange.600',
+    assessment: 'purple.600',
+    interview: 'grren.600',
+  };
 
   return (
     <>
@@ -71,26 +90,31 @@ const JobCard = ({ ...job }) => {
             </Tooltip>
           </chakra.span>
           <Box
+            display='flex'
+            alignItems='center'
             as='span'
             px={2}
             py={1}
             cursor='pointer'
-            bg='gray.600'
+            bg={color[status]}
             color='gray.100'
             fontSize='0.7rem'
             rounded='md'
             _hover={{
-              bg: 'gray.500',
+              bg: color_hover[status],
             }}
             textTransform='capitalize'
           >
             {status}
+            <Box fontSize='0.6rem' as='span' ml='0.2rem'>
+              <i className='fa-solid fa-chevron-down'></i>
+            </Box>
           </Box>
         </Flex>
 
         <Box mt={2}>
           <Link
-            fontSize='1.05rem'
+            fontSize='1.04rem'
             color='gray.700'
             _dark={{
               color: 'gray.50',

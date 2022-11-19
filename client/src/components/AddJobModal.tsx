@@ -151,9 +151,10 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
           bg={useColorModeValue('white', 'gray.700')}
         >
           <Button
-            size='0.5rem'
+            size='0.8rem'
             ml={4}
-            p={1}
+            py={1}
+            px={2}
             bg='gray.50'
             _dark={{
               bg: 'gray.500',
@@ -180,11 +181,12 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
               });
             }}
             cursor='pointer'
-            fontSize='0.85rem'
+            fontSize='1.15rem'
           >
             <Flex align='center'>
-              <Box as='span'>Close</Box>
-              <ArrowForwardIcon pt='0.15rem' />
+              {/* <Box as='span'>Close</Box>
+              <ArrowForwardIcon pt='0.15rem' /> */}
+              <i className='fa-solid fa-xmark'></i>
             </Flex>
           </Button>
           <Stack
@@ -401,7 +403,9 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                   <Button
                     minW='6.5rem'
                     type='submit'
-                    colorScheme='linkedin'
+                    bg='linkedin.500'
+                    color='gray.100'
+                    _hover={{ bg: 'linkedin.600' }}
                     _focus={{
                       shadow: '',
                     }}
