@@ -108,8 +108,8 @@ export const SideBar = ({
     <>
       <Stats />
       <Search />
-      <Status />
-      <Jobsites />
+      {/* <Status />
+      <Jobsites /> */}
       <Categories
         loading={loading}
         loading2={loading2}
