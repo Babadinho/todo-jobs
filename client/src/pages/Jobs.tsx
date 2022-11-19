@@ -82,6 +82,7 @@ const Jobs = ({ loadJobs }: any) => {
           >
             <DrawerCloseButton />
             <SideBar
+              loadJobs={loadJobs}
               category={category}
               setCategory={setCategory}
               sidebar={sidebar}
@@ -96,6 +97,7 @@ const Jobs = ({ loadJobs }: any) => {
           display={{ base: 'none', lg: 'block' }}
         >
           <SideBar
+            loadJobs={loadJobs}
             category={category}
             setCategory={setCategory}
             sidebar={sidebar}
@@ -150,7 +152,7 @@ const Jobs = ({ loadJobs }: any) => {
             </Box>
             {userJobs &&
               userJobs.length > 0 &&
-              userJobs.map((job: any, i: any) => {
+              userJobs.map((job: {}, i: any) => {
                 return <JobCard {...job} key={i} />;
               })}
           </Box>

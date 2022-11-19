@@ -9,8 +9,8 @@ export const fetchJob = async (link: any, token: any) =>
     },
   });
 
-export const getJobs = async (userId: any, token: any) =>
-  await axios.get(`${process.env.REACT_APP_URL}/jobs/${userId}`, {
+export const getJobs = async (userId: any, query: any, token: any) =>
+  await axios.post(`${process.env.REACT_APP_URL}/jobs/${userId}`, query, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

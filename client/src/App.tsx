@@ -22,11 +22,9 @@ const App = () => {
   );
   jobs = useMemo(() => ({ userJobs, setUserJobs }), [userJobs, setUserJobs]);
 
-  const loadJobs = async () => {
+  const loadJobs = async (userId: any, query: any, token: any) => {
     try {
-      const res =
-        isAuthenticated() &&
-        (await getJobs(isAuthenticated().user._id, isAuthenticated().token));
+      const res = isAuthenticated() && (await getJobs(userId, query, token));
       setUserJobs(res.data);
     } catch (error: any) {
       console.log(error.response.data);
@@ -40,7 +38,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    loadJobs();
+    loadJobs(isAuthenticated().user._id, {}, isAuthenticated().token);
   }, [userDetails]);
   return (
     <Box _light={{ bg: '#f7f8fd' }}>

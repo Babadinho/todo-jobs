@@ -8,7 +8,7 @@ const { requireSignin } = require('../controllers/auth');
 
 //routes
 router.post('/fetch-job', requireSignin, fetchJob);
-router.get('/jobs/:userId', requireSignin, getJobs);
+router.post('/jobs/:userId', requireSignin, getJobs);
 router.post('/add-job/:userId', requireSignin, addJob);
 // router.post('/edit-category/:userId', requireSignin, editCategory);
 // router.post('/delete-category/:userId', requireSignin, deleteCategory);

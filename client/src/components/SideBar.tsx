@@ -19,6 +19,7 @@ export const SideBar = ({
   activeCat,
   setActiveCat,
   sidebar,
+  loadJobs,
 }: any) => {
   const toast = useToast();
   const { userDetails } = useContext(UserContext);
@@ -106,10 +107,10 @@ export const SideBar = ({
 
   return (
     <>
-      <Stats />
       <Search />
-      {/* <Status />
-      <Jobsites /> */}
+      <Stats />
+      <Status loadJobs={loadJobs} />
+      <Jobsites />
       <Categories
         loading={loading}
         loading2={loading2}

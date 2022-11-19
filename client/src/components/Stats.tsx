@@ -56,7 +56,12 @@ const Stats = () => {
               color: 'brand.900',
             }}
           >
-            <Badge rounded='lg' fontSize='xs' colorScheme='linkedin'>
+            <Badge
+              rounded='lg'
+              fontSize='xs'
+              colorScheme='linkedin'
+              fontWeight='500'
+            >
               15
             </Badge>
           </chakra.span>
@@ -89,7 +94,12 @@ const Stats = () => {
               color: 'brand.900',
             }}
           >
-            <Badge rounded='lg' fontSize='xs' colorScheme='linkedin'>
+            <Badge
+              rounded='lg'
+              fontSize='xs'
+              colorScheme='linkedin'
+              fontWeight='500'
+            >
               150
             </Badge>
           </chakra.span>
