@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import AddCategoryModal from './AddCategoryModal';
 import Categories from './Categories';
@@ -12,6 +12,11 @@ import {
   deleteCategory,
   editCategory,
 } from '../middlewares/category';
+
+interface Query {
+  status: string;
+  categoryId: string;
+}
 
 export const SideBar = ({
   category,
@@ -30,9 +35,22 @@ export const SideBar = ({
   const [value, setValue] = useState<string>('');
   const [edit, setEdit] = useState<string>('');
   const [editValue, setEditValue] = useState<string>('');
+  const [status, setStatus] = useState<string>('all jobs');
 
   //get default list and store in variable
   const defaultActive = category && category.length > 0 && category[0]._id;
+
+  const handleLoadJobs = async () => {
+    try {
+      await loadJobs(
+        userDetails.user._id,
+        { status: status === 'all jobs' ? '' : status, category: activeCat },
+        userDetails.token
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleAddCategory = async () => {
     try {
@@ -105,11 +123,15 @@ export const SideBar = ({
     }
   };
 
+  useEffect(() => {
+    handleLoadJobs();
+  }, [status, activeCat]);
+
   return (
     <>
       <Search />
       <Stats />
-      <Status loadJobs={loadJobs} />
+      <Status activeStatus={status} setStatus={setStatus} />
       <Jobsites />
       <Categories
         loading={loading}

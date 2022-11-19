@@ -60,7 +60,7 @@ const Stats = () => {
               rounded='lg'
               fontSize='xs'
               colorScheme='linkedin'
-              fontWeight='500'
+              fontWeight='400'
             >
               15
             </Badge>
@@ -98,7 +98,7 @@ const Stats = () => {
               rounded='lg'
               fontSize='xs'
               colorScheme='linkedin'
-              fontWeight='500'
+              fontWeight='400'
             >
               150
             </Badge>

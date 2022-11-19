@@ -4,17 +4,24 @@ const cheerio = require('cheerio');
 const psl = require('psl');
 
 exports.getJobs = async (req, res) => {
-  const { status } = req.body;
   try {
-    const jobs = await Job.find({
+    var query = {
       user: req.params.userId,
-      status: status ? status : Job.schema.path('status').enumValues,
-    })
+    };
+
+    for (var key in req.body) {
+      req.body[key] ? (query[key] = req.body[key]) : null;
+    }
+
+    console.log(query);
+
+    const jobs = await Job.find(query)
       .populate('category')
       .populate('notes')
       .sort({
         createdAt: 'ascending',
       });
+
     if (jobs) {
       res.json(jobs);
     }

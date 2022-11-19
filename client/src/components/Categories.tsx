@@ -94,7 +94,7 @@ const Categories = ({
                   <Box display='flex' alignItems='center'>
                     <Box
                       onClick={() => {
-                        setActiveCat(c._id);
+                        setActiveCat(activeCat === c._id ? '' : c._id);
                         // sidebar.onClose();
                         activeCat !== c._id && setEdit('');
                       }}
