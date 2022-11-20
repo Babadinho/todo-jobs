@@ -6,7 +6,7 @@ exports.getNotes = async (req, res) => {
   try {
     const notes = await Note.find({ job: req.params.jobId, user: userId }).sort(
       {
-        createdAt: 'ascending',
+        createdAt: 'descending',
       }
     );
     if (notes) {

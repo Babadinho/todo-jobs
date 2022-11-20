@@ -16,9 +16,9 @@ exports.getJobs = async (req, res) => {
 
     const jobs = await Job.find(query)
       .populate('category')
-      .populate('notes')
+      .populate({ path: 'notes', options: { sort: { createdAt: -1 } } })
       .sort({
-        createdAt: 'ascending',
+        createdAt: 'descending',
       });
 
     if (jobs) {
