@@ -161,6 +161,7 @@ const Jobs = ({ loadJobs }: any) => {
             <DrawerCloseButton />
             <SideBar
               status={status}
+              search={search}
               setSearch={setSearch}
               setStatus={setStatus}
               loadJobs={loadJobs}
@@ -179,10 +180,12 @@ const Jobs = ({ loadJobs }: any) => {
         >
           <SideBar
             status={status}
+            search={search}
             setSearch={setSearch}
             setStatus={setStatus}
             loadJobs={loadJobs}
             category={category}
+            sidebar={sidebar}
             setCategory={setCategory}
             activeCat={activeCatId}
             setActiveCat={setActiveCatId}

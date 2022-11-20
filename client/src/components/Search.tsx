@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Box, Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
 
-const Search = ({ setSearch }: any) => {
-  const [value, setValue] = useState<string>('');
+const Search = ({ search, setSearch, sidebar }: any) => {
+  const [value, setValue] = useState<string>(search);
+  const [error, setError] = useState<boolean>(false);
+
   return (
     <>
       <Box
@@ -19,18 +21,38 @@ const Search = ({ setSearch }: any) => {
         rounded='md'
         className='sidebarCard'
       >
-        <InputGroup size='sm'>
+        <InputGroup size='sm' position='relative'>
           <Input
             _dark={{
               _placeholder: { color: 'gray.300' },
             }}
             type='tel'
+            borderColor={error ? 'red.200' : 'gray.200'}
             placeholder='Search job'
             focusBorderColor='brand.400'
             rounded='md'
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => {
+              setValue(e.target.value);
+              setError(false);
+            }}
           />
+          <Box
+            position='absolute'
+            right={'2.9rem'}
+            top={'0.35rem'}
+            fontSize='0.9rem'
+            color='gray.500'
+            cursor='pointer'
+            display={value ? 'block' : 'none'}
+            onClick={() => {
+              setValue('');
+              setSearch('');
+            }}
+            zIndex={10}
+          >
+            <i className='fa-solid fa-xmark'></i>
+          </Box>
           <InputRightAddon
             bg='gray.50'
             _dark={{
@@ -46,7 +68,14 @@ const Search = ({ setSearch }: any) => {
             color='gray.500'
             rounded='md'
             cursor='pointer'
-            onClick={() => setSearch(value)}
+            onClick={() => {
+              if (!value) {
+                return setError(true);
+              }
+              setSearch(value);
+              setError(false);
+              sidebar.onClose();
+            }}
           >
             <Search2Icon />
           </InputRightAddon>

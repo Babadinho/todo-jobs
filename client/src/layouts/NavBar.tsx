@@ -90,8 +90,6 @@ const NavBar = () => {
                     }}
                   >
                     <Avatar
-                      // h={'2.8rem'}
-                      // w={'2.8rem'}
                       size={'md'}
                       name={
                         userDetails &&
@@ -100,12 +98,11 @@ const NavBar = () => {
                           userDetails.user.lastName
                       }
                       src={userDetails && userDetails.user.picture}
-                      referrerPolicy={'no-referrer'}
                     />
                   </MenuButton>
                   <Portal>
-                    <MenuList alignItems={'center'}>
-                      <Center>
+                    <MenuList alignItems={'center'} color='gray.700'>
+                      {/* <Center>
                         <Avatar
                           size={'xl'}
                           name={
@@ -115,11 +112,10 @@ const NavBar = () => {
                               userDetails.user.lastName
                           }
                           src={userDetails && userDetails.user.picture}
-                          referrerPolicy={'no-referrer'}
                           mb='0.5rem'
                         />
-                      </Center>
-                      <Center>
+                      </Center> */}
+                      {/* <Center>
                         <Box>
                           {userDetails &&
                             userDetails.user.firstName +
@@ -127,9 +123,15 @@ const NavBar = () => {
                               userDetails.user.lastName}
                         </Box>
                       </Center>
-                      <MenuDivider />
-                      <MenuItem>Account Settings</MenuItem>
-                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                      <MenuDivider /> */}
+                      <MenuItem>
+                        <i className='fa-solid fa-user-gear'></i>&nbsp; Account
+                        Settings
+                      </MenuItem>
+                      <MenuItem onClick={handleLogout}>
+                        <i className='fa-solid fa-right-from-bracket'></i>&nbsp;
+                        Logout
+                      </MenuItem>
                     </MenuList>
                   </Portal>
                 </Menu>
