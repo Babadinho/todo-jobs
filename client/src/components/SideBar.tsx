@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import AddCategoryModal from './AddCategoryModal';
 import Categories from './Categories';
@@ -13,18 +13,13 @@ import {
   editCategory,
 } from '../middlewares/category';
 
-interface Query {
-  status: string;
-  categoryId: string;
-}
-
 export const SideBar = ({
   category,
   setCategory,
   activeCat,
   setActiveCat,
-  sidebar,
-  loadJobs,
+  status,
+  setStatus,
 }: any) => {
   const toast = useToast();
   const { userDetails } = useContext(UserContext);
@@ -35,23 +30,12 @@ export const SideBar = ({
   const [value, setValue] = useState<string>('');
   const [edit, setEdit] = useState<string>('');
   const [editValue, setEditValue] = useState<string>('');
-  const [status, setStatus] = useState<string>('all jobs');
 
-  //get default list and store in variable
-  const defaultActive = category && category.length > 0 && category[0]._id;
+  /* get default category and store in variable. WIll be passed 
+  as props to Categories and used to set Default category to not deletable */
+  const defaultCategory = category && category.length > 0 && category[0]._id;
 
-  const handleLoadJobs = async () => {
-    try {
-      await loadJobs(
-        userDetails.user._id,
-        { status: status === 'all jobs' ? '' : status, category: activeCat },
-        userDetails.token
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  // Function for adding new category
   const handleAddCategory = async () => {
     try {
       const res = await addCategory(
@@ -81,6 +65,7 @@ export const SideBar = ({
     }
   };
 
+  // Function for editing category
   const handleCategoryEdit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setError('');
@@ -104,6 +89,7 @@ export const SideBar = ({
     }
   };
 
+  // Function for deleting category
   const handleCategoryDelete = async (categoryId: any) => {
     try {
       const res = await deleteCategory(
@@ -123,22 +109,18 @@ export const SideBar = ({
     }
   };
 
-  useEffect(() => {
-    handleLoadJobs();
-  }, [status, activeCat]);
-
   return (
     <>
       <Search />
       <Stats />
-      <Status activeStatus={status} setStatus={setStatus} />
+      <Status activeStatus={status} status={status} setStatus={setStatus} />
       <Jobsites />
       <Categories
         loading={loading}
         loading2={loading2}
         error={error}
         setError={setError}
-        defaultActive={defaultActive}
+        defaultCategory={defaultCategory}
         edit={edit}
         onOpen={onOpen}
         category={category}

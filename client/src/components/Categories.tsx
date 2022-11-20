@@ -16,7 +16,7 @@ const Categories = ({
   loading2,
   error,
   setError,
-  defaultActive,
+  defaultCategory,
   edit,
   onOpen,
   category,
@@ -201,7 +201,7 @@ const Categories = ({
                     </Text>
                     <Text
                       fontSize='0.7rem'
-                      display={c._id === defaultActive ? 'none' : 'flex'}
+                      display={c._id === defaultCategory ? 'none' : 'flex'}
                       color='red.300'
                       _hover={{ color: 'red.400' }}
                       onClick={() => handleCategoryDelete(c._id)}

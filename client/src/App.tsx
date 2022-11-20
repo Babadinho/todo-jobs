@@ -15,14 +15,18 @@ const App = () => {
   const [userDetails, setUserDetails] = useState<{} | null>(null);
   const [userJobs, setUserJobs] = useState<{} | null>(null);
   let value: {};
-  let jobs: any;
+  let jobs: {};
   value = useMemo(
     () => ({ userDetails, setUserDetails }),
     [userDetails, setUserDetails]
   );
   jobs = useMemo(() => ({ userJobs, setUserJobs }), [userJobs, setUserJobs]);
 
-  const loadJobs = async (userId: any, query: any, token: any) => {
+  /* Function for getting user jobs, stored in Context API. 
+  Also passed down as props to Job component to use in getting jobs based on user filter
+  This function accepts 3 arguments, userId, query: which is an object containing user filters, 
+  and token. */
+  const loadJobs = async (userId: string, query: {}, token: string) => {
     try {
       const res = isAuthenticated() && (await getJobs(userId, query, token));
       setUserJobs(res.data);

@@ -36,15 +36,7 @@ exports.addNote = async (req, res) => {
     job.notes.push(newNote._id);
     await job.save();
 
-    const jobs = await Job.find({ user: req.params.userId })
-      .populate('category')
-      .populate('notes')
-      .sort({
-        createdAt: 'ascending',
-      });
-    if (jobs) {
-      res.json(jobs);
-    }
+    return res.json(newNote);
   } catch (err) {
     return res.status(400).send('Error. Try again');
   }
@@ -67,15 +59,7 @@ exports.deleteNote = async (req, res) => {
       job.save();
     }
 
-    const jobs = await Job.find({ user: req.params.userId })
-      .populate('category')
-      .populate('notes')
-      .sort({
-        createdAt: 'ascending',
-      });
-    if (jobs) {
-      res.json(jobs);
-    }
+    return res.json(job);
   } catch (err) {
     return res.status(400).send('Error. Try again');
   }

@@ -3,7 +3,7 @@ import React from 'react';
 import { colors } from '../utils/globalVars';
 
 const Status = ({ activeStatus, setStatus }: any) => {
-  const handleSetActive = async (color: any) => {
+  const handleSetActive = async (color: string) => {
     setStatus(activeStatus === color ? '' : color);
   };
 
@@ -24,9 +24,10 @@ const Status = ({ activeStatus, setStatus }: any) => {
         className='sidebarCard'
       >
         <Flex wrap='wrap'>
-          {Object.keys(colors).map((color: any) => {
+          {Object.keys(colors).map((color: string, i: any) => {
             return (
               <Button
+                key={i}
                 onClick={() => handleSetActive(color)}
                 rounded='0.3rem'
                 mr='0.7rem'

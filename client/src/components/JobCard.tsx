@@ -13,7 +13,19 @@ import moment from 'moment';
 import NotesModal from './NotesModal';
 import { colors, colors_hover } from '../utils/globalVars';
 
-const JobCard = ({ ...job }) => {
+const JobCard = ({
+  loading,
+  setLoading,
+  loading2,
+  setLoading2,
+  error,
+  note,
+  setNote,
+  setError,
+  handleAddNote,
+  handleDeleteNote,
+  ...job
+}: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
@@ -125,20 +137,6 @@ const JobCard = ({ ...job }) => {
           </chakra.p>
         </Box>
 
-        {/* <Flex justifyContent='flex-end' mt='0.6rem'>
-          <chakra.span
-            fontSize='0.75rem'
-            fontStyle='oblique'
-            // fontWeight='600'
-            color='gray.600'
-            _dark={{
-              color: 'gray.400',
-            }}
-          >
-            Closing {moment(endDate).fromNow()}
-          </chakra.span>
-        </Flex> */}
-
         <Flex justifyContent='space-between' alignItems='center' mt={4}>
           <Flex align='center'>
             <Image
@@ -163,7 +161,6 @@ const JobCard = ({ ...job }) => {
               {domain}
             </Box>
           </Flex>
-
           <Flex
             alignItems='center'
             color='gray.700'
@@ -209,7 +206,20 @@ const JobCard = ({ ...job }) => {
           </Flex>
         </Flex>
       </Box>
-      <NotesModal isOpen={isOpen} onClose={onClose} job={job} />
+      <NotesModal
+        isOpen={isOpen}
+        onClose={onClose}
+        job={job}
+        loading={loading}
+        setLoading={setLoading}
+        loading2={loading2}
+        error={error}
+        note={note}
+        setNote={setNote}
+        setError={setError}
+        handleAddNote={handleAddNote}
+        handleDeleteNote={handleDeleteNote}
+      />
     </>
   );
 };

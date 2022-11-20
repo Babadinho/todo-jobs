@@ -13,8 +13,6 @@ exports.getJobs = async (req, res) => {
       req.body[key] ? (query[key] = req.body[key]) : null;
     }
 
-    console.log(query);
-
     const jobs = await Job.find(query)
       .populate('category')
       .populate('notes')

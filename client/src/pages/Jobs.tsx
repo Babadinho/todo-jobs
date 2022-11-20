@@ -3,32 +3,61 @@ import {
   Box,
   Flex,
   chakra,
+  Image,
+  Text,
   IconButton,
   Drawer,
+  Button,
+  Grid,
+  GridItem,
   DrawerOverlay,
   DrawerContent,
   useDisclosure,
   DrawerCloseButton,
-  Button,
-  Grid,
-  GridItem,
 } from '@chakra-ui/react';
 import JobCard from '../components/JobCard';
 import SideBar from '../components/SideBar';
-import AddJobModal2 from '../components/AddJobModal';
+import AddJobModal from '../components/AddJobModal';
 import { FiMenu } from 'react-icons/fi';
-import { AddIcon } from '@chakra-ui/icons';
 import { isAuthenticated } from '../middlewares/auth';
 import { getCategories } from '../middlewares/category';
+import { addNote, deleteNote } from '../middlewares/note';
 import { JobContext } from '../context/Context';
+const Empty = require('../public/images/empty.png');
+import { UserContext } from '../context/Context';
 
 const Jobs = ({ loadJobs }: any) => {
   const sidebar = useDisclosure();
+  const { userDetails } = useContext(UserContext);
   const { userJobs } = useContext(JobContext);
   const [category, setCategory] = useState<Array<{}> | null>();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [activeCatId, setActiveCatId] = useState<string | null>();
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [loading2, setLoading2] = useState<Boolean>(false);
+  const [error, setError] = useState<string>('');
+  const [note, setNote] = useState<string>('');
+  const [noteStatus, setNoteStatus] = useState<string>('');
+  const [activeCatId, setActiveCatId] = useState<string | null>('');
+  const [status, setStatus] = useState<string>('all jobs');
 
+  // function to load jobs based on filter selected by user
+  const handleLoadJobs = async () => {
+    try {
+      (await userDetails) &&
+        loadJobs(
+          userDetails.user._id,
+          {
+            status: status === 'all jobs' ? '' : status,
+            category: activeCatId,
+          },
+          userDetails.token
+        );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // this function loads list of user categories
   const loadCategories = async () => {
     try {
       const res =
@@ -43,9 +72,53 @@ const Jobs = ({ loadJobs }: any) => {
     }
   };
 
+  // Function for adding new note
+  const handleAddNote = async (job: any) => {
+    try {
+      const res = await addNote(
+        userDetails.user._id,
+        { jobId: job, note: note },
+        userDetails.token
+      );
+      setError('');
+      if (res.data) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+          setNote('');
+          setNoteStatus(res.data);
+        }, 2000);
+      }
+    } catch (error: any) {
+      if (error.response.status === 400) setError(error.response.data);
+      setLoading(false);
+    }
+  };
+
+  // Function for deleting note
+  const handleDeleteNote = async (note: any, job: any) => {
+    try {
+      const res = await deleteNote(
+        userDetails.user._id,
+        { jobId: job._id, noteId: note._id },
+        userDetails.token
+      );
+      setLoading2(true);
+      if (res.data) {
+        setTimeout(() => {
+          setLoading2(false);
+          setNoteStatus(res.data);
+        }, 2000);
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     loadCategories();
-  }, []);
+    handleLoadJobs();
+  }, [status, activeCatId, noteStatus]);
 
   return (
     <Box
@@ -82,6 +155,8 @@ const Jobs = ({ loadJobs }: any) => {
           >
             <DrawerCloseButton />
             <SideBar
+              status={status}
+              setStatus={setStatus}
               loadJobs={loadJobs}
               category={category}
               setCategory={setCategory}
@@ -97,10 +172,11 @@ const Jobs = ({ loadJobs }: any) => {
           display={{ base: 'none', lg: 'block' }}
         >
           <SideBar
+            status={status}
+            setStatus={setStatus}
             loadJobs={loadJobs}
             category={category}
             setCategory={setCategory}
-            sidebar={sidebar}
             activeCat={activeCatId}
             setActiveCat={setActiveCatId}
           />
@@ -137,7 +213,6 @@ const Jobs = ({ loadJobs }: any) => {
                 </chakra.span>
                 <chakra.span>
                   <Button
-                    // leftIcon={<AddIcon fontSize='0.8rem' color='gray.100' />}
                     bg='linkedin.500'
                     color='gray.100'
                     _hover={{ bg: 'linkedin.600' }}
@@ -150,16 +225,74 @@ const Jobs = ({ loadJobs }: any) => {
                 </chakra.span>
               </Flex>
             </Box>
+            {userJobs && userJobs.length === 0 && (
+              <Box
+                bg='white'
+                rounded='md'
+                shadow='sm'
+                pt={{ base: '3rem', md: '4rem' }}
+                pb='8rem'
+                display='flex'
+                justifyContent='center'
+                alignItems='center'
+                flexDir='column'
+                px='2rem'
+              >
+                <Image
+                  src={Empty}
+                  alt='empty'
+                  h={{ base: '10rem', md: '12rem' }}
+                  w={{ base: '10rem', md: '12rem' }}
+                  opacity={0.7}
+                />
+                <Box textAlign='center'>
+                  <Text
+                    fontSize='1.04rem'
+                    color='gray.700'
+                    _dark={{
+                      color: 'gray.50',
+                    }}
+                    fontWeight='700'
+                  >
+                    No jobs found.
+                  </Text>
+                  <chakra.p
+                    mt={2}
+                    color='gray.600'
+                    _dark={{
+                      color: 'gray.300',
+                    }}
+                    fontSize='0.9rem'
+                  >
+                    We could not find any jobs. It seems you haven't added any
+                    jobs here.
+                  </chakra.p>
+                </Box>
+              </Box>
+            )}
             {userJobs &&
               userJobs.length > 0 &&
-              userJobs.map((job: {}, i: any) => {
-                return <JobCard {...job} key={i} />;
+              userJobs.map((job: {}, i: string) => {
+                return (
+                  <JobCard
+                    {...job}
+                    key={i}
+                    loading={loading}
+                    setLoading={setLoading}
+                    loading2={loading2}
+                    error={error}
+                    note={note}
+                    setNote={setNote}
+                    setError={setError}
+                    handleAddNote={handleAddNote}
+                    handleDeleteNote={handleDeleteNote}
+                  />
+                );
               })}
           </Box>
         </GridItem>
       </Grid>
-
-      <AddJobModal2 isOpen={isOpen} onClose={onClose} categories={category} />
+      <AddJobModal isOpen={isOpen} onClose={onClose} categories={category} />
     </Box>
   );
 };

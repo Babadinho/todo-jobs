@@ -1,13 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
   Input,
   InputRightAddon,
   Spinner,
@@ -17,63 +15,23 @@ import {
   List,
   ListItem,
 } from '@chakra-ui/react';
-import { addNote, deleteNote } from '../middlewares/note';
-import { JobContext, UserContext } from '../context/Context';
 import moment from 'moment';
 
-const NotesModal = ({ isOpen, onClose, job }: any) => {
-  const { userDetails } = useContext(UserContext);
-  const { setUserJobs } = useContext(JobContext);
-  const [note, setNote] = useState<string>();
-  const [noteId, setNoteId] = useState<string>();
-  const [error, setError] = useState<string>('');
-  const [loading, setLoading] = useState<Boolean>(false);
-  const [loading2, setLoading2] = useState<Boolean>(false);
-
-  const handleAddNote = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    try {
-      const res = await addNote(
-        userDetails.user._id,
-        { jobId: job._id, note: note },
-        userDetails.token
-      );
-      setError('');
-      if (res.data) {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-          setUserJobs(res.data);
-          setNote('');
-        }, 2000);
-      }
-    } catch (error: any) {
-      if (error.response.status === 400) setError(error.response.data);
-      setLoading(false);
-    }
-  };
-
-  const handleDeleteNote = async (noteId: any) => {
-    setNoteId(noteId);
-    try {
-      const res = await deleteNote(
-        userDetails.user._id,
-        { jobId: job._id, noteId: noteId },
-        userDetails.token
-      );
-      setLoading2(true);
-      if (res.data) {
-        setTimeout(() => {
-          setUserJobs(res.data);
-          setLoading2(false);
-        }, 2000);
-      }
-    } catch (error: any) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {}, [setUserJobs]);
+const NotesModal = ({
+  isOpen,
+  onClose,
+  job,
+  loading,
+  setLoading,
+  loading2,
+  error,
+  note,
+  setNote,
+  setError,
+  handleAddNote,
+  handleDeleteNote,
+}: any) => {
+  const [noteId, setNoteId] = useState<string>('');
 
   return (
     <>
@@ -88,7 +46,13 @@ const NotesModal = ({ isOpen, onClose, job }: any) => {
             <Text color='red.500' pb='0.1rem' textAlign='center'>
               {error && error}
             </Text>
-            <Box as='form' onSubmit={handleAddNote}>
+            <Box
+              as='form'
+              onSubmit={(e: { preventDefault: () => void }) => {
+                e.preventDefault();
+                handleAddNote(job);
+              }}
+            >
               <InputGroup size='sm'>
                 <Input
                   type='tel'
@@ -114,7 +78,7 @@ const NotesModal = ({ isOpen, onClose, job }: any) => {
                   color='gray.600'
                   rounded='md'
                   cursor='pointer'
-                  onClick={handleAddNote}
+                  onClick={() => handleAddNote(job._id)}
                 >
                   {loading ? (
                     <Spinner size='xs' />
@@ -159,10 +123,13 @@ const NotesModal = ({ isOpen, onClose, job }: any) => {
                         fontSize='0.8rem'
                         _hover={{ color: 'gray.600' }}
                         _dark={{ color: 'gray.400' }}
-                        onClick={() => handleDeleteNote(note._id)}
+                        onClick={() => {
+                          setNoteId(note._id);
+                          handleDeleteNote(note, job);
+                        }}
                         cursor='pointer'
                       >
-                        {loading2 && note._id === noteId ? (
+                        {loading2 && noteId === note._id ? (
                           <Spinner size='xs' />
                         ) : (
                           <i className='fa-solid fa-trash'></i>
