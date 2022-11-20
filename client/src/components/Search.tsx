@@ -6,6 +6,19 @@ const Search = ({ search, setSearch, sidebar }: any) => {
   const [value, setValue] = useState<string>(search);
   const [error, setError] = useState<boolean>(false);
 
+  const handleSearch = () => {
+    if (!value) {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 15000);
+    } else {
+      setSearch(value);
+      setError(false);
+      sidebar.onClose();
+    }
+  };
+
   return (
     <>
       <Box
@@ -68,14 +81,7 @@ const Search = ({ search, setSearch, sidebar }: any) => {
             color='gray.500'
             rounded='md'
             cursor='pointer'
-            onClick={() => {
-              if (!value) {
-                return setError(true);
-              }
-              setSearch(value);
-              setError(false);
-              sidebar.onClose();
-            }}
+            onClick={handleSearch}
           >
             <Search2Icon />
           </InputRightAddon>
