@@ -11,6 +11,7 @@ exports.getJobs = async (req, res) => {
 
     for (var key in req.body) {
       req.body[key] ? (query[key] = req.body[key]) : null;
+      key === 'title' ? (query[key] = new RegExp(req.body[key], 'i')) : null;
     }
 
     const jobs = await Job.find(query)
@@ -24,6 +25,7 @@ exports.getJobs = async (req, res) => {
       res.json(jobs);
     }
   } catch (error) {
+    console.log(error);
     res.status(400).send('Error loading jobs');
   }
 };

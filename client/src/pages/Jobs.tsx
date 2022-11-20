@@ -39,6 +39,7 @@ const Jobs = ({ loadJobs }: any) => {
   const [noteStatus, setNoteStatus] = useState<string>('');
   const [activeCatId, setActiveCatId] = useState<string | null>('');
   const [status, setStatus] = useState<string>('all jobs');
+  const [search, setSearch] = useState<string>('');
 
   // function to load jobs based on filter selected by user
   const handleLoadJobs = async () => {
@@ -49,6 +50,7 @@ const Jobs = ({ loadJobs }: any) => {
           {
             status: status === 'all jobs' ? '' : status,
             category: activeCatId,
+            title: search,
           },
           userDetails.token
         );
@@ -116,9 +118,12 @@ const Jobs = ({ loadJobs }: any) => {
   };
 
   useEffect(() => {
-    loadCategories();
     handleLoadJobs();
-  }, [status, activeCatId, noteStatus]);
+  }, [status, search, activeCatId, noteStatus]);
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
   return (
     <Box
@@ -156,6 +161,7 @@ const Jobs = ({ loadJobs }: any) => {
             <DrawerCloseButton />
             <SideBar
               status={status}
+              setSearch={setSearch}
               setStatus={setStatus}
               loadJobs={loadJobs}
               category={category}
@@ -173,6 +179,7 @@ const Jobs = ({ loadJobs }: any) => {
         >
           <SideBar
             status={status}
+            setSearch={setSearch}
             setStatus={setStatus}
             loadJobs={loadJobs}
             category={category}

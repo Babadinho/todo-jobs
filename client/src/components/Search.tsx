@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Input,
-  InputGroup,
-  InputRightAddon,
-  Spinner,
-} from '@chakra-ui/react';
+import { Box, Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
 
-const Search = () => {
-  const [loading, setLoading] = useState<Boolean>(false);
+const Search = ({ setSearch }: any) => {
+  const [value, setValue] = useState<string>('');
   return (
     <>
       <Box
@@ -34,8 +28,8 @@ const Search = () => {
             placeholder='Search job'
             focusBorderColor='brand.400'
             rounded='md'
-            // value={link}
-            // onChange={handleChange('link')}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
           />
           <InputRightAddon
             bg='gray.50'
@@ -52,9 +46,9 @@ const Search = () => {
             color='gray.500'
             rounded='md'
             cursor='pointer'
-            // onClick={handlefetchJob}
+            onClick={() => setSearch(value)}
           >
-            {loading ? <Spinner size='xs' /> : <Search2Icon />}
+            <Search2Icon />
           </InputRightAddon>
         </InputGroup>
       </Box>

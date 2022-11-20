@@ -42,7 +42,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    loadJobs(isAuthenticated().user._id, {}, isAuthenticated().token);
+    isAuthenticated() &&
+      loadJobs(isAuthenticated().user._id, {}, isAuthenticated().token);
   }, [userDetails]);
   return (
     <Box _light={{ bg: '#f7f8fd' }}>

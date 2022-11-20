@@ -100,6 +100,7 @@ const NavBar = () => {
                           userDetails.user.lastName
                       }
                       src={userDetails && userDetails.user.picture}
+                      referrerPolicy={'no-referrer'}
                     />
                   </MenuButton>
                   <Portal>
@@ -114,6 +115,7 @@ const NavBar = () => {
                               userDetails.user.lastName
                           }
                           src={userDetails && userDetails.user.picture}
+                          referrerPolicy={'no-referrer'}
                           mb='0.5rem'
                         />
                       </Center>
