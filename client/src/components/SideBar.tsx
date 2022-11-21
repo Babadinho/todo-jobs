@@ -22,6 +22,8 @@ export const SideBar = ({
   setStatus,
   search,
   setSearch,
+  searchValue,
+  setSearchValue,
   sidebar,
 }: any) => {
   const toast = useToast();
@@ -114,7 +116,13 @@ export const SideBar = ({
 
   return (
     <>
-      <Search search={search} setSearch={setSearch} sidebar={sidebar} />
+      <Search
+        search={search}
+        setSearch={setSearch}
+        sidebar={sidebar}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <Stats />
       <Status activeStatus={status} status={status} setStatus={setStatus} />
       <Jobsites />

@@ -11,3 +11,9 @@ interface jobInterface {
   setUserJobs: any;
 }
 export const JobContext = createContext<Partial<jobInterface>>({});
+
+interface categoryInterface {
+  category: any;
+  setCategory: any;
+}
+export const CategoryContext = createContext<Partial<categoryInterface>>({});

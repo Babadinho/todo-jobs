@@ -20,9 +20,8 @@ import SideBar from '../components/SideBar';
 import AddJobModal from '../components/AddJobModal';
 import { FiMenu } from 'react-icons/fi';
 import { isAuthenticated } from '../middlewares/auth';
-import { getCategories } from '../middlewares/category';
 import { addNote, deleteNote } from '../middlewares/note';
-import { JobContext } from '../context/Context';
+import { CategoryContext, JobContext } from '../context/Context';
 const Empty = require('../public/images/empty.png');
 import { UserContext } from '../context/Context';
 
@@ -30,7 +29,7 @@ const Jobs = ({ loadJobs }: any) => {
   const sidebar = useDisclosure();
   const { userDetails } = useContext(UserContext);
   const { userJobs } = useContext(JobContext);
-  const [category, setCategory] = useState<Array<{}> | null>();
+  const { category, setCategory } = useContext(CategoryContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState<Boolean>(false);
   const [loading2, setLoading2] = useState<Boolean>(false);
@@ -40,6 +39,7 @@ const Jobs = ({ loadJobs }: any) => {
   const [activeCatId, setActiveCatId] = useState<string | null>('');
   const [status, setStatus] = useState<string>('all jobs');
   const [search, setSearch] = useState<string>('');
+  const [searchValue, setSearchValue] = useState<string>('');
 
   // function to load jobs based on filter selected by user
   const handleLoadJobs = async () => {
@@ -56,21 +56,6 @@ const Jobs = ({ loadJobs }: any) => {
         );
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  // this function loads list of user categories
-  const loadCategories = async () => {
-    try {
-      const res =
-        isAuthenticated() &&
-        (await getCategories(
-          isAuthenticated().user._id,
-          isAuthenticated().token
-        ));
-      setCategory(res.data);
-    } catch (error: any) {
-      console.log(error.response.data);
     }
   };
 
@@ -121,10 +106,6 @@ const Jobs = ({ loadJobs }: any) => {
     handleLoadJobs();
   }, [status, search, activeCatId, noteStatus]);
 
-  useEffect(() => {
-    loadCategories();
-  }, []);
-
   return (
     <Box
       _light={{ bg: '#f7f8fd' }}
@@ -170,6 +151,8 @@ const Jobs = ({ loadJobs }: any) => {
               sidebar={sidebar}
               activeCat={activeCatId}
               setActiveCat={setActiveCatId}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
             />
           </DrawerContent>
         </Drawer>
@@ -189,6 +172,8 @@ const Jobs = ({ loadJobs }: any) => {
             setCategory={setCategory}
             activeCat={activeCatId}
             setActiveCat={setActiveCatId}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
         </GridItem>
         <GridItem colSpan={{ base: 6, lg: 3 }}>
@@ -238,6 +223,7 @@ const Jobs = ({ loadJobs }: any) => {
             {userJobs && userJobs.length === 0 && (
               <Box
                 bg='white'
+                _dark={{ bg: 'gray.700' }}
                 rounded='md'
                 shadow='sm'
                 pt={{ base: '3rem', md: '4rem' }}
@@ -253,14 +239,13 @@ const Jobs = ({ loadJobs }: any) => {
                   alt='empty'
                   h={{ base: '10rem', md: '12rem' }}
                   w={{ base: '10rem', md: '12rem' }}
-                  opacity={0.7}
                 />
                 <Box textAlign='center'>
                   <Text
                     fontSize='1.04rem'
-                    color='gray.700'
+                    color='gray.600'
                     _dark={{
-                      color: 'gray.50',
+                      color: 'gray.100',
                     }}
                     fontWeight='700'
                   >

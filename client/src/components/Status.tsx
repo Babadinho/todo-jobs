@@ -12,7 +12,7 @@ const Status = ({ activeStatus, setStatus }: any) => {
       <Box
         w='full'
         py={3}
-        pt='1.5rem'
+        // pt='1.5rem'
         bg='white'
         _dark={{
           bg: 'gray.700',
@@ -23,6 +23,17 @@ const Status = ({ activeStatus, setStatus }: any) => {
         rounded='md'
         className='sidebarCard'
       >
+        <Box
+          fontSize='md'
+          fontWeight='bold'
+          color='gray.700'
+          _dark={{
+            color: 'gray.50',
+          }}
+          mb='1rem'
+        >
+          <i className='fa-solid fa-temperature-three-quarters'></i> Status
+        </Box>
         <Flex wrap='wrap'>
           {Object.keys(colors).map((color: string, i: any) => {
             return (

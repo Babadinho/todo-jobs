@@ -43,7 +43,7 @@ const Categories = ({
         rounded='md'
         className='sidebarCard'
       >
-        <Flex justifyContent='space-between' alignItems='center' mb='0.8rem'>
+        <Flex justifyContent='space-between' alignItems='center' mb='0.6rem'>
           <chakra.span
             fontSize='md'
             fontWeight='bold'

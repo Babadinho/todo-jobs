@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import { Box, Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
 
-const Search = ({ search, setSearch, sidebar }: any) => {
-  const [value, setValue] = useState<string>(search);
+const Search = ({ setSearch, searchValue, setSearchValue, sidebar }: any) => {
   const [error, setError] = useState<boolean>(false);
 
   const handleSearch = () => {
-    if (!value) {
+    if (!searchValue) {
       setError(true);
       setTimeout(() => {
         setError(false);
       }, 15000);
     } else {
-      setSearch(value);
+      setSearch(searchValue);
       setError(false);
       sidebar.onClose();
     }
@@ -37,16 +36,20 @@ const Search = ({ search, setSearch, sidebar }: any) => {
         <InputGroup size='sm' position='relative'>
           <Input
             _dark={{
+              borderColor: error ? 'red.400' : 'gray.600',
               _placeholder: { color: 'gray.300' },
             }}
             type='tel'
-            borderColor={error ? 'red.200' : 'gray.200'}
+            _hover={{
+              borderColor: error ? 'red.300' : 'gray.200',
+            }}
+            borderColor={error ? 'red.300' : 'gray.200'}
             placeholder='Search job'
             focusBorderColor='brand.400'
             rounded='md'
-            value={value}
+            value={searchValue}
             onChange={(e) => {
-              setValue(e.target.value);
+              setSearchValue(e.target.value);
               setError(false);
             }}
           />
@@ -57,9 +60,9 @@ const Search = ({ search, setSearch, sidebar }: any) => {
             fontSize='0.9rem'
             color='gray.500'
             cursor='pointer'
-            display={value ? 'block' : 'none'}
+            display={searchValue ? 'block' : 'none'}
             onClick={() => {
-              setValue('');
+              setSearchValue('');
               setSearch('');
             }}
             zIndex={10}

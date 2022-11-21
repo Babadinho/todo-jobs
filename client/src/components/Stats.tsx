@@ -24,7 +24,7 @@ const Stats = () => {
           _dark={{
             color: 'gray.50',
           }}
-          mb='0.7rem'
+          mb='0.5rem'
         >
           <i className='fa-solid fa-chart-pie'></i> Stats
         </Box>
