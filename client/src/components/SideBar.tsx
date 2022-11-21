@@ -125,7 +125,7 @@ export const SideBar = ({
       />
       <Stats />
       <Status activeStatus={status} status={status} setStatus={setStatus} />
-      <Jobsites />
+      {/* <Jobsites /> */}
       <Categories
         loading={loading}
         loading2={loading2}

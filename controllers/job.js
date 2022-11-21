@@ -150,6 +150,51 @@ exports.addJob = async (req, res) => {
   }
 };
 
+exports.editJob = async (req, res) => {
+  try {
+    let { jobId, link, title, description, category, endDate } =
+      req.body.jobDetails;
+
+    // validate fields
+    if (!link) return res.status(400).send('Please enter url');
+    if (!category) return res.status(400).send('Please select category');
+
+    const domain = new URL(link).hostname;
+    const parsed = psl.parse(domain);
+
+    const editJob = {
+      link,
+      title,
+      description,
+      category,
+      user: req.params.userId,
+      status: 'applied',
+      sld: parsed.sld,
+      domain: parsed.domain,
+      endDate,
+    };
+
+    await Job.findOneAndUpdate(
+      { _user: req.params.userId, _id: jobId },
+      { $set: editJob },
+      { new: true, useFindAndModify: false }
+    );
+
+    const jobs = await Job.find({ user: req.params.userId })
+      .populate('category')
+      .populate({ path: 'notes', options: { sort: { createdAt: -1 } } })
+      .sort({
+        createdAt: 'descending',
+      });
+    if (jobs) {
+      return res.json(jobs);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send('Error. Try again');
+  }
+};
+
 exports.changeJobStatus = async (req, res) => {
   const { status, userId } = req.body;
   try {

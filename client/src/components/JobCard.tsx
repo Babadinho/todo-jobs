@@ -18,6 +18,7 @@ import NotesModal from './NotesModal';
 import { colors, colors_hover } from '../utils/globalVars';
 import { changeJobStatus } from '../middlewares/job';
 import { JobContext, UserContext } from '../context/Context';
+import EditJobModal from './EditJobModal';
 const Website = require('../public/images/website.png');
 
 const JobCard = ({
@@ -31,6 +32,7 @@ const JobCard = ({
   setError,
   handleAddNote,
   handleDeleteNote,
+  categories,
   ...job
 }: any) => {
   const {
@@ -48,6 +50,7 @@ const JobCard = ({
   } = job;
   const ref = React.useRef();
   const toast = useToast();
+  const editModal = useDisclosure();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { userDetails } = useContext(UserContext);
   const { setUserJobs } = useContext(JobContext);
@@ -94,7 +97,7 @@ const JobCard = ({
       <Box
         className='job-card'
         mx='auto'
-        px={8}
+        px={{ base: 5, md: 6 }}
         py={4}
         mb='1rem'
         rounded='md'
@@ -164,7 +167,7 @@ const JobCard = ({
               pt={1}
               pb={2}
               pl={2}
-              w='7rem'
+              w='7.2rem'
               display={currentStatus === _id ? 'flex' : 'none'}
               border='1px'
               borderColor='gray.200'
@@ -185,24 +188,30 @@ const JobCard = ({
                 textTransform='capitalize'
               >
                 {Object.keys(colors).map((status: string, i: any) => {
-                  return (
-                    <ListItem
-                      display={currentStatus === _id ? 'flex' : 'none'}
-                      alignItems='center'
-                      cursor='pointer'
-                      key={i}
-                      px='0.5rem'
-                      color={colors[status]}
-                      onClick={() => hadleJobStatus(_id, status)}
-                      _hover={{ bg: 'gray.200', _dark: { bg: 'gray.600' } }}
-                      rounded='sm'
-                    >
-                      {status}
-                      <Box color={colors[status]} fontSize='0.4rem' ml='0.3rem'>
-                        <i className='fa-solid fa-stop'></i>
-                      </Box>
-                    </ListItem>
-                  );
+                  if (status !== job.status) {
+                    return (
+                      <ListItem
+                        display={currentStatus === _id ? 'flex' : 'none'}
+                        alignItems='center'
+                        cursor='pointer'
+                        key={i}
+                        px='0.5rem'
+                        color={colors[status]}
+                        onClick={() => hadleJobStatus(_id, status)}
+                        _hover={{ bg: 'gray.200', _dark: { bg: 'gray.600' } }}
+                        rounded='sm'
+                      >
+                        {status}
+                        <Box
+                          color={colors[status]}
+                          fontSize='0.4rem'
+                          ml='0.3rem'
+                        >
+                          <i className='fa-solid fa-stop'></i>
+                        </Box>
+                      </ListItem>
+                    );
+                  }
                 })}
 
                 {/* <ListItem>Lorem ipsu</ListItem> */}
@@ -296,7 +305,7 @@ const JobCard = ({
                 </Badge>
               )}
             </Box>
-            <Box cursor='pointer'>
+            <Box cursor='pointer' mr='0.5rem'>
               <Tooltip
                 hasArrow
                 label='Add to calender'
@@ -306,6 +315,18 @@ const JobCard = ({
                 fontSize='0.75rem'
               >
                 <i className='fa-solid fa-calendar-days'></i>
+              </Tooltip>
+            </Box>
+            <Box cursor='pointer' onClick={() => editModal.onOpen()}>
+              <Tooltip
+                hasArrow
+                label='Edit job'
+                bg='gray.300'
+                color='black'
+                placement='top'
+                fontSize='0.75rem'
+              >
+                <i className='fa-solid fa-pen-to-square'></i>
               </Tooltip>
             </Box>
           </Flex>
@@ -324,6 +345,13 @@ const JobCard = ({
         setError={setError}
         handleAddNote={handleAddNote}
         handleDeleteNote={handleDeleteNote}
+      />
+      <EditJobModal
+        job={job}
+        editModal={editModal}
+        isOpen={editModal.isOpen}
+        onClose={editModal.onClose}
+        categories={categories}
       />
     </>
   );

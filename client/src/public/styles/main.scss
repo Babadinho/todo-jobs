@@ -1,13 +1,13 @@
 @import "./animations.scss";
 
-#app {
+#app, html{
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-html {
-  height: 100%
+.main {
+  height: 100vh;
 }
 
 body {

@@ -19,7 +19,6 @@ import JobCard from '../components/JobCard';
 import SideBar from '../components/SideBar';
 import AddJobModal from '../components/AddJobModal';
 import { FiMenu } from 'react-icons/fi';
-import { isAuthenticated } from '../middlewares/auth';
 import { addNote, deleteNote } from '../middlewares/note';
 import { CategoryContext, JobContext } from '../context/Context';
 const Empty = require('../public/images/empty.png');
@@ -202,7 +201,7 @@ const Jobs = ({ loadJobs }: any) => {
                     display={{ base: 'inline-flex', lg: 'none' }}
                     onClick={sidebar.onOpen}
                     icon={<FiMenu />}
-                    size='sm'
+                    size='md'
                     colorScheme='linkedin'
                   />
                 </chakra.span>
@@ -281,6 +280,7 @@ const Jobs = ({ loadJobs }: any) => {
                     setError={setError}
                     handleAddNote={handleAddNote}
                     handleDeleteNote={handleDeleteNote}
+                    categories={category}
                   />
                 );
               })}

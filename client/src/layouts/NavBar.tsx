@@ -101,7 +101,11 @@ const NavBar = () => {
                     />
                   </MenuButton>
                   <Portal>
-                    <MenuList alignItems={'center'} color='gray.700'>
+                    <MenuList
+                      alignItems={'center'}
+                      color='gray.700'
+                      fontSize='0.95rem'
+                    >
                       {/* <Center>
                         <Avatar
                           size={'xl'}
