@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import {
   Box,
   Flex,
@@ -8,10 +8,17 @@ import {
   Tooltip,
   useDisclosure,
   Badge,
+  List,
+  ListItem,
+  useToast,
+  useOutsideClick,
 } from '@chakra-ui/react';
 import moment from 'moment';
 import NotesModal from './NotesModal';
 import { colors, colors_hover } from '../utils/globalVars';
+import { changeJobStatus } from '../middlewares/job';
+import { JobContext, UserContext } from '../context/Context';
+const Website = require('../public/images/website.png');
 
 const JobCard = ({
   loading,
@@ -26,9 +33,8 @@ const JobCard = ({
   handleDeleteNote,
   ...job
 }: any) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const {
+    _id,
     link,
     title,
     description,
@@ -40,6 +46,48 @@ const JobCard = ({
     notes,
     createdAt,
   } = job;
+  const ref = React.useRef();
+  const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { userDetails } = useContext(UserContext);
+  const { setUserJobs } = useContext(JobContext);
+  const [currentStatus, setCurrentStatus] = useState<string | null>('');
+
+  useOutsideClick({
+    ref: ref,
+    handler: () => setCurrentStatus(''),
+  });
+
+  const hadleJobStatus = async (jobId: string, newStatus: string) => {
+    setCurrentStatus('');
+    try {
+      const res = await changeJobStatus(
+        jobId,
+        { userId: userDetails.user._id, status: newStatus },
+        userDetails.token
+      );
+      if (res.data) {
+        setLoading(true);
+        setUserJobs(res.data);
+        toast({
+          title: 'Status updated successfully',
+          status: 'success',
+          duration: 4000,
+          isClosable: true,
+          position: 'top',
+        });
+      }
+    } catch (error: any) {
+      if (error.response.status === 400) setError(error.response.data);
+      toast({
+        title: error.response.data,
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
+    }
+  };
 
   return (
     <>
@@ -64,7 +112,8 @@ const JobCard = ({
               moment(endDate).diff(Date.now()) <= 0 ? 'red.400' : 'gray.600'
             }
             _dark={{
-              color: 'gray.400',
+              color:
+                moment(endDate).diff(Date.now()) <= 0 ? 'red.400' : 'gray.400',
             }}
             cursor='pointer'
           >
@@ -84,6 +133,7 @@ const JobCard = ({
             </Tooltip>
           </chakra.span>
           <Box
+            ref={ref}
             display='flex'
             alignItems='center'
             as='span'
@@ -94,14 +144,69 @@ const JobCard = ({
             color='gray.100'
             fontSize='0.7rem'
             rounded='md'
+            onClick={() => {
+              setCurrentStatus(currentStatus !== _id ? _id : '');
+            }}
             _hover={{
               bg: colors_hover[status],
             }}
             textTransform='capitalize'
+            position='relative'
           >
             {status}
             <Box fontSize='0.6rem' as='span' ml='0.2rem'>
               <i className='fa-solid fa-chevron-down'></i>
+            </Box>
+
+            <Box
+              bg='white'
+              _dark={{ bg: 'gray.700', borderColor: 'gray.500' }}
+              pt={1}
+              pb={2}
+              pl={2}
+              w='7rem'
+              display={currentStatus === _id ? 'flex' : 'none'}
+              border='1px'
+              borderColor='gray.200'
+              rounded='md'
+              shadow='sm'
+              position='absolute'
+              right={'0.05rem'}
+              top={7}
+              onMouseLeave={() => setCurrentStatus('')}
+            >
+              <List
+                spacing={'0.1rem'}
+                display='flex'
+                flexDir='column'
+                alignItems={'flex-end'}
+                justifyContent='flex-start'
+                fontSize='0.85rem'
+                textTransform='capitalize'
+              >
+                {Object.keys(colors).map((status: string, i: any) => {
+                  return (
+                    <ListItem
+                      display={currentStatus === _id ? 'flex' : 'none'}
+                      alignItems='center'
+                      cursor='pointer'
+                      key={i}
+                      px='0.5rem'
+                      color={colors[status]}
+                      onClick={() => hadleJobStatus(_id, status)}
+                      _hover={{ bg: 'gray.200', _dark: { bg: 'gray.600' } }}
+                      rounded='sm'
+                    >
+                      {status}
+                      <Box color={colors[status]} fontSize='0.4rem' ml='0.3rem'>
+                        <i className='fa-solid fa-stop'></i>
+                      </Box>
+                    </ListItem>
+                  );
+                })}
+
+                {/* <ListItem>Lorem ipsu</ListItem> */}
+              </List>
             </Box>
           </Box>
         </Flex>
@@ -109,9 +214,9 @@ const JobCard = ({
         <Box mt={2}>
           <Link
             fontSize='1.04rem'
-            color='gray.700'
+            color={status === 'closed' ? 'gray.600' : 'gray.700'}
             _dark={{
-              color: 'gray.50',
+              color: status === 'closed' ? 'gray.400' : 'gray.50',
             }}
             fontWeight='700'
             _hover={{
@@ -141,11 +246,11 @@ const JobCard = ({
           <Flex align='center'>
             <Image
               mr='0.3rem'
-              w={6}
-              h={6}
+              w={5}
+              h={5}
               rounded='full'
               fit='cover'
-              src={image}
+              src={image ? image : Website}
               alt='avatar'
             />
             <Box

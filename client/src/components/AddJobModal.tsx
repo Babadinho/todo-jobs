@@ -19,10 +19,10 @@ import {
   Slide,
   Flex,
   useOutsideClick,
+  FormHelperText,
 } from '@chakra-ui/react';
 import { addJob, fetchJob } from '../middlewares/job';
-import { UserContext } from '../context/Context';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { UserContext, JobContext } from '../context/Context';
 
 interface JobInfo {
   link: string;
@@ -37,6 +37,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
   const ref = React.useRef();
   const toast = useToast();
   const { userDetails } = useContext(UserContext);
+  const { setUserJobs } = useContext(JobContext);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<Boolean>(false);
   const [loading2, setLoading2] = useState<Boolean>(false);
@@ -104,6 +105,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
+          setUserJobs(res.data);
           onClose();
           toast({
             title: 'Job added successfully',
@@ -291,6 +293,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                         >
                           Title
                         </FormLabel>
+
                         <Input
                           _dark={{
                             _placeholder: { color: 'gray.200' },
@@ -305,6 +308,9 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
                           value={title}
                           onChange={handleChange('title')}
                         />
+                        <FormHelperText fontStyle='italic' fontSize='0.85rem'>
+                          Use good format. E.g: Web Developer at Google
+                        </FormHelperText>
                       </FormControl>
                     </Box>
 

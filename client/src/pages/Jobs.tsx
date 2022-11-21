@@ -109,7 +109,7 @@ const Jobs = ({ loadJobs }: any) => {
   return (
     <Box
       _light={{ bg: '#f7f8fd' }}
-      pt={{ base: '3rem', md: '4rem' }}
+      pt={{ base: '4rem', md: '4rem' }}
       px={{ base: '1rem', md: '5rem', xl: '12rem' }}
       className='main'
       pb={{ base: '5rem', md: '3rem' }}

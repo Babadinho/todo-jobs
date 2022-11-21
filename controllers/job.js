@@ -49,14 +49,36 @@ exports.fetchJob = async (req, res) => {
     const $ = cheerio.load(body);
     const title = $('title').text();
     const desc = $('meta[name=description]').attr('content');
-    const image = $('meta[property=og:image]').attr('content');
+    // const image = $('meta[property=og:image]').attr('content');
 
-    const domain = new URL(image).hostname;
-    const pathname = new URL(image).pathname;
-    const protocol = new URL(image).protocol;
+    // const domain = new URL(image).hostname;
+    // const pathname = new URL(image).pathname;
+    // const protocol = new URL(image).protocol;
+    // const parsed = psl.parse(domain);
+
+    // const newImage = protocol + '//www.' + parsed.domain + pathname;
+
+    let image = $("link[rel='shortcut icon']").attr('href');
+
+    const domain = new URL(link).hostname;
+    const protocol = new URL(link).protocol;
     const parsed = psl.parse(domain);
 
-    const newImage = protocol + '//www.' + parsed.domain + pathname;
+    let newImage = protocol + '//www.' + parsed.domain + image;
+
+    if (image === undefined && parsed.domain !== 'indeed.com') {
+      image = $('meta[property=og:image]').attr('content');
+      const domain = new URL(image).hostname;
+      const pathname = new URL(image).pathname;
+      const protocol = new URL(image).protocol;
+      const parsed = psl.parse(domain);
+
+      newImage = protocol + '//www.' + parsed.domain + pathname;
+    }
+
+    // if (title || desc === undefined) {
+    //   return res.status(400).send("Could'nt fetch job please enter manually");
+    // }
 
     return res.json({
       title,
@@ -68,13 +90,14 @@ exports.fetchJob = async (req, res) => {
       clearTimeout(timeout);
       return res.status(400).send("Could'nt fetch job please enter manually");
     }
-    return res.status(400).send('Error. Try again');
+    console.log(err);
+    return res.status(400).send('Error. Please enter job manually');
   }
 };
 
 exports.addJob = async (req, res) => {
   try {
-    const { link, title, description, category, image, endDate } =
+    let { link, title, description, category, image, endDate } =
       req.body.jobDetails;
 
     // validate fields
@@ -94,6 +117,9 @@ exports.addJob = async (req, res) => {
     if (parsed.domain === 'totaljobs.com')
       image = 'https://www.totaljobs.com/jsd/img/global/totaljobs.png';
 
+    if (parsed.domain === 'indeed.com')
+      image = 'https://indeed.com/images/favicon.ico';
+
     const job = new Job({
       link,
       title,
@@ -109,11 +135,41 @@ exports.addJob = async (req, res) => {
 
     await job.save();
 
-    const jobs = await Job.find({ user: req.params.userId });
+    const jobs = await Job.find({ user: req.params.userId })
+      .populate('category')
+      .populate({ path: 'notes', options: { sort: { createdAt: -1 } } })
+      .sort({
+        createdAt: 'descending',
+      });
     if (jobs) {
       return res.json(jobs);
     }
   } catch (err) {
+    console.log(err);
+    return res.status(400).send('Error. Try again');
+  }
+};
+
+exports.changeJobStatus = async (req, res) => {
+  const { status, userId } = req.body;
+  try {
+    await Job.updateOne(
+      { _id: req.params.jobId, user: userId },
+      { status: status },
+      { upsert: true }
+    );
+
+    const jobs = await Job.find({ user: userId })
+      .populate('category')
+      .populate({ path: 'notes', options: { sort: { createdAt: -1 } } })
+      .sort({
+        createdAt: 'descending',
+      });
+    if (jobs) {
+      return res.json(jobs);
+    }
+  } catch (err) {
+    console.log(err);
     return res.status(400).send('Error. Try again');
   }
 };
