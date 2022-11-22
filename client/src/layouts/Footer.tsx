@@ -9,12 +9,12 @@ const Footer = () => {
         flexDir='row'
         alignItems='center'
         justifyContent='center'
-        bg={useColorModeValue('white', 'gray.800')}
+        bg={useColorModeValue('#f7f8fd', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
         borderTop={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
-        h={'60px'}
+        h={'3.75rem'}
         px={{ base: 4, md: 20, xl: 40 }}
         fontSize='0.9rem'
       >

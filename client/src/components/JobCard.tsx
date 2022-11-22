@@ -123,9 +123,11 @@ const JobCard = ({
             <Tooltip
               hasArrow
               label={
-                moment(endDate).diff(Date.now()) <= 0
-                  ? `Closed ${moment(endDate).fromNow()}`
-                  : `Closing ${moment(endDate).fromNow()}`
+                endDate
+                  ? moment(endDate).diff(Date.now()) <= 0
+                    ? `Closed ${moment(endDate).fromNow()}`
+                    : `Closing ${moment(endDate).fromNow()}`
+                  : 'No closing date'
               }
               bg='gray.700'
               color='white'

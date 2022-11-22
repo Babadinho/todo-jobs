@@ -28,7 +28,7 @@ const JobSchema = new Schema(
     },
     endDate: {
       type: Date,
-      required: true,
+      required: false,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

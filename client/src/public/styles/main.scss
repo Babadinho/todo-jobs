@@ -1,17 +1,10 @@
 @import "./animations.scss";
 
-#app, html{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
 .main {
-  height: 100vh;
+  min-height : calc(100vh - 3.75rem);
 }
 
 body {
-  height: 100%;
   margin: 0;
   font-family: 'Jost', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -36,10 +29,6 @@ body {
 
 .heading {
   font-family: 'Jost', sans-serif;
-}
-
-.footer {
-  margin-top: auto !important;
 }
 
 .chakra-button {
