@@ -8,6 +8,7 @@ const {
   addJob,
   editJob,
   getJobs,
+  deleteJob,
   changeJobStatus,
 } = require('../controllers/job');
 const { requireSignin } = require('../controllers/auth');
@@ -17,6 +18,7 @@ router.post('/fetch-job', requireSignin, fetchJob);
 router.post('/jobs/:userId', requireSignin, getJobs);
 router.post('/add-job/:userId', requireSignin, addJob);
 router.post('/edit-job/:userId', requireSignin, editJob);
+router.post('/delete-job/:userId', requireSignin, deleteJob);
 router.post('/status/:jobId', requireSignin, changeJobStatus);
 // router.post('/edit-category/:userId', requireSignin, editCategory);
 // router.post('/delete-category/:userId', requireSignin, deleteCategory);

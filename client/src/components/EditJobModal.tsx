@@ -19,9 +19,8 @@ import {
   Flex,
   useOutsideClick,
   FormHelperText,
-  useDisclosure,
 } from '@chakra-ui/react';
-import { editJob } from '../middlewares/job';
+import { editJob, deleteJob } from '../middlewares/job';
 import { UserContext, JobContext } from '../context/Context';
 import moment from 'moment';
 
@@ -96,6 +95,41 @@ const EditJobModal = ({ editModal, categories, job }: any) => {
     }
   };
 
+  // Function for deleting job
+  const handleDeleteJob = async (jobId: string) => {
+    try {
+      const res = await deleteJob(
+        userDetails.user._id,
+        { jobId },
+        userDetails.token
+      );
+      if (res.data) {
+        setLoading2(true);
+        setTimeout(() => {
+          setLoading(false);
+          setUserJobs(res.data);
+          editModal.onClose();
+          toast({
+            title: 'Job deleted successfully',
+            status: 'success',
+            duration: 4000,
+            isClosable: true,
+            position: 'top',
+          });
+        }, 2000);
+      }
+    } catch (error: any) {
+      setLoading2(false);
+      toast({
+        title: error.response.data,
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
+    }
+  };
+
   return (
     <Box>
       <Slide
@@ -134,14 +168,6 @@ const EditJobModal = ({ editModal, categories, job }: any) => {
               editModal.onClose();
               setLoading2(false);
               setLoading(false);
-              setJobDetails({
-                jobId: '',
-                link: '',
-                title: '',
-                description: '',
-                category: '',
-                endDate: '',
-              });
             }}
             cursor='pointer'
             fontSize='1.15rem'
@@ -342,7 +368,27 @@ const EditJobModal = ({ editModal, categories, job }: any) => {
                     </Box>
                   </Stack>
                 </chakra.form>
-                <Flex justify='flex-end' mt='1.5rem' pr={2}>
+                <Flex justify='flex-end' alignItems='center' mt='1.5rem' pr={2}>
+                  <Button
+                    mr='0.7rem'
+                    minW='6.5rem'
+                    type='submit'
+                    bg='red.500'
+                    color='gray.100'
+                    _hover={{ bg: 'red.600' }}
+                    _focus={{
+                      shadow: '',
+                    }}
+                    fontWeight='md'
+                    onClick={() => handleDeleteJob(job._id)}
+                  >
+                    {loading2 ? (
+                      <Spinner thickness='4px' size='md' />
+                    ) : (
+                      'Delete'
+                    )}
+                  </Button>
+
                   <Button
                     minW='6.5rem'
                     type='submit'
@@ -355,7 +401,11 @@ const EditJobModal = ({ editModal, categories, job }: any) => {
                     fontWeight='md'
                     onClick={handleEditJob}
                   >
-                    {loading ? <Spinner thickness='4px' size='md' /> : 'Submit'}
+                    {loading ? (
+                      <Spinner thickness='4px' size='md' />
+                    ) : (
+                      'Edit Job'
+                    )}
                   </Button>
                 </Flex>
               </Box>

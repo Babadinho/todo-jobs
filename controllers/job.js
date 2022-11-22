@@ -1,4 +1,5 @@
 const Job = require('../models/Job');
+const Note = require('../models/Note');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const psl = require('psl');
@@ -179,6 +180,29 @@ exports.editJob = async (req, res) => {
       { $set: editJob },
       { new: true, useFindAndModify: false }
     );
+
+    const jobs = await Job.find({ user: req.params.userId })
+      .populate('category')
+      .populate({ path: 'notes', options: { sort: { createdAt: -1 } } })
+      .sort({
+        createdAt: 'descending',
+      });
+    if (jobs) {
+      return res.json(jobs);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send('Error. Try again');
+  }
+};
+
+exports.deleteJob = async (req, res) => {
+  try {
+    let { jobId } = req.body;
+
+    await Note.deleteMany({ _user: req.params.userId, job: jobId });
+
+    await Job.findOneAndDelete({ _user: req.params.userId, _id: jobId });
 
     const jobs = await Job.find({ user: req.params.userId })
       .populate('category')
