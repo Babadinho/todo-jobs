@@ -89,7 +89,7 @@ const App = () => {
   useEffect(() => {
     isAuthenticated() &&
       loadJobs(isAuthenticated().user._id, {}, isAuthenticated().token);
-  }, [userDetails]);
+  }, [userDetails, setUserJobs]);
 
   useEffect(() => {
     loadCategories();
