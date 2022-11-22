@@ -100,13 +100,13 @@ const EditJobModal = ({ editModal, categories, job }: any) => {
     try {
       const res = await deleteJob(
         userDetails.user._id,
-        { jobId },
+        { jobId, category },
         userDetails.token
       );
       if (res.data) {
         setLoading2(true);
         setTimeout(() => {
-          setLoading(false);
+          setLoading2(false);
           setUserJobs(res.data);
           editModal.onClose();
           toast({

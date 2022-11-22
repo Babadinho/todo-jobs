@@ -8,6 +8,7 @@ import {
   Input,
   Box,
   Text,
+  Badge,
 } from '@chakra-ui/react';
 import React from 'react';
 
@@ -139,9 +140,19 @@ const Categories = ({
                           />
                         </Box>
                       ) : (
-                        <Box fontSize='0.94rem'>{c.name}</Box>
+                        <Box fontSize='0.94rem' mr='0.2rem'>
+                          {c.name}
+                        </Box>
                       )}
                     </Box>
+                    <Badge
+                      colorScheme='linkedin'
+                      fontWeight='400'
+                      fontSize='0.65rem'
+                      rounded='50%'
+                    >
+                      {c.jobCount}
+                    </Badge>
                   </Box>
 
                   <Stack

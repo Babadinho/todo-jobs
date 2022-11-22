@@ -30,7 +30,7 @@ const Jobsites = ({ activeSite, setActiveSite }: any) => {
         >
           <i className='fa-solid fa-link'></i> Job Sites
         </Box>
-        <Flex flexWrap='wrap'>
+        <Flex flexWrap='wrap' className='job-card'>
           {jobSites &&
             jobSites.map((site: any, i: any) => {
               return (

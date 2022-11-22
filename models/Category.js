@@ -10,6 +10,10 @@ const CategorySchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
     },
+    jobCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

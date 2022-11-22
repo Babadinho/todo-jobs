@@ -1,4 +1,5 @@
 const Job = require('../models/Job');
+const Category = require('../models/Category');
 const Note = require('../models/Note');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
@@ -137,6 +138,12 @@ exports.addJob = async (req, res) => {
 
     await job.save();
 
+    const catToUpdate = await Category.findOne({ _id: category });
+    if (catToUpdate) {
+      catToUpdate.jobCount = catToUpdate.jobCount + 1;
+      await catToUpdate.save();
+    }
+
     const jobs = await Job.find({ user: req.params.userId })
       .populate('category')
       .populate({ path: 'notes', options: { sort: { createdAt: -1 } } })
@@ -199,11 +206,17 @@ exports.editJob = async (req, res) => {
 
 exports.deleteJob = async (req, res) => {
   try {
-    let { jobId } = req.body;
+    let { jobId, category } = req.body;
 
     await Note.deleteMany({ _user: req.params.userId, job: jobId });
 
     await Job.findOneAndDelete({ _user: req.params.userId, _id: jobId });
+
+    const catToUpdate = await Category.findOne({ _id: category });
+    if (catToUpdate) {
+      catToUpdate.jobCount = catToUpdate.jobCount - 1;
+      await catToUpdate.save();
+    }
 
     const jobs = await Job.find({ user: req.params.userId })
       .populate('category')

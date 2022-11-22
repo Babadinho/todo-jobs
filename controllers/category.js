@@ -75,11 +75,19 @@ exports.deleteCategory = async (req, res) => {
       user: req.params.userId,
       _id: categoryId,
     }).exec();
-    // await Job.deleteMany({ user: req.params.userId, list: categoryId }).exec();
+    await Job.deleteMany({
+      user: req.params.userId,
+      category: categoryId,
+    }).exec();
 
-    const category = await Category.find({ user: req.params.userId });
-    if (category) {
-      res.json(category);
+    const jobs = await Job.find({ user: req.params.userId })
+      .populate('category')
+      .populate({ path: 'notes', options: { sort: { createdAt: -1 } } })
+      .sort({
+        createdAt: 'descending',
+      });
+    if (jobs) {
+      return res.json(jobs);
     }
   } catch (err) {
     return res.status(400).send('Error. Try again');
