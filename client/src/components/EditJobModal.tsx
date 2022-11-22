@@ -46,7 +46,7 @@ const EditJobModal = ({ editModal, categories, job }: any) => {
     title: job.title,
     description: job.description,
     category: job.category._id,
-    endDate: moment(job.endDate).format('YYYY-MM-DD'),
+    endDate: job.endDate,
   });
 
   const { link, title, description, category, endDate } = jobDetails;
@@ -361,7 +361,7 @@ const EditJobModal = ({ editModal, categories, job }: any) => {
                           fontSize={{
                             sm: 'sm',
                           }}
-                          value={endDate}
+                          value={moment(endDate).format('YYYY-MM-DD')}
                           onChange={handleChange('endDate')}
                         />
                       </FormControl>

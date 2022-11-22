@@ -3,6 +3,7 @@ const Note = require('../models/Note');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const psl = require('psl');
+var { ObjectID } = require('mongodb');
 
 exports.getJobs = async (req, res) => {
   try {
@@ -237,6 +238,25 @@ exports.changeJobStatus = async (req, res) => {
     if (jobs) {
       return res.json(jobs);
     }
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send('Error. Try again');
+  }
+};
+
+exports.getJobSites = async (req, res) => {
+  try {
+    const sites = await Job.aggregate([
+      { $match: { user: new ObjectID(req.params.userId) } },
+      {
+        $group: {
+          _id: '$sld',
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    return res.json(sites);
   } catch (err) {
     console.log(err);
     return res.status(400).send('Error. Try again');

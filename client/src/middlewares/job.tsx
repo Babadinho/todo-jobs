@@ -61,3 +61,12 @@ export const changeJobStatus = async (jobId: any, userId: any, token: any) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
+export const getJobSites = async (userId: any, token: any) =>
+  await axios.get(`${process.env.REACT_APP_URL}/job-sites/${userId}`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });

@@ -10,6 +10,7 @@ const {
   getJobs,
   deleteJob,
   changeJobStatus,
+  getJobSites,
 } = require('../controllers/job');
 const { requireSignin } = require('../controllers/auth');
 
@@ -20,7 +21,6 @@ router.post('/add-job/:userId', requireSignin, addJob);
 router.post('/edit-job/:userId', requireSignin, editJob);
 router.post('/delete-job/:userId', requireSignin, deleteJob);
 router.post('/status/:jobId', requireSignin, changeJobStatus);
-// router.post('/edit-category/:userId', requireSignin, editCategory);
-// router.post('/delete-category/:userId', requireSignin, deleteCategory);
+router.get('/job-sites/:userId', requireSignin, getJobSites);
 
 module.exports = router;

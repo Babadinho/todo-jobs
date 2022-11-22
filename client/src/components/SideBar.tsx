@@ -18,6 +18,8 @@ export const SideBar = ({
   setCategory,
   activeCat,
   setActiveCat,
+  activeSite,
+  setActiveSite,
   status,
   setStatus,
   search,
@@ -125,7 +127,7 @@ export const SideBar = ({
       />
       <Stats />
       <Status activeStatus={status} status={status} setStatus={setStatus} />
-      {/* <Jobsites /> */}
+      <Jobsites activeSite={activeSite} setActiveSite={setActiveSite} />
       <Categories
         loading={loading}
         loading2={loading2}

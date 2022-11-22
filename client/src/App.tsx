@@ -6,8 +6,13 @@ import Login from './auth/Login';
 import Register from './auth/Register';
 import NavBar from './layouts/NavBar';
 import Footer from './layouts/Footer';
-import { UserContext, JobContext, CategoryContext } from './context/Context';
-import { getJobs } from './middlewares/job';
+import {
+  UserContext,
+  JobContext,
+  CategoryContext,
+  SitesContext,
+} from './context/Context';
+import { getJobs, getJobSites } from './middlewares/job';
 import { isAuthenticated } from './middlewares/auth';
 import { Box } from '@chakra-ui/react';
 import { getCategories } from './middlewares/category';
@@ -16,9 +21,11 @@ const App = () => {
   const [userDetails, setUserDetails] = useState<{} | null>(null);
   const [userJobs, setUserJobs] = useState<{} | null>(null);
   const [category, setCategory] = useState<Array<{}> | null>();
+  const [jobSites, setJobSites] = useState<Array<{}> | null>();
   let value: {};
   let jobs: {};
   let categories: {};
+  let sites: {};
   value = useMemo(
     () => ({ userDetails, setUserDetails }),
     [userDetails, setUserDetails]
@@ -28,6 +35,7 @@ const App = () => {
     () => ({ category, setCategory }),
     [category, setCategory]
   );
+  sites = useMemo(() => ({ jobSites, setJobSites }), [jobSites, setJobSites]);
 
   /* Function for getting user jobs, stored in Context API. 
   Also passed down as props to Job component to use in getting jobs based on user filter
@@ -57,6 +65,21 @@ const App = () => {
     }
   };
 
+  // this function loads list of job sites
+  const loadJobSites = async () => {
+    try {
+      const res =
+        isAuthenticated() &&
+        (await getJobSites(
+          isAuthenticated().user._id,
+          isAuthenticated().token
+        ));
+      setJobSites(res.data);
+    } catch (error: any) {
+      console.log(error.response.data);
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem('todo-jobs')) {
       setUserDetails(JSON.parse(localStorage.getItem('todo-jobs')));
@@ -67,6 +90,7 @@ const App = () => {
     isAuthenticated() &&
       loadJobs(isAuthenticated().user._id, {}, isAuthenticated().token);
     loadCategories();
+    loadJobSites();
   }, [userDetails]);
 
   return (
@@ -74,26 +98,28 @@ const App = () => {
       <UserContext.Provider value={value}>
         <JobContext.Provider value={jobs}>
           <CategoryContext.Provider value={categories}>
-            <NavBar />
-            <Routes>
-              <Route
-                path='/'
-                element={
-                  <PrivateRoute>
-                    <Jobs loadJobs={loadJobs} />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path='/login'
-                element={userDetails ? <Navigate to='/' /> : <Login />}
-              />
-              <Route
-                path='/register'
-                element={userDetails ? <Navigate to='/' /> : <Register />}
-              />
-            </Routes>
-            <Footer />
+            <SitesContext.Provider value={sites}>
+              <NavBar />
+              <Routes>
+                <Route
+                  path='/'
+                  element={
+                    <PrivateRoute>
+                      <Jobs loadJobs={loadJobs} />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path='/login'
+                  element={userDetails ? <Navigate to='/' /> : <Login />}
+                />
+                <Route
+                  path='/register'
+                  element={userDetails ? <Navigate to='/' /> : <Register />}
+                />
+              </Routes>
+              <Footer />
+            </SitesContext.Provider>
           </CategoryContext.Provider>
         </JobContext.Provider>
       </UserContext.Provider>

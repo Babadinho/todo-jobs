@@ -36,6 +36,7 @@ const Jobs = ({ loadJobs }: any) => {
   const [note, setNote] = useState<string>('');
   const [noteStatus, setNoteStatus] = useState<string>('');
   const [activeCatId, setActiveCatId] = useState<string | null>('');
+  const [activeSite, setActiveSite] = useState<string | null>('');
   const [status, setStatus] = useState<string>('all jobs');
   const [search, setSearch] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
@@ -50,6 +51,7 @@ const Jobs = ({ loadJobs }: any) => {
             status: status === 'all jobs' ? '' : status,
             category: activeCatId,
             title: search,
+            sld: activeSite,
           },
           userDetails.token
         );
@@ -103,12 +105,12 @@ const Jobs = ({ loadJobs }: any) => {
 
   useEffect(() => {
     handleLoadJobs();
-  }, [status, search, activeCatId, noteStatus]);
+  }, [status, search, activeCatId, noteStatus, activeSite]);
 
   return (
     <Box
       _light={{ bg: '#f7f8fd' }}
-      pt={{ base: '4rem', md: '4rem' }}
+      pt={{ base: '5rem', md: '5rem' }}
       px={{ base: '1rem', md: '5rem', xl: '12rem' }}
       className='main'
       pb={{ base: '5rem', md: '3rem' }}
@@ -132,7 +134,7 @@ const Jobs = ({ loadJobs }: any) => {
             _dark={{
               bg: 'gray.800',
             }}
-            px={7}
+            px={5}
             py={4}
             pt='4rem'
             shadow='md'
@@ -150,6 +152,8 @@ const Jobs = ({ loadJobs }: any) => {
               sidebar={sidebar}
               activeCat={activeCatId}
               setActiveCat={setActiveCatId}
+              activeSite={activeSite}
+              setActiveSite={setActiveSite}
               searchValue={searchValue}
               setSearchValue={setSearchValue}
             />
@@ -171,6 +175,8 @@ const Jobs = ({ loadJobs }: any) => {
             setCategory={setCategory}
             activeCat={activeCatId}
             setActiveCat={setActiveCatId}
+            activeSite={activeSite}
+            setActiveSite={setActiveSite}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
           />

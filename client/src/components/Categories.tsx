@@ -101,14 +101,22 @@ const Categories = ({
                       cursor='pointer'
                       display='flex'
                       alignItems='center'
+                      className='category'
+                      color={activeCat === c._id ? 'gray.700' : 'gray.600'}
+                      _dark={{
+                        color: activeCat === c._id ? 'gray.50' : 'gray.300',
+                      }}
+                      _hover={{
+                        color: 'gray.700',
+                        _dark: { color: 'gray.50' },
+                      }}
                     >
-                      <Box
-                        fontSize='0.65rem'
-                        mr='0.4rem'
-                        color='gray.600'
-                        _dark={{ color: 'gray.300' }}
-                      >
-                        <i className='fa-solid fa-stop'></i>
+                      <Box fontSize='0.65rem' mr='0.4rem'>
+                        {activeCat === c._id ? (
+                          <i className='fa-solid fa-square-check'></i>
+                        ) : (
+                          <i className='fa-solid fa-stop'></i>
+                        )}
                       </Box>
                       {edit && activeCat === c._id ? (
                         <Box as='form' onSubmit={handleCategoryEdit}>
@@ -131,19 +139,7 @@ const Categories = ({
                           />
                         </Box>
                       ) : (
-                        <Box
-                          className='category'
-                          color={activeCat === c._id ? 'gray.900' : 'gray.600'}
-                          _dark={{
-                            color: activeCat === c._id ? 'gray.50' : 'gray.300',
-                          }}
-                          _hover={{
-                            color: 'gray.900',
-                          }}
-                          fontSize='0.94rem'
-                        >
-                          {c.name}
-                        </Box>
+                        <Box fontSize='0.94rem'>{c.name}</Box>
                       )}
                     </Box>
                   </Box>
@@ -182,10 +178,10 @@ const Categories = ({
                             setEdit(c._id);
                             setEditValue(c.name);
                           }}
-                          color='gray.500'
+                          color='gray.600'
                           _dark={{ color: 'gray.300' }}
                           _hover={{
-                            color: 'gray.600',
+                            color: 'gray.700',
                             _dark: {
                               color: 'gray.100',
                             },
@@ -202,8 +198,8 @@ const Categories = ({
                     <Text
                       fontSize='0.7rem'
                       display={c._id === defaultCategory ? 'none' : 'flex'}
-                      color='red.300'
-                      _hover={{ color: 'red.400' }}
+                      color='red.400'
+                      _hover={{ color: 'red.500' }}
                       onClick={() => handleCategoryDelete(c._id)}
                       alignItems='center'
                     >

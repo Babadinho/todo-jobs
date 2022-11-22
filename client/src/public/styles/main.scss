@@ -9,6 +9,7 @@ body {
   font-family: 'Jost', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: overlay;
 }
 
 .job-card {
@@ -55,4 +56,15 @@ body {
 
 .category:hover {
   transform: translateY(-.05rem);
+}
+
+// :host, :root, [data-theme] {
+//   --chakra-ring-inset: none;
+//   --chakra-ring-shadow: 0 0 #f7f8fd !important;
+//   --chakra-ring-offset-shadow: 0 0 #f7f8fd !important;
+// }
+
+::-webkit-scrollbar-track {
+  box-shadow: none !important;
+  border-radius: none !important;
 }
