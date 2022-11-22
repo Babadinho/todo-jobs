@@ -103,7 +103,7 @@ const NavBar = () => {
                   {/* <Portal> */}
                   <MenuList
                     alignItems={'center'}
-                    color='gray.700'
+                    color={useColorModeValue('gray.700', 'gray.50')}
                     fontSize='0.95rem'
                   >
                     {/* <Center>
