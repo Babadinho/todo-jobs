@@ -9,8 +9,15 @@ import {
   Box,
   Text,
   Badge,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 
 const Categories = ({
   loading,
@@ -29,6 +36,10 @@ const Categories = ({
   setActiveCat,
   handleCategoryDelete,
 }: any) => {
+  const deleteCategory = useDisclosure();
+  const cancelRef = React.useRef();
+  const [categoryToDelete, setCategoryToDelete] = useState<string>('');
+
   return (
     <>
       <Box
@@ -211,7 +222,10 @@ const Categories = ({
                       display={c._id === defaultCategory ? 'none' : 'flex'}
                       color='red.400'
                       _hover={{ color: 'red.500' }}
-                      onClick={() => handleCategoryDelete(c._id)}
+                      onClick={() => {
+                        setCategoryToDelete(c._id);
+                        deleteCategory.onOpen();
+                      }}
                       alignItems='center'
                     >
                       {loading2 ? (
@@ -226,6 +240,42 @@ const Categories = ({
             ))}
         </Flex>
       </Box>
+
+      {/* delete category alert dialog */}
+
+      <AlertDialog
+        isOpen={deleteCategory.isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={deleteCategory.onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Delete Category
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure? This will also delete jobs in this category.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={deleteCategory.onClose}>
+                Cancel
+              </Button>
+              <Button
+                colorScheme='red'
+                onClick={() => {
+                  handleCategoryDelete(categoryToDelete);
+                  deleteCategory.onClose();
+                }}
+                ml={3}
+              >
+                Continue
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </>
   );
 };

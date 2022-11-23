@@ -1,5 +1,6 @@
 const Category = require('../models/Category');
 const Job = require('../models/Job');
+const Note = require('../models/Note');
 
 exports.getCategories = async (req, res) => {
   try {
@@ -71,13 +72,24 @@ exports.deleteCategory = async (req, res) => {
   try {
     const { categoryId } = req.body;
 
-    await Category.deleteOne({
+    // first delete notes
+    const jobsToDeleteNote = await Job.find({
+      category: categoryId,
       user: req.params.userId,
-      _id: categoryId,
-    }).exec();
+    });
+
+    await Note.deleteMany({ job: { $in: jobsToDeleteNote } });
+
+    // delete jobs in the category
     await Job.deleteMany({
       user: req.params.userId,
       category: categoryId,
+    }).exec();
+
+    // Delete the category
+    await Category.deleteOne({
+      user: req.params.userId,
+      _id: categoryId,
     }).exec();
 
     const jobs = await Job.find({ user: req.params.userId })
@@ -90,6 +102,7 @@ exports.deleteCategory = async (req, res) => {
       return res.json(jobs);
     }
   } catch (err) {
+    console.log(err);
     return res.status(400).send('Error. Try again');
   }
 };

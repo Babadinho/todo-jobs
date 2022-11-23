@@ -33,62 +33,70 @@ const Search = ({ setSearch, searchValue, setSearchValue, sidebar }: any) => {
         rounded='md'
         className='sidebarCard'
       >
-        <InputGroup size='sm' position='relative'>
-          <Input
-            _dark={{
-              borderColor: error ? 'red.400' : 'gray.600',
-              _placeholder: { color: 'gray.300' },
-            }}
-            type='tel'
-            _hover={{
-              borderColor: error ? 'red.300' : 'gray.200',
-            }}
-            borderColor={error ? 'red.300' : 'gray.200'}
-            placeholder='Search job'
-            focusBorderColor='brand.400'
-            rounded='md'
-            value={searchValue}
-            onChange={(e) => {
-              setSearchValue(e.target.value);
-              setError(false);
-            }}
-          />
-          <Box
-            position='absolute'
-            right={'2.9rem'}
-            top={'0.35rem'}
-            fontSize='0.9rem'
-            color='gray.500'
-            cursor='pointer'
-            display={searchValue ? 'block' : 'none'}
-            onClick={() => {
-              setSearchValue('');
-              setSearch('');
-            }}
-            zIndex={10}
-          >
-            <i className='fa-solid fa-xmark'></i>
-          </Box>
-          <InputRightAddon
-            bg='gray.50'
-            _dark={{
-              bg: 'gray.500',
-              color: 'white',
-            }}
-            _hover={{
-              bg: 'gray.100',
-              _dark: {
-                bg: 'gray.400',
-              },
-            }}
-            color='gray.500'
-            rounded='md'
-            cursor='pointer'
-            onClick={handleSearch}
-          >
-            <Search2Icon />
-          </InputRightAddon>
-        </InputGroup>
+        <Box
+          as='form'
+          onSubmit={(e: { preventDefault: () => void }) => {
+            e.preventDefault();
+            handleSearch();
+          }}
+        >
+          <InputGroup size='sm' position='relative'>
+            <Input
+              _dark={{
+                borderColor: error ? 'red.400' : 'gray.600',
+                _placeholder: { color: 'gray.300' },
+              }}
+              type='tel'
+              _hover={{
+                borderColor: error ? 'red.300' : 'gray.200',
+              }}
+              borderColor={error ? 'red.300' : 'gray.200'}
+              placeholder='Search job'
+              focusBorderColor='brand.400'
+              rounded='md'
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+                setError(false);
+              }}
+            />
+            <Box
+              position='absolute'
+              right={'2.9rem'}
+              top={'0.35rem'}
+              fontSize='0.9rem'
+              color='gray.500'
+              cursor='pointer'
+              display={searchValue ? 'block' : 'none'}
+              onClick={() => {
+                setSearchValue('');
+                setSearch('');
+              }}
+              zIndex={10}
+            >
+              <i className='fa-solid fa-xmark'></i>
+            </Box>
+            <InputRightAddon
+              bg='gray.50'
+              _dark={{
+                bg: 'gray.500',
+                color: 'white',
+              }}
+              _hover={{
+                bg: 'gray.100',
+                _dark: {
+                  bg: 'gray.400',
+                },
+              }}
+              color='gray.500'
+              rounded='md'
+              cursor='pointer'
+              onClick={handleSearch}
+            >
+              <Search2Icon />
+            </InputRightAddon>
+          </InputGroup>
+        </Box>
       </Box>
     </>
   );

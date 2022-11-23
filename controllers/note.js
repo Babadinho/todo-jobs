@@ -36,7 +36,7 @@ exports.addNote = async (req, res) => {
     job.notes.push(newNote._id);
     await job.save();
 
-    return res.json(newNote);
+    return res.json(job);
   } catch (err) {
     return res.status(400).send('Error. Try again');
   }
