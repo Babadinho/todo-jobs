@@ -275,3 +275,49 @@ exports.getJobSites = async (req, res) => {
     return res.status(400).send('Error. Try again');
   }
 };
+
+exports.getJobStats = async (req, res) => {
+  try {
+    const stats = await Job.aggregate([
+      { $match: { user: new ObjectID(req.params.userId) } },
+      {
+        $group: {
+          _id: { $month: '$createdAt' }, // group by the month *number*, mongodb doesn't have a way to format date as month names
+          number: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: false, // remove _id
+          month: {
+            // set the field month as the month name representing the month number
+            $arrayElemAt: [
+              [
+                '', // month number starts at 1, so the 0th element can be anything
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+              ],
+              '$_id',
+            ],
+          },
+          number: true, // keep the count
+        },
+      },
+    ]);
+
+    return res.json(stats);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send('Error. Try again');
+  }
+};

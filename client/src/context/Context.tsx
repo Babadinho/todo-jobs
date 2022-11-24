@@ -23,3 +23,9 @@ interface SitesInterface {
   setJobSites: any;
 }
 export const SitesContext = createContext<Partial<SitesInterface>>({});
+
+interface StatsInterface {
+  jobStats: any;
+  setJobStats: any;
+}
+export const StatsContext = createContext<Partial<StatsInterface>>({});

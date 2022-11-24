@@ -123,7 +123,7 @@ const Categories = ({
                         _dark: { color: 'gray.50' },
                       }}
                     >
-                      <Box fontSize='0.65rem' mr='0.4rem'>
+                      <Box fontSize='0.6rem' mr='0.4rem'>
                         {activeCat === c._id ? (
                           <i className='fa-solid fa-square-check'></i>
                         ) : (
@@ -151,7 +151,7 @@ const Categories = ({
                           />
                         </Box>
                       ) : (
-                        <Box fontSize='0.94rem' mr='0.2rem'>
+                        <Box fontSize='0.94rem' mr='0.3rem'>
                           {c.name}
                         </Box>
                       )}

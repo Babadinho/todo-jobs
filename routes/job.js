@@ -11,6 +11,7 @@ const {
   deleteJob,
   changeJobStatus,
   getJobSites,
+  getJobStats,
 } = require('../controllers/job');
 const { requireSignin } = require('../controllers/auth');
 
@@ -22,5 +23,6 @@ router.post('/edit-job/:userId', requireSignin, editJob);
 router.post('/delete-job/:userId', requireSignin, deleteJob);
 router.post('/status/:jobId', requireSignin, changeJobStatus);
 router.get('/job-sites/:userId', requireSignin, getJobSites);
+router.get('/job-stats/:userId', requireSignin, getJobStats);
 
 module.exports = router;

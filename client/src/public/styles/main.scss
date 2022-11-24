@@ -58,13 +58,20 @@ body {
   transform: translateY(-.05rem);
 }
 
-// :host, :root, [data-theme] {
-//   --chakra-ring-inset: none;
-//   --chakra-ring-shadow: 0 0 #f7f8fd !important;
-//   --chakra-ring-offset-shadow: 0 0 #f7f8fd !important;
-// }
+.line {
+  display: inline-block;
+  margin-right: 0.3rem;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+}
 
-::-webkit-scrollbar-track {
-  box-shadow: none !important;
-  border-radius: none !important;
+.load-3 .line:nth-last-child(1) {
+  animation: loadingC 0.6s 0.1s linear infinite;
+}
+.load-3 .line:nth-last-child(2) {
+  animation: loadingC 0.6s 0.2s linear infinite;
+}
+.load-3 .line:nth-last-child(3) {
+  animation: loadingC 0.6s 0.3s linear infinite;
 }

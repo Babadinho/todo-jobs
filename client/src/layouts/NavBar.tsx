@@ -100,13 +100,9 @@ const NavBar = () => {
                       src={userDetails && userDetails.user.picture}
                     />
                   </MenuButton>
-                  {/* <Portal> */}
-                  <MenuList
-                    alignItems={'center'}
-                    color={useColorModeValue('gray.700', 'gray.50')}
-                    fontSize='0.95rem'
-                  >
-                    {/* <Center>
+                  <Portal>
+                    <MenuList alignItems={'center'} fontSize='0.95rem'>
+                      {/* <Center>
                         <Avatar
                           size={'xl'}
                           name={
@@ -119,7 +115,7 @@ const NavBar = () => {
                           mb='0.5rem'
                         />
                       </Center> */}
-                    {/* <Center>
+                      {/* <Center>
                         <Box>
                           {userDetails &&
                             userDetails.user.firstName +
@@ -128,16 +124,16 @@ const NavBar = () => {
                         </Box>
                       </Center>
                       <MenuDivider /> */}
-                    <MenuItem>
-                      <i className='fa-solid fa-user-gear'></i>&nbsp; Account
-                      Settings
-                    </MenuItem>
-                    <MenuItem onClick={handleLogout}>
-                      <i className='fa-solid fa-right-from-bracket'></i>&nbsp;
-                      Logout
-                    </MenuItem>
-                  </MenuList>
-                  {/* </Portal> */}
+                      <MenuItem>
+                        <i className='fa-solid fa-user-gear'></i>&nbsp; Account
+                        Settings
+                      </MenuItem>
+                      <MenuItem onClick={handleLogout}>
+                        <i className='fa-solid fa-right-from-bracket'></i>&nbsp;
+                        Logout
+                      </MenuItem>
+                    </MenuList>
+                  </Portal>
                 </Menu>
               )}
             </Stack>

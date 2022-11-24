@@ -270,6 +270,32 @@ const Jobs = ({ loadJobs }: any) => {
                 </Box>
               </Box>
             )}
+            {!userJobs && (
+              <Box
+                className='load-wrapp'
+                textAlign='center'
+                pt='5rem'
+                pb='8rem'
+              >
+                <Box className='load-3' py='5rem'>
+                  <Box
+                    className='line'
+                    bg='gray.600'
+                    _dark={{ bg: 'gray.500' }}
+                  ></Box>
+                  <Box
+                    className='line'
+                    bg='gray.600'
+                    _dark={{ bg: 'gray.500' }}
+                  ></Box>
+                  <Box
+                    className='line'
+                    bg='gray.600'
+                    _dark={{ bg: 'gray.500' }}
+                  ></Box>
+                </Box>
+              </Box>
+            )}
             {userJobs &&
               userJobs.length > 0 &&
               userJobs.map((job: {}, i: string) => {
