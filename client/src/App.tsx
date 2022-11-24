@@ -19,6 +19,7 @@ import { Box } from '@chakra-ui/react';
 import { getCategories } from './middlewares/category';
 
 const App = () => {
+  const [current, setCurrent] = useState(1);
   const [userDetails, setUserDetails] = useState<{} | null>(null);
   const [userJobs, setUserJobs] = useState<{} | null>(null);
   const [category, setCategory] = useState<Array<{}> | null>();
@@ -48,7 +49,10 @@ const App = () => {
   const loadJobs = async (userId: string, query: {}, token: string) => {
     try {
       const res = isAuthenticated() && (await getJobs(userId, query, token));
-      setUserJobs(res.data);
+      if (res.data) {
+        setUserJobs(res.data);
+        setCurrent(1);
+      }
     } catch (error: any) {
       console.log(error.response.data);
     }
@@ -129,7 +133,11 @@ const App = () => {
                     path='/'
                     element={
                       <PrivateRoute>
-                        <Jobs loadJobs={loadJobs} />
+                        <Jobs
+                          loadJobs={loadJobs}
+                          current={current}
+                          setCurrent={setCurrent}
+                        />
                       </PrivateRoute>
                     }
                   />

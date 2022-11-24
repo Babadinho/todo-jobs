@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import {
   Box,
   Flex,
@@ -15,6 +15,7 @@ import {
   useDisclosure,
   DrawerCloseButton,
 } from '@chakra-ui/react';
+import Pagination from '@choc-ui/paginator';
 import JobCard from '../components/JobCard';
 import SideBar from '../components/SideBar';
 import AddJobModal from '../components/AddJobModal';
@@ -24,7 +25,7 @@ import { CategoryContext, JobContext } from '../context/Context';
 const Empty = require('../public/images/empty.png');
 import { UserContext } from '../context/Context';
 
-const Jobs = ({ loadJobs }: any) => {
+const Jobs = ({ loadJobs, current, setCurrent }: any) => {
   const sidebar = useDisclosure();
   const { userDetails } = useContext(UserContext);
   const { userJobs } = useContext(JobContext);
@@ -40,6 +41,11 @@ const Jobs = ({ loadJobs }: any) => {
   const [status, setStatus] = useState<string>('all jobs');
   const [search, setSearch] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
+
+  // pagination
+  const pageSize = 8;
+  const offset = (current - 1) * pageSize;
+  const user_jobs = userJobs && userJobs.slice(offset, offset + pageSize);
 
   // function to load jobs based on filter selected by user
   const handleLoadJobs = async () => {
@@ -106,6 +112,26 @@ const Jobs = ({ loadJobs }: any) => {
   useEffect(() => {
     handleLoadJobs();
   }, [status, search, activeCatId, noteStatus, activeSite]);
+
+  const Prev = forwardRef((props, ref: any) => (
+    <Button ref={ref} {...props} shadow='sm'>
+      Prev
+    </Button>
+  ));
+  const Next = forwardRef((props, ref: any) => (
+    <Button ref={ref} {...props} shadow='sm'>
+      Next
+    </Button>
+  ));
+
+  const itemRender = (_: any, type: any) => {
+    if (type === 'prev') {
+      return Prev;
+    }
+    if (type === 'next') {
+      return Next;
+    }
+  };
 
   return (
     <Box
@@ -296,9 +322,9 @@ const Jobs = ({ loadJobs }: any) => {
                 </Box>
               </Box>
             )}
-            {userJobs &&
-              userJobs.length > 0 &&
-              userJobs.map((job: {}, i: string) => {
+            {user_jobs &&
+              user_jobs.length > 0 &&
+              user_jobs.map((job: {}, i: string) => {
                 return (
                   <JobCard
                     {...job}
@@ -317,6 +343,24 @@ const Jobs = ({ loadJobs }: any) => {
                 );
               })}
           </Box>
+          {userJobs && userJobs.length > pageSize && (
+            <Box className='job-card'>
+              <Pagination
+                current={current}
+                onChange={(page: any) => {
+                  setCurrent(page);
+                }}
+                pageSize={pageSize}
+                total={userJobs && userJobs.length}
+                itemRender={itemRender}
+                paginationProps={{
+                  mt: '1rem',
+                  display: 'flex',
+                }}
+                colorScheme='linkedin'
+              />
+            </Box>
+          )}
         </GridItem>
       </Grid>
       <AddJobModal isOpen={isOpen} onClose={onClose} categories={category} />
