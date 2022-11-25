@@ -283,18 +283,17 @@ exports.getJobStats = async (req, res) => {
       { $match: { user: new ObjectID(req.params.userId) } },
       {
         $group: {
-          _id: { $month: '$createdAt' }, // group by the month *number*, mongodb doesn't have a way to format date as month names
+          _id: { $month: '$createdAt' },
           number: { $sum: 1 },
         },
       },
       {
         $project: {
-          _id: false, // remove _id
+          _id: false,
           month: {
-            // set the field month as the month name representing the month number
             $arrayElemAt: [
               [
-                '', // month number starts at 1, so the 0th element can be anything
+                '',
                 'January',
                 'February',
                 'March',
@@ -311,7 +310,7 @@ exports.getJobStats = async (req, res) => {
               '$_id',
             ],
           },
-          number: true, // keep the count
+          number: true,
         },
       },
     ]);
