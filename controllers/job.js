@@ -15,13 +15,14 @@ exports.getJobs = async (req, res) => {
     for (var key in req.body) {
       req.body[key] ? (query[key] = req.body[key]) : null;
       key === 'title' ? (query[key] = new RegExp(req.body[key], 'i')) : null;
+      key === 'createdAt' && delete query[key];
     }
 
     const jobs = await Job.find(query)
       .populate('category')
       .populate({ path: 'notes', options: { sort: { createdAt: -1 } } })
       .sort({
-        createdAt: 'descending',
+        createdAt: req.body.createdAt,
       });
 
     if (jobs) {
