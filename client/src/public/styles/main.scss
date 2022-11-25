@@ -6,10 +6,14 @@
 
 body {
   margin: 0;
-  font-family: 'Jost', sans-serif;
+  font-family: 'Jost', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: overlay;
+}
+
+.logo {
+  font-family: 'Noto Sans', sans-serif !important;
 }
 
 .job-card {
@@ -74,4 +78,8 @@ body {
 }
 .load-3 .line:nth-last-child(3) {
   animation: loadingC 0.6s 0.3s linear infinite;
+}
+
+.css-f6lfba >option, .css-f6lfba >optgroup {
+background: #2d3748!important;
 }

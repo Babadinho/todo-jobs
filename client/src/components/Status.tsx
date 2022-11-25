@@ -43,7 +43,7 @@ const Status = ({ activeStatus, setStatus }: any) => {
                 rounded='0.3rem'
                 mr='0.7rem'
                 mb='0.7rem'
-                fontSize='xs'
+                fontSize='0.8rem'
                 fontWeight='400'
                 bg={activeStatus === color ? colors[color] : '#cfedfb'}
                 color={activeStatus === color ? 'gray.50' : 'linkedin.800'}

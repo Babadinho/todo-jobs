@@ -224,7 +224,7 @@ const JobCard = ({
 
         <Box mt={2}>
           <Link
-            fontSize='1.04rem'
+            fontSize='1.05rem'
             color={status === 'closed' ? 'gray.600' : 'gray.700'}
             _dark={{
               color: status === 'closed' ? 'gray.400' : 'gray.50',
@@ -246,7 +246,7 @@ const JobCard = ({
             _dark={{
               color: 'gray.300',
             }}
-            fontSize='0.9rem'
+            fontSize='0.92rem'
           >
             {description.substring(0, 230)}
             {description.length > 143 && '..'}

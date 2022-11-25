@@ -120,6 +120,7 @@ export const SideBar = ({
 
   return (
     <>
+      <Stats />
       <Search
         search={search}
         setSearch={setSearch}
@@ -127,7 +128,6 @@ export const SideBar = ({
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      <Stats />
       <Status activeStatus={status} status={status} setStatus={setStatus} />
       <Jobsites activeSite={activeSite} setActiveSite={setActiveSite} />
       <Categories

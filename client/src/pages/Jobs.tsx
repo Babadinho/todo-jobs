@@ -14,6 +14,7 @@ import {
   DrawerContent,
   useDisclosure,
   DrawerCloseButton,
+  Select,
 } from '@chakra-ui/react';
 import Pagination from '@choc-ui/paginator';
 import JobCard from '../components/JobCard';
@@ -41,6 +42,7 @@ const Jobs = ({ loadJobs, current, setCurrent }: any) => {
   const [status, setStatus] = useState<string>('all jobs');
   const [search, setSearch] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
+  const [filter, setFilter] = useState<string>('-1');
 
   // pagination
   const pageSize = 8;
@@ -58,6 +60,7 @@ const Jobs = ({ loadJobs, current, setCurrent }: any) => {
             category: activeCatId,
             title: search,
             sld: activeSite,
+            createdAt: filter,
           },
           userDetails.token
         );
@@ -111,7 +114,7 @@ const Jobs = ({ loadJobs, current, setCurrent }: any) => {
 
   useEffect(() => {
     handleLoadJobs();
-  }, [status, search, activeCatId, noteStatus, activeSite]);
+  }, [status, search, activeCatId, noteStatus, activeSite, filter]);
 
   const Prev = forwardRef((props, ref: any) => (
     <Button ref={ref} {...props} shadow='sm'>
@@ -223,19 +226,39 @@ const Jobs = ({ loadJobs, current, setCurrent }: any) => {
               <Flex justifyContent='space-between' alignItems='center'>
                 <chakra.span
                   fontSize='sm'
-                  color='white'
+                  color='gray.50'
                   _dark={{
-                    color: 'white',
+                    color: 'gray.50',
                   }}
+                  display='flex'
                 >
                   <IconButton
                     aria-label='Menu'
                     display={{ base: 'inline-flex', lg: 'none' }}
                     onClick={sidebar.onOpen}
                     icon={<FiMenu />}
-                    size='md'
+                    size='sm'
                     colorScheme='linkedin'
+                    mr='0.5rem'
                   />
+                  <Box w={{ base: '40vw', md: '12rem' }}>
+                    <Select
+                      size='sm'
+                      rounded='md'
+                      borderColor='gray.600'
+                      focusBorderColor='none'
+                      _hover={{
+                        borderColor: 'gray.600',
+                      }}
+                      value={filter}
+                      onChange={(e) => {
+                        setFilter(e.target.value);
+                      }}
+                    >
+                      <option value='-1'>Newest</option>
+                      <option value='1'>Oldest</option>
+                    </Select>
+                  </Box>
                 </chakra.span>
                 <chakra.span>
                   <Button

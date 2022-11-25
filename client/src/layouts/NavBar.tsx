@@ -61,7 +61,7 @@ const NavBar = () => {
                 {/* <Box as='span' pb='0.2rem'>
                   <i className='fa-solid fa-stopwatch'></i>
                 </Box> */}
-                <Text ml='0.12rem'>Todojobs</Text>
+                <Text ml='0.12rem'>todojobs</Text>
               </Flex>
             </Link>
           </Box>

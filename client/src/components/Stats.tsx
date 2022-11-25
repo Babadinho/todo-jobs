@@ -71,7 +71,7 @@ const Stats = () => {
           >
             <Flex align='center'>
               <Box
-                fontSize='0.7rem'
+                fontSize='0.8rem'
                 mr='0.4rem'
                 color='gray.600'
                 _dark={{ color: 'gray.300' }}
@@ -118,7 +118,7 @@ const Stats = () => {
           >
             <Flex align='center'>
               <Box
-                fontSize='0.7rem'
+                fontSize='0.8rem'
                 mr='0.4rem'
                 color='gray.600'
                 _dark={{ color: 'gray.300' }}

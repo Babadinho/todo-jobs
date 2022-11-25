@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import PrivateRoute from './auth/PrivateRoute';
+import Index from './pages/Index';
 import Jobs from './pages/Jobs';
 import Login from './auth/Login';
 import Register from './auth/Register';
@@ -111,7 +112,11 @@ const App = () => {
 
   useEffect(() => {
     isAuthenticated() &&
-      loadJobs(isAuthenticated().user._id, {}, isAuthenticated().token);
+      loadJobs(
+        isAuthenticated().user._id,
+        { createdAt: '-1' },
+        isAuthenticated().token
+      );
   }, [userDetails, setUserJobs]);
 
   useEffect(() => {
@@ -132,13 +137,17 @@ const App = () => {
                   <Route
                     path='/'
                     element={
-                      <PrivateRoute>
-                        <Jobs
-                          loadJobs={loadJobs}
-                          current={current}
-                          setCurrent={setCurrent}
-                        />
-                      </PrivateRoute>
+                      userDetails ? (
+                        <PrivateRoute>
+                          <Jobs
+                            loadJobs={loadJobs}
+                            current={current}
+                            setCurrent={setCurrent}
+                          />
+                        </PrivateRoute>
+                      ) : (
+                        <Index />
+                      )
                     }
                   />
                   <Route
