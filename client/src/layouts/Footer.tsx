@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <Box className='footer'>
+    <Box className='footer' mt='auto'>
       <Flex
         w='full'
         flexDir='row'
@@ -14,7 +14,7 @@ const Footer = () => {
         borderTop={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
-        h={'3.75rem'}
+        h={'65px'}
         px={{ base: 4, md: 20, xl: 40 }}
         fontSize='0.9rem'
       >

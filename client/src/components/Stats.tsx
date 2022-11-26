@@ -25,16 +25,6 @@ const Stats = () => {
   let lastMonth = month[date.getMonth() - 1];
   let lastThreeMonth = month[date.getMonth() - 2];
 
-  // const anyAdult =
-  //   jobStats &&
-  //   jobStats.length > 0 &&
-  //   jobStats.map((person: any) => person.month === thisMonth);
-  // console.log(anyAdult);
-
-  //  console.log(stats);
-
-  console.log(thisMonth);
-
   return (
     <>
       <Box

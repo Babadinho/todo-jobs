@@ -35,7 +35,7 @@ const NavBar = () => {
 
   return (
     <>
-      <Box bg={useColorModeValue('white', 'gray.700')}>
+      <Box bg={useColorModeValue('white', 'gray.700')} shadow='sm'>
         <Flex
           h={'3.8rem'}
           px={{ base: '1rem', md: '5rem', xl: '12rem' }}
@@ -43,7 +43,7 @@ const NavBar = () => {
           justifyContent={'space-between'}
         >
           <Box
-            fontWeight={'bold'}
+            fontWeight='bold'
             fontSize={'1.6rem'}
             color='gray.700'
             _dark={{
@@ -58,10 +58,10 @@ const NavBar = () => {
               }}
             >
               <Flex alignItems={'center'}>
-                {/* <Box as='span' pb='0.2rem'>
-                  <i className='fa-solid fa-stopwatch'></i>
-                </Box> */}
-                <Text ml='0.12rem'>todojobs</Text>
+                <Box as='span' pb='0.1rem' fontSize='1.3rem'>
+                  <i className='fa-solid fa-blog'></i>
+                </Box>
+                <Text ml='0.14rem'>Todojobs</Text>
               </Flex>
             </Link>
           </Box>

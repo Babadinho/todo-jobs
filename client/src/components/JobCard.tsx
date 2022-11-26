@@ -21,6 +21,15 @@ import { JobContext, UserContext } from '../context/Context';
 import EditJobModal from './EditJobModal';
 const Website = require('../public/images/website.png');
 
+interface JobInfo {
+  jobId: string;
+  link: string;
+  title: string;
+  description?: string;
+  category: string;
+  endDate: string;
+}
+
 const JobCard = ({
   loading,
   setLoading,
@@ -54,6 +63,14 @@ const JobCard = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { userDetails } = useContext(UserContext);
   const { setUserJobs } = useContext(JobContext);
+  const [jobDetails, setJobDetails] = useState<JobInfo>({
+    jobId: '',
+    link: '',
+    title: '',
+    description: '',
+    category: '',
+    endDate: '',
+  });
   const [currentStatus, setCurrentStatus] = useState<string | null>('');
 
   useOutsideClick({
@@ -224,7 +241,7 @@ const JobCard = ({
 
         <Box mt={2}>
           <Link
-            fontSize='1.05rem'
+            fontSize='1.09rem'
             color={status === 'closed' ? 'gray.600' : 'gray.700'}
             _dark={{
               color: status === 'closed' ? 'gray.400' : 'gray.50',
@@ -319,7 +336,20 @@ const JobCard = ({
                 <i className='fa-solid fa-calendar-days'></i>
               </Tooltip>
             </Box>
-            <Box cursor='pointer' onClick={() => editModal.onOpen()}>
+            <Box
+              cursor='pointer'
+              onClick={() => {
+                setJobDetails({
+                  jobId: job._id,
+                  link: job.link,
+                  title: job.title,
+                  description: job.description,
+                  category: job.category._id,
+                  endDate: job.endDate,
+                });
+                editModal.onOpen();
+              }}
+            >
               <Tooltip
                 hasArrow
                 label='Edit job'
@@ -350,6 +380,8 @@ const JobCard = ({
       />
       <EditJobModal
         job={job}
+        jobDetails={jobDetails}
+        setJobDetails={setJobDetails}
         editModal={editModal}
         isOpen={editModal.isOpen}
         onClose={editModal.onClose}

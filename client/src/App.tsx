@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import PrivateRoute from './auth/PrivateRoute';
 import Index from './pages/Index';
 import Jobs from './pages/Jobs';
 import Login from './auth/Login';
@@ -16,6 +15,7 @@ import {
 } from './context/Context';
 import { getJobs, getJobSites, getJobStats } from './middlewares/job';
 import { isAuthenticated } from './middlewares/auth';
+import PrivateRoute from './auth/PrivateRoute';
 import { Box } from '@chakra-ui/react';
 import { getCategories } from './middlewares/category';
 
@@ -126,18 +126,24 @@ const App = () => {
   }, [userJobs]);
 
   return (
-    <Box _light={{ bg: '#f7f8fd' }}>
-      <UserContext.Provider value={value}>
-        <JobContext.Provider value={jobs}>
-          <CategoryContext.Provider value={categories}>
-            <SitesContext.Provider value={sites}>
-              <StatsContext.Provider value={stats}>
-                <NavBar />
-                <Routes>
-                  <Route
-                    path='/'
-                    element={
-                      userDetails ? (
+    <>
+      <Box _light={{ bg: '#f7f8fd' }}>
+        <UserContext.Provider value={value}>
+          <JobContext.Provider value={jobs}>
+            <CategoryContext.Provider value={categories}>
+              <SitesContext.Provider value={sites}>
+                <StatsContext.Provider value={stats}>
+                  <NavBar />
+                  <Routes>
+                    <Route
+                      path='/'
+                      element={
+                        userDetails ? <Navigate to='/jobs' /> : <Index />
+                      }
+                    />
+                    <Route
+                      path='/jobs'
+                      element={
                         <PrivateRoute>
                           <Jobs
                             loadJobs={loadJobs}
@@ -145,27 +151,25 @@ const App = () => {
                             setCurrent={setCurrent}
                           />
                         </PrivateRoute>
-                      ) : (
-                        <Index />
-                      )
-                    }
-                  />
-                  <Route
-                    path='/login'
-                    element={userDetails ? <Navigate to='/' /> : <Login />}
-                  />
-                  <Route
-                    path='/register'
-                    element={userDetails ? <Navigate to='/' /> : <Register />}
-                  />
-                </Routes>
-                <Footer />
-              </StatsContext.Provider>
-            </SitesContext.Provider>
-          </CategoryContext.Provider>
-        </JobContext.Provider>
-      </UserContext.Provider>
-    </Box>
+                      }
+                    />
+                    <Route
+                      path='/login'
+                      element={userDetails ? <Navigate to='/' /> : <Login />}
+                    />
+                    <Route
+                      path='/register'
+                      element={userDetails ? <Navigate to='/' /> : <Register />}
+                    />
+                  </Routes>
+                </StatsContext.Provider>
+              </SitesContext.Provider>
+            </CategoryContext.Provider>
+          </JobContext.Provider>
+        </UserContext.Provider>
+      </Box>
+      <Footer />
+    </>
   );
 };
 

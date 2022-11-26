@@ -57,7 +57,7 @@ const Login = () => {
         authenticate(res.data);
         setTimeout(() => {
           setUserDetails(res.data);
-          navigate('/');
+          navigate('/jobs');
         }, 2000);
       }
     } catch (error: any) {
@@ -111,8 +111,8 @@ const Login = () => {
   }, []);
 
   return (
-    <>
-      <Flex align={'center'} justify={'center'} mt='2rem' mb='3rem'>
+    <Box className='main'>
+      <Flex align={'center'} justify={'center'} mt='2rem'>
         <Stack
           spacing={8}
           mx={'auto'}
@@ -229,7 +229,7 @@ const Login = () => {
           </Box>
         </Stack>
       </Flex>
-    </>
+    </Box>
   );
 };
 

@@ -1,7 +1,21 @@
 @import "./animations.scss";
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
 
 .main {
-  min-height : calc(100vh - 3.75rem);
+  // min-height : calc(100vh - 65px) !important;
+  margin-bottom: 4rem !important;
+}
+
+.footer {
+margin-top: auto !important;
 }
 
 body {
@@ -9,7 +23,8 @@ body {
   font-family: 'Jost', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: overlay;
+  overflow: overlay !important;
+  height: 100% !important;
 }
 
 .logo {
@@ -80,6 +95,10 @@ body {
   animation: loadingC 0.6s 0.3s linear infinite;
 }
 
-.css-f6lfba >option, .css-f6lfba >optgroup {
-background: #2d3748!important;
+.css-4o94kf >option, .css-4o94kf >optgroup {
+background: #2d3748 !important;
+
+  &:hover {
+    color: #2d3748 !important;
+  }
 }

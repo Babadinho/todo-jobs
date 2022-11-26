@@ -24,30 +24,19 @@ import { editJob, deleteJob } from '../middlewares/job';
 import { UserContext, JobContext } from '../context/Context';
 import moment from 'moment';
 
-interface JobInfo {
-  jobId: string;
-  link: string;
-  title: string;
-  description?: string;
-  category: string;
-  endDate: string;
-}
-
-const EditJobModal = ({ editModal, categories, job }: any) => {
+const EditJobModal = ({
+  editModal,
+  categories,
+  job,
+  jobDetails,
+  setJobDetails,
+}: any) => {
   const ref = useRef();
   const toast = useToast();
   const { userDetails } = useContext(UserContext);
   const { setUserJobs } = useContext(JobContext);
   const [loading, setLoading] = useState<Boolean>(false);
   const [loading2, setLoading2] = useState<Boolean>(false);
-  const [jobDetails, setJobDetails] = useState<JobInfo>({
-    jobId: job._id,
-    link: job.link,
-    title: job.title,
-    description: job.description,
-    category: job.category._id,
-    endDate: job.endDate,
-  });
 
   const { link, title, description, category, endDate } = jobDetails;
 
