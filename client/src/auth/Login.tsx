@@ -112,7 +112,7 @@ const Login = () => {
 
   return (
     <Box className='main'>
-      <Flex align={'center'} justify={'center'} mt='3rem'>
+      <Flex align={'center'} justify={'center'} mt='2rem'>
         <Stack
           spacing={8}
           mx={'auto'}

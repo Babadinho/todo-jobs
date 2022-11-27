@@ -26,6 +26,7 @@ const Status = ({ activeStatus, setStatus }: any) => {
         <Box
           fontSize='md'
           fontWeight='bold'
+          fontFamily="'Overpass', sans-serif"
           color='gray.700'
           _dark={{
             color: 'gray.50',

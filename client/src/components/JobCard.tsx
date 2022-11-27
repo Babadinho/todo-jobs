@@ -241,7 +241,7 @@ const JobCard = ({
 
         <Box mt={2}>
           <Link
-            fontSize='1.09rem'
+            fontSize='1.05rem'
             color={status === 'closed' ? 'gray.600' : 'gray.700'}
             _dark={{
               color: status === 'closed' ? 'gray.400' : 'gray.50',
@@ -254,8 +254,10 @@ const JobCard = ({
               },
               textDecor: 'none',
             }}
+            href={link}
+            target='_blank'
           >
-            {title}
+            <chakra.h2>{title}</chakra.h2>
           </Link>
           <chakra.p
             mt={2}
@@ -281,18 +283,24 @@ const JobCard = ({
               src={image ? image : Website}
               alt='avatar'
             />
-            <Box
-              as='span'
-              color='gray.700'
-              _dark={{
-                color: 'gray.200',
-              }}
-              fontSize='0.9rem'
-              fontWeight='700'
-              cursor='pointer'
+            <Link
+              href={`https://www.${domain}`}
+              target='_blank'
+              _hover={{ textDecoration: 'none' }}
             >
-              {domain}
-            </Box>
+              <Box
+                as='span'
+                color='gray.700'
+                _dark={{
+                  color: 'gray.200',
+                }}
+                fontSize='0.9rem'
+                fontWeight='700'
+                cursor='pointer'
+              >
+                {domain}
+              </Box>
+            </Link>
           </Flex>
           <Flex
             alignItems='center'

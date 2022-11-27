@@ -10,6 +10,7 @@ import {
   Flex,
   useColorModeValue,
 } from '@chakra-ui/react';
+const Hero = require('../public/images/hero.png');
 
 const Index = () => {
   const Feature = (props: any) => {
@@ -55,7 +56,7 @@ const Index = () => {
 
   return (
     <Box
-      mt={{ base: '4rem', md: '7rem' }}
+      pt={{ base: '4rem', md: '7rem' }}
       px={{ base: '1rem', md: '5rem', xl: '12rem' }}
       className='main'
       pb={{ base: '5rem', md: '3rem' }}
@@ -162,8 +163,8 @@ const Index = () => {
           w='full'
           rounded='lg'
           shadow='2xl'
-          src='https://kutty.netlify.app/hero.jpg'
-          alt='Hellonext feedback boards software screenshot'
+          src={Hero}
+          alt='todojobs application dashboard'
         />
       </Box>
       <Flex
