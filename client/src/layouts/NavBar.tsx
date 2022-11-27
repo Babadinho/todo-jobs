@@ -61,7 +61,7 @@ const NavBar = () => {
                 <Box as='span' pb='0.1rem' fontSize='1.3rem'>
                   <i className='fa-solid fa-blog'></i>
                 </Box>
-                <Text ml='0.14rem'>Todojobs</Text>
+                <Text ml='0.14rem'>TodoJobs</Text>
               </Flex>
             </Link>
           </Box>
