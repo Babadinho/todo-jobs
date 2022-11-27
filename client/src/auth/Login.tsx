@@ -112,7 +112,7 @@ const Login = () => {
 
   return (
     <Box className='main'>
-      <Flex align={'center'} justify={'center'} mt='2rem'>
+      <Flex align={'center'} justify={'center'} mt='3rem'>
         <Stack
           spacing={8}
           mx={'auto'}
@@ -146,7 +146,7 @@ const Login = () => {
           <Box
             rounded={'lg'}
             bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'md'}
+            boxShadow={'sm'}
             p={8}
           >
             <Stack spacing={4} color='gray.600'>

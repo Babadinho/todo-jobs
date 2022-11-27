@@ -10,7 +10,7 @@ html {
 }
 
 .main {
-  // min-height : calc(100vh - 65px) !important;
+  min-height: calc(100vh - 65px) !important;
   margin-bottom: 4rem !important;
 }
 
@@ -28,11 +28,11 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: 'Jost', sans-serif !important;
+  font-family: 'Overpass', sans-serif !important;
 }
 
 .logo {
-  font-family: 'Jost', sans-serif !important;
+  font-family: 'Overpass', sans-serif !important;
 }
 
 .job-card {
@@ -105,4 +105,11 @@ background: #2d3748 !important;
   &:hover {
     color: #2d3748 !important;
   }
+}
+
+.selectable {
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
 }

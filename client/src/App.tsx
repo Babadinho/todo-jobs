@@ -16,7 +16,7 @@ import {
 import { getJobs, getJobSites, getJobStats } from './middlewares/job';
 import { isAuthenticated } from './middlewares/auth';
 import PrivateRoute from './auth/PrivateRoute';
-import { Box } from '@chakra-ui/react';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 import { getCategories } from './middlewares/category';
 
 const App = () => {
@@ -127,7 +127,7 @@ const App = () => {
 
   return (
     <>
-      <Box _light={{ bg: '#f7f8fd' }}>
+      <Box>
         <UserContext.Provider value={value}>
           <JobContext.Provider value={jobs}>
             <CategoryContext.Provider value={categories}>
