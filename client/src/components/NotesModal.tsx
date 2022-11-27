@@ -55,7 +55,7 @@ const NotesModal = ({
             >
               <InputGroup size='sm'>
                 <Input
-                  type='tel'
+                  type='text'
                   placeholder='Enter note'
                   focusBorderColor='brand.400'
                   rounded='md'

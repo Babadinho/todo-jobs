@@ -153,6 +153,7 @@ const AddJobModal = ({ onClose, isOpen, categories }: any) => {
           w={{ base: '100vw', md: 'lg' }}
           zIndex={10}
           bg={useColorModeValue('white', 'gray.700')}
+          overflow='auto'
         >
           <Button
             size='0.8rem'

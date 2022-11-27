@@ -34,7 +34,7 @@ const Stats = () => {
         _dark={{
           bg: 'gray.700',
         }}
-        mb='1.5rem'
+        mb='0.9rem'
         px={{ base: 4, md: 3, xl: 4 }}
         shadow='sm'
         rounded='md'

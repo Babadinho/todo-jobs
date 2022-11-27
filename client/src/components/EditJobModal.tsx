@@ -171,6 +171,7 @@ const EditJobModal = ({
             maxW={'lg'}
             py={10}
             w={{ base: 'full', md: '63vh' }}
+            overflow='auto'
           >
             <Box
               rounded={'lg'}
@@ -216,7 +217,7 @@ const EditJobModal = ({
                             _dark={{
                               _placeholder: { color: 'gray.200' },
                             }}
-                            type='tel'
+                            type='text'
                             placeholder='https://www.example.com'
                             focusBorderColor='brand.400'
                             rounded='md'

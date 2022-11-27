@@ -27,7 +27,7 @@ const Search = ({ setSearch, searchValue, setSearchValue, sidebar }: any) => {
         _dark={{
           bg: 'gray.700',
         }}
-        mb='1.5rem'
+        mb='0.9rem'
         px={{ base: 4, md: 3, xl: 4 }}
         shadow='sm'
         rounded='md'
@@ -46,7 +46,7 @@ const Search = ({ setSearch, searchValue, setSearchValue, sidebar }: any) => {
                 borderColor: error ? 'red.400' : 'gray.600',
                 _placeholder: { color: 'gray.300' },
               }}
-              type='tel'
+              type='text'
               _hover={{
                 borderColor: error ? 'red.300' : 'gray.200',
               }}
