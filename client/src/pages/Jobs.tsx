@@ -164,9 +164,11 @@ const Jobs = ({ loadJobs, current, setCurrent }: any) => {
             }}
             px={5}
             py={4}
-            pt='4rem'
+            pt='3rem'
             shadow='md'
             rounded='md'
+            maxH='100vh'
+            overflow='auto'
           >
             <DrawerCloseButton />
             <SideBar
