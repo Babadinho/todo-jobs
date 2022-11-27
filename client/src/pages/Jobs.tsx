@@ -39,7 +39,7 @@ const Jobs = ({ loadJobs, current, setCurrent }: any) => {
   const [noteStatus, setNoteStatus] = useState<string>('');
   const [activeCatId, setActiveCatId] = useState<string | null>('');
   const [activeSite, setActiveSite] = useState<string | null>('');
-  const [status, setStatus] = useState<string>('all jobs');
+  const [status, setStatus] = useState<string>('');
   const [search, setSearch] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
   const [filter, setFilter] = useState<string>('-1');

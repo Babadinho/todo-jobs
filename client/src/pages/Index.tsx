@@ -87,8 +87,8 @@ const Index = () => {
           color='gray.600'
           _dark={{ color: 'gray.300' }}
         >
-          Todojobs is a web application that allows you record and keep track of
-          your job applications. You can now ditch excel and use use todojobs
+          Todojobs is a web application that allows to you record and keep track
+          of your job applications. You can now ditch excel and use use todojobs
           which is easier and faster to use. Categorize and seamlessly manage
           your job applications.
         </chakra.p>

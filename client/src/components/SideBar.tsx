@@ -128,7 +128,7 @@ export const SideBar = ({
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      <Status activeStatus={status} status={status} setStatus={setStatus} />
+      <Status status={status} setStatus={setStatus} />
       <Jobsites activeSite={activeSite} setActiveSite={setActiveSite} />
       <Categories
         loading={loading}
