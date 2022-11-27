@@ -59,7 +59,7 @@ const NavBar = () => {
             >
               <Flex alignItems={'center'}>
                 <Box as='span' pb='0.1rem' fontSize='1.3rem'>
-                  <i className='fa-solid fa-blog'></i>
+                  <i className='fa-regular fa-calendar-check'></i>
                 </Box>
                 <Text ml='0.14rem'>Todojobs</Text>
               </Flex>
