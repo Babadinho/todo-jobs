@@ -1,6 +1,6 @@
 import { Box, Button, Flex } from '@chakra-ui/react';
 import React from 'react';
-import { colors } from '../utils/globalVars';
+import { colors, colors_hover } from '../utils/globalVars';
 
 const Status = ({ status, setStatus }: any) => {
   // const handleSetActive = async (color: string) => {
@@ -46,23 +46,34 @@ const Status = ({ status, setStatus }: any) => {
                 mb='0.7rem'
                 fontSize='0.8rem'
                 fontWeight='400'
-                bg={status === color ? colors[color] : '#cfedfb'}
-                color={status === color ? 'gray.50' : 'linkedin.800'}
-                // _hover={{
-                //   bg: colors[color],
-                //   color: 'gray.50',
-                // }}
+                bg={colors[color]}
+                // bg={status === color ? colors[color] : '#cfedfb'}
+                color={'gray.50'}
+                // color={status === color ? 'gray.50' : 'linkedin.800'}
+                _focus={{
+                  outline: 0,
+                  boxShadow: 0,
+                }}
+                _hover={{
+                  bg: colors_hover[color],
+                  color: 'gray.50',
+                }}
                 _dark={{
                   bg: status === color ? colors[color] : '#9bdaf329',
                   color: status === color ? 'gray.50' : 'linkedin.200',
                   _hover: {
-                    bg: colors[color],
+                    bg: colors_hover[color],
                     color: 'gray.50',
                   },
                 }}
                 size='xs'
                 textTransform='capitalize'
               >
+                {status === color && (
+                  <Box fontSize='0.7rem' mr='0.15rem'>
+                    <i className='fa-regular fa-circle-check'></i>
+                  </Box>
+                )}
                 {color}
               </Button>
             );
