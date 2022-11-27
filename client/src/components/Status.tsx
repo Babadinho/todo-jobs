@@ -46,10 +46,9 @@ const Status = ({ status, setStatus }: any) => {
                 mb='0.7rem'
                 fontSize='0.8rem'
                 fontWeight='400'
+                borderColor={colors[color]}
                 bg={colors[color]}
-                // bg={status === color ? colors[color] : '#cfedfb'}
                 color={'gray.50'}
-                // color={status === color ? 'gray.50' : 'linkedin.800'}
                 _focus={{
                   outline: 0,
                   boxShadow: 0,
@@ -57,14 +56,6 @@ const Status = ({ status, setStatus }: any) => {
                 _hover={{
                   bg: colors_hover[color],
                   color: 'gray.50',
-                }}
-                _dark={{
-                  bg: status === color ? colors[color] : '#9bdaf329',
-                  color: status === color ? 'gray.50' : 'linkedin.200',
-                  _hover: {
-                    bg: colors_hover[color],
-                    color: 'gray.50',
-                  },
                 }}
                 size='xs'
                 textTransform='capitalize'
