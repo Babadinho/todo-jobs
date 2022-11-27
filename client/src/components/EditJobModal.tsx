@@ -350,7 +350,9 @@ const EditJobModal = ({
                           fontSize={{
                             sm: 'sm',
                           }}
-                          value={moment(endDate).format('YYYY-MM-DD')}
+                          value={
+                            endDate && moment(endDate).format('YYYY-MM-DD')
+                          }
                           onChange={handleChange('endDate')}
                         />
                       </FormControl>

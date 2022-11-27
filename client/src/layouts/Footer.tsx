@@ -39,7 +39,7 @@ const Footer = () => {
             <Link
               href='https://github.com/Babadinho'
               color='linkedin.500'
-              fontWeight='600'
+              fontWeight='400'
               target='_blank'
               _hover={{
                 color: 'linkedin.600',
