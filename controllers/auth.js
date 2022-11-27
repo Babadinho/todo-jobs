@@ -161,11 +161,6 @@ exports.signinGoogle = async (req, res) => {
         await category.save();
       }
 
-      //Generate jwt signed token
-      let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: '7d',
-      });
-
       const today = new Date();
 
       await Job.updateMany(
@@ -175,9 +170,16 @@ exports.signinGoogle = async (req, res) => {
         }
       );
 
+      const new_user = await User.findOne({ email: profile?.email });
+
+      //Generate jwt signed token
+      let token = jwt.sign({ _id: new_user._id }, process.env.JWT_SECRET, {
+        expiresIn: '7d',
+      });
+
       return res.status(201).json({
         token,
-        user,
+        user: new_user,
       });
     }
   } catch (error) {
