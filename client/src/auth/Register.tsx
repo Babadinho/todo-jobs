@@ -91,6 +91,7 @@ const Register = () => {
   };
 
   const handleGoogleRegister = async (response: any) => {
+    setRegisterText('Please wait..');
     try {
       const res = await signinGoogle(response);
       setLoading(true);
@@ -109,6 +110,7 @@ const Register = () => {
         isClosable: true,
       });
       setLoading(false);
+      setRegisterText('Register');
     }
   };
 

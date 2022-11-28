@@ -75,6 +75,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async (response: any) => {
+    setLoginText('Please wait..');
     try {
       const res = await signinGoogle(response);
       setLoading(true);
@@ -94,6 +95,7 @@ const Login = () => {
         position: 'top',
       });
       setLoading(false);
+      setLoginText('Login');
     }
   };
 
