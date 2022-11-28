@@ -38,6 +38,7 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loginText, setLoginText] = useState<string>('Login');
 
   const { email, password } = values;
 
@@ -47,6 +48,7 @@ const Login = () => {
 
   const handleLogin = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    setLoginText('Please wait..');
     try {
       const res = await login({
         email: email,
@@ -68,6 +70,7 @@ const Login = () => {
         isClosable: true,
       });
       setLoading(false);
+      setLoginText('Login');
     }
   };
 
@@ -202,7 +205,7 @@ const Login = () => {
                     bg: 'linkedin.600',
                   }}
                 >
-                  {loading ? <Spinner thickness='4px' size='lg' /> : 'Login'}
+                  {loading ? <Spinner thickness='4px' size='lg' /> : loginText}
                 </Button>
               </Stack>
               <Box
