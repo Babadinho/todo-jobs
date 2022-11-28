@@ -41,8 +41,7 @@ export const SideBar = ({
 
   /* get default category and store in variable. WIll be passed 
   as props to Categories and used to set Default category to not deletable */
-  const defaultCategory =
-    category && category.length > 0 && category[0]._id._id;
+  const defaultCategory = category && category.length > 0 && category[0]._id;
 
   // Function for adding new category
   const handleAddCategory = async () => {
