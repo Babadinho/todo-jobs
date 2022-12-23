@@ -15,59 +15,48 @@ import { Link, animateScroll as scroll } from 'react-scroll';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-const container = {
-  show: {
-    transition: {
-      staggerChildren: 0.35,
-    },
-  },
-};
-
-const item = {
-  hidden: {
-    opacity: 0,
-    y: 200,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      ease: [0.6, 0.01, -0.05, 0.3],
-      duration: 1.6,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -200,
-    transition: {
-      ease: 'easeInOut',
-      duration: 0.8,
-    },
-  },
-};
-
 const Index = () => {
   const { ref, inView } = useInView({
-    threshold: 0.2,
+    threshold: 0.1,
   });
   const animation = useAnimation();
 
+  const container = {
+    show: {
+      transition: {
+        staggerChildren: 0.35,
+      },
+    },
+  };
+
+  const item = {
+    hidden: {
+      opacity: 0,
+      y: 200,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: [0.6, 0.01, -0.05, 0.01],
+        duration: 1.6,
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -200,
+      transition: {
+        ease: 'easeInOut',
+        duration: 0.8,
+      },
+    },
+  };
+
   useEffect(() => {
     if (inView) {
-      animation.start({
-        x: 0,
-        opacity: 1,
-        y: 0,
-        transition: {
-          type: 'spring',
-          duration: 1.2,
-        },
-      });
+      animation.start('show');
     }
-    if (!inView) {
-      animation.start({ x: '-100vw' });
-    }
-  }, [inView]);
+  }, [animation, inView]);
 
   const Feature = (props: any) => {
     return (
@@ -110,62 +99,85 @@ const Index = () => {
       pb={{ base: '5rem', md: '3rem' }}
       bg={useColorModeValue('gray.50', 'gray.800')}
     >
-      <motion.div
-        variants={container}
-        initial='hidden'
-        animate='show'
-        exit='exit'
+      <Box
+        w={{ base: 'full', md: 11 / 12, xl: 9 / 12 }}
+        mx='auto'
+        textAlign={{ base: 'left', md: 'center' }}
       >
-        <Box
-          w={{ base: 'full', md: 11 / 12, xl: 9 / 12 }}
-          mx='auto'
-          textAlign={{ base: 'left', md: 'center' }}
+        <chakra.h1
+          mb={6}
+          fontSize={{ base: '4xl', md: '6xl' }}
+          fontWeight='bold'
+          lineHeight='none'
+          letterSpacing={{ base: 'normal', md: 'tight' }}
+          color='gray.700'
+          _dark={{ color: 'gray.100' }}
         >
-          <chakra.h1
-            mb={6}
-            fontSize={{ base: '4xl', md: '6xl' }}
-            fontWeight='bold'
-            lineHeight='none'
-            letterSpacing={{ base: 'normal', md: 'tight' }}
-            color='gray.700'
-            _dark={{ color: 'gray.100' }}
+          Track all your{' '}
+          <Text
+            display={{ base: 'block', lg: 'inline' }}
+            w='full'
+            bgClip='text'
+            bgGradient='linear(to-r, green.400,linkedin.500)'
+            fontWeight='extrabold'
           >
-            Track all your{' '}
-            <Text
-              display={{ base: 'block', lg: 'inline' }}
-              w='full'
-              bgClip='text'
-              bgGradient='linear(to-r, green.400,linkedin.500)'
-              fontWeight='extrabold'
-            >
-              job applications
-            </Text>{' '}
-            in a single place.
-          </chakra.h1>
-          <chakra.p
-            px={{ base: 0, lg: 15 }}
-            mb={6}
-            fontSize={{ base: 'lg', md: 'xl' }}
-            color='gray.600'
-            _dark={{ color: 'gray.300' }}
+            job applications
+          </Text>{' '}
+          in a single place.
+        </chakra.h1>
+        <chakra.p
+          px={{ base: 0, lg: 15 }}
+          mb={6}
+          fontSize={{ base: 'lg', md: 'xl' }}
+          color='gray.600'
+          _dark={{ color: 'gray.300' }}
+        >
+          Todojobs is a web application that allows to you record and keep track
+          of your job applications. You can now ditch excel and use use todojobs
+          which is easier and faster to use. Categorize and seamlessly manage
+          your job applications.
+        </chakra.p>
+        <Stack
+          direction={{ base: 'column', sm: 'row' }}
+          mb={{ base: 4, md: 8 }}
+          spacing={2}
+          justifyContent={{ sm: 'left', md: 'center' }}
+        >
+          <Button
+            as='a'
+            variant='solid'
+            color='white'
+            bg='linkedin.500'
+            _hover={{ bg: 'linkedin.600' }}
+            display='inline-flex'
+            alignItems='center'
+            justifyContent='center'
+            w={{ base: 'full', sm: 'auto' }}
+            mb={{ base: 2, sm: 0 }}
+            size='lg'
+            cursor='pointer'
+            href='/login'
           >
-            Todojobs is a web application that allows to you record and keep
-            track of your job applications. You can now ditch excel and use use
-            todojobs which is easier and faster to use. Categorize and
-            seamlessly manage your job applications.
-          </chakra.p>
-          <Stack
-            direction={{ base: 'column', sm: 'row' }}
-            mb={{ base: 4, md: 8 }}
-            spacing={2}
-            justifyContent={{ sm: 'left', md: 'center' }}
+            Get Started
+            <Icon boxSize={4} ml={1} viewBox='0 0 20 20' fill='currentColor'>
+              <path
+                fillRule='evenodd'
+                d='M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z'
+                clipRule='evenodd'
+              />
+            </Icon>
+          </Button>
+          <Link
+            activeClass='active'
+            to='howItWorks'
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
           >
             <Button
               as='a'
-              variant='solid'
-              color='white'
-              bg='linkedin.500'
-              _hover={{ bg: 'linkedin.600' }}
+              colorScheme='gray'
               display='inline-flex'
               alignItems='center'
               justifyContent='center'
@@ -173,79 +185,59 @@ const Index = () => {
               mb={{ base: 2, sm: 0 }}
               size='lg'
               cursor='pointer'
-              href='/login'
+              href='#howItWorks'
             >
-              Get Started
+              How it Works
               <Icon boxSize={4} ml={1} viewBox='0 0 20 20' fill='currentColor'>
                 <path
                   fillRule='evenodd'
-                  d='M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z'
+                  d='M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.415 1.415l.707-.708zm-7.071 7.072l.707-.707A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z'
                   clipRule='evenodd'
                 />
               </Icon>
             </Button>
-            <Link
-              activeClass='active'
-              to='howItWorks'
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-            >
-              <Button
-                as='a'
-                colorScheme='gray'
-                display='inline-flex'
-                alignItems='center'
-                justifyContent='center'
-                w={{ base: 'full', sm: 'auto' }}
-                mb={{ base: 2, sm: 0 }}
-                size='lg'
-                cursor='pointer'
-                href='#howItWorks'
-              >
-                How it Works
-                <Icon
-                  boxSize={4}
-                  ml={1}
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                >
-                  <path
-                    fillRule='evenodd'
-                    d='M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.415 1.415l.707-.708zm-7.071 7.072l.707-.707A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z'
-                    clipRule='evenodd'
-                  />
-                </Icon>
-              </Button>
-            </Link>
-          </Stack>
-        </Box>
-        <Box
-          w={{ base: 'full', md: 10 / 12 }}
-          mx='auto'
-          mt={20}
-          textAlign='center'
+          </Link>
+        </Stack>
+      </Box>
+      <Box
+        w={{ base: 'full', md: 10 / 12 }}
+        mx='auto'
+        mt={20}
+        textAlign='center'
+      >
+        {' '}
+        <motion.div
+          variants={container}
+          initial='hidden'
+          animate='show'
+          exit='exit'
         >
           <motion.div variants={item}>
             <Image
               w='full'
               rounded='lg'
-              shadow='2xl'
+              shadow='xl'
               src={Hero}
               alt='todojobs application dashboard'
             />
           </motion.div>
-        </Box>
-        <Box as='div' ref={ref}>
-          <Flex
-            justifyContent='center'
-            alignItems='center'
-            mt='10rem'
-            id='howItWorks'
-            className='scrollTo'
+        </motion.div>
+      </Box>
+      <Box as='div' ref={ref}>
+        <Flex
+          justifyContent='center'
+          alignItems='center'
+          mt='12rem'
+          id='howItWorks'
+          className='scrollTo'
+        >
+          <motion.div
+            variants={container}
+            animate={animation}
+            initial='hidden'
+            exit='exit'
           >
-            <motion.div animate={animation}>
+            <motion.div variants={item}>
               <Box py={12} bg='white' _dark={{ bg: 'gray.700' }} rounded='xl'>
                 <Box maxW='7xl' mx='auto' px={{ base: 4, lg: 8 }} pb={4}>
                   <Box textAlign='center'>
@@ -337,7 +329,7 @@ const Index = () => {
                         Filter between job applications using the category,
                         status, and the job board or website. The search feature
                         also adds and extra way to narrow down what you are
-                        looing for.
+                        looking for.
                       </Feature>
 
                       <Feature
@@ -353,9 +345,9 @@ const Index = () => {
                 </Box>
               </Box>
             </motion.div>
-          </Flex>
-        </Box>
-      </motion.div>
+          </motion.div>
+        </Flex>
+      </Box>
     </Box>
   );
 };
