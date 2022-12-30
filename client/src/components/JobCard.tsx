@@ -87,7 +87,7 @@ const JobCard = ({
         userDetails.token
       );
       if (res.data) {
-        setLoading(true);
+        setLoading(false);
         setUserJobs(res.data);
         toast({
           title: 'Status updated successfully',
