@@ -117,7 +117,7 @@ const Stats = () => {
                 <i className='fa-solid fa-square-poll-vertical'></i>
               </Box>{' '}
               <Box color='gray.600' _dark={{ color: 'gray.300' }}>
-                {lastMonth}
+                {lastMonth === undefined ? 'December' : lastMonth}
               </Box>
             </Flex>
           </chakra.span>
