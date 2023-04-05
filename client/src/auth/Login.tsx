@@ -20,18 +20,18 @@ import { useEffect, useState } from 'react';
 import { authenticate, login, signinGoogle } from '../middlewares/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/Context';
+import useScript from '../hooks/useScript';
 
 interface UserInfo {
   email: string;
   password: string;
 }
 
-declare const google: any;
-
 const Login = () => {
   const { setUserDetails } = useContext(UserContext);
   const navigate = useNavigate();
   const toast = useToast();
+  const { loaded, error } = useScript('https://apis.google.com/js/platform.js');
   const [values, setValues] = useState<UserInfo>({
     email: '',
     password: '',
@@ -100,20 +100,24 @@ const Login = () => {
   };
 
   useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-      callback: handleGoogleLogin,
-    });
+    if (loaded && !error && (window as any).google) {
+      (window as any).google.accounts.id.initialize({
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        callback: handleGoogleLogin,
+      });
 
-    google.accounts.id.renderButton(document.getElementById('loginGoogle'), {
-      type: 'standard',
-      // theme: 'filled_black',
-      size: 'large',
-      text: 'signin_with',
-      shape: 'pill',
-    });
-  }, []);
+      (window as any).google.accounts.id.renderButton(
+        document.getElementById('loginGoogle'),
+        {
+          type: 'standard',
+          // theme: 'filled_black',
+          size: 'large',
+          text: 'signin_with',
+          shape: 'pill',
+        }
+      );
+    }
+  }, [loaded, error]);
 
   return (
     <Box className='main'>
