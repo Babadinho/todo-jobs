@@ -2,7 +2,7 @@
 
 Todojobs is a web application that allows to you record and keep track of your job applications. You can now ditch excel and use use todojobs which is easier and faster to use. Categorize and seamlessly manage your job applications.
 
-![Todojons Image](https://raw.githubusercontent.com/babadinho/todo-jobs/client/src/public/images/hero.png)
+![Todojobs Image](https://raw.githubusercontent.com/Babadinho/todo-jobs/main/client/src/public/images/hero.png)
 
 ## Features
 
