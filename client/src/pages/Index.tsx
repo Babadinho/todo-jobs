@@ -103,6 +103,7 @@ const Index = () => {
         w={{ base: 'full', md: 11 / 12, xl: 9 / 12 }}
         mx='auto'
         textAlign={{ base: 'left', md: 'center' }}
+        maxW='7xl'
       >
         <chakra.h1
           mb={6}
@@ -157,6 +158,7 @@ const Index = () => {
             size='lg'
             cursor='pointer'
             href='/login'
+            fontWeight={500}
           >
             Get Started
             <Icon boxSize={4} ml={1} viewBox='0 0 20 20' fill='currentColor'>
@@ -199,12 +201,7 @@ const Index = () => {
           </Link>
         </Stack>
       </Box>
-      <Box
-        w={{ base: 'full', md: 10 / 12 }}
-        mx='auto'
-        mt={20}
-        textAlign='center'
-      >
+      <Box mx='auto' mt={20} textAlign='center' maxW='7xl'>
         {' '}
         <motion.div
           variants={container}
@@ -216,7 +213,7 @@ const Index = () => {
             <Image
               w='full'
               rounded='lg'
-              shadow='xl'
+              shadow='md'
               src={Hero}
               alt='todojobs application dashboard'
             />
@@ -227,7 +224,7 @@ const Index = () => {
         <Flex
           justifyContent='center'
           alignItems='center'
-          mt='12rem'
+          mt='8rem'
           id='howItWorks'
           className='scrollTo'
         >
@@ -238,32 +235,35 @@ const Index = () => {
             exit='exit'
           >
             <motion.div variants={item}>
+              <chakra.h2
+                mb={9}
+                fontSize={{ base: '3xl', md: '2.7rem' }}
+                fontWeight='bold'
+                lineHeight='none'
+                color='gray.700'
+                _dark={{ color: 'gray.100' }}
+                textAlign='center'
+              >
+                How it Works
+                <Icon
+                  boxSize={6}
+                  ml={1}
+                  mb={1}
+                  viewBox='0 0 20 20'
+                  fill='linkedin.500'
+                >
+                  <path
+                    fillRule='evenodd'
+                    d='M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.415 1.415l.707-.708zm-7.071 7.072l.707-.707A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z'
+                    clipRule='evenodd'
+                  />
+                </Icon>
+              </chakra.h2>
+            </motion.div>
+            <motion.div variants={item}>
               <Box py={12} bg='white' _dark={{ bg: 'gray.700' }} rounded='xl'>
                 <Box maxW='7xl' mx='auto' px={{ base: 4, lg: 8 }} pb={4}>
                   <Box textAlign='center'>
-                    <chakra.h2
-                      _light={{ color: 'brand.600' }}
-                      fontSize='1.1rem'
-                      fontWeight='semibold'
-                      textTransform='uppercase'
-                      letterSpacing='wide'
-                      pb={4}
-                    >
-                      How it Works
-                      <Icon
-                        boxSize={4}
-                        ml={1}
-                        mb={1}
-                        viewBox='0 0 20 20'
-                        fill='currentColor'
-                      >
-                        <path
-                          fillRule='evenodd'
-                          d='M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.415 1.415l.707-.708zm-7.071 7.072l.707-.707A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z'
-                          clipRule='evenodd'
-                        />
-                      </Icon>
-                    </chakra.h2>
                     <chakra.p
                       mt={2}
                       fontSize={{ base: '3xl', sm: '4xl' }}

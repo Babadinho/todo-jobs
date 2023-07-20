@@ -35,12 +35,17 @@ const NavBar = () => {
 
   return (
     <>
-      <Box bg={useColorModeValue('white', 'gray.700')} shadow='sm'>
+      <Box
+        bg={useColorModeValue('white', 'gray.700')}
+        shadow='sm'
+        px={{ base: '1rem', md: '5rem', xl: '12rem' }}
+      >
         <Flex
           h={'3.8rem'}
-          px={{ base: '1rem', md: '5rem', xl: '12rem' }}
           alignItems={'center'}
           justifyContent={'space-between'}
+          maxW='7xl'
+          mx='auto'
         >
           <Box
             fontWeight='bold'

@@ -31,7 +31,7 @@ const Footer = () => {
             color='gray.800'
             _dark={{ color: 'white' }}
           >
-            Justbooks © 2022. All Rights Reserved
+            Todojobs © 2023. All Rights Reserved
           </chakra.p>
 
           <chakra.p color='gray.800' _dark={{ color: 'white' }}>
