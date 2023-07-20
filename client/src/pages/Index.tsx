@@ -158,7 +158,6 @@ const Index = () => {
             size='lg'
             cursor='pointer'
             href='/login'
-            fontWeight={500}
           >
             Get Started
             <Icon boxSize={4} ml={1} viewBox='0 0 20 20' fill='currentColor'>
@@ -178,7 +177,6 @@ const Index = () => {
             duration={500}
           >
             <Button
-              as='a'
               colorScheme='gray'
               display='inline-flex'
               alignItems='center'
@@ -187,7 +185,6 @@ const Index = () => {
               mb={{ base: 2, sm: 0 }}
               size='lg'
               cursor='pointer'
-              href='#howItWorks'
             >
               How it Works
               <Icon boxSize={4} ml={1} viewBox='0 0 20 20' fill='currentColor'>

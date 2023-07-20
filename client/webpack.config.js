@@ -65,6 +65,7 @@ module.exports = {
       title: 'Webpack App',
       filename: 'index.html',
       template: 'src/public/index.html',
+      favicon: './src/public/images/favicon.ico',
     }),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env),
