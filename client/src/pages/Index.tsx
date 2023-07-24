@@ -96,7 +96,7 @@ const Index = () => {
       pt={{ base: '4rem', md: '7rem' }}
       px={{ base: '1rem', md: '5rem', xl: '12rem' }}
       className='main'
-      pb={{ base: '5rem', md: '3rem' }}
+      pb={{ base: '5rem', md: '6rem' }}
       bg={useColorModeValue('gray.50', 'gray.800')}
     >
       <Box

@@ -25,6 +25,8 @@ const Footer = () => {
           align='center'
           justify='space-between'
           py='4'
+          maxW='7xl'
+          mx='auto'
         >
           <chakra.p
             py={{ base: '2', sm: '0' }}

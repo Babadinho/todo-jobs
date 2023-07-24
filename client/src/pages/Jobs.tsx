@@ -142,13 +142,9 @@ const Jobs = ({ loadJobs, current, setCurrent }: any) => {
       px={{ base: '1rem', md: '5rem', xl: '12rem' }}
       className='main'
       pb={{ base: '5rem', md: '3rem' }}
+      mx='auto'
     >
-      <Grid
-        // h='100%'
-        // templateRows='repeat(1, 1fr)'
-        templateColumns='repeat(4, 1fr)'
-        gap={4}
-      >
+      <Grid templateColumns='repeat(4, 1fr)' gap={4} maxW='7xl' mx='auto'>
         <Drawer
           isOpen={sidebar.isOpen}
           onClose={sidebar.onClose}
