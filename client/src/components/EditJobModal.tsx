@@ -132,7 +132,7 @@ const EditJobModal = ({
           rounded='md'
           shadow='md'
           h='100vh'
-          w={{ base: '100vw', md: 'lg' }}
+          w={{ base: '100vw', md: 'xl' }}
           zIndex={10}
           bg={useColorModeValue('white', 'gray.700')}
         >
