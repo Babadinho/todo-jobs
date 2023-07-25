@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const psl = require('psl');
 var { ObjectID } = require('mongodb');
+const AbortController = require('abort-controller');
 
 exports.getJobs = async (req, res) => {
   try {
